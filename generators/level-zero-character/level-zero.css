@@ -107,69 +107,111 @@
     font-size: 0.9rem !important;
     font-style: italic;
 }
-/* Character Class/Ancestry Name */
-.character-class {
-    font-family: var(--font-heading);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: 0.03em;
-}
-
-/* Character Badges */
-.character-badges {
+/* Character Card - Bootstrap Styles */
+.character-card-attrs .attribute {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--space-sm);
+    text-align: center;
+    padding: var(--space-sm);
+    background: var(--parchment-sunk);
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-md);
 }
 
-.ancestry-badge {
-    font-size: 0.6rem;
+.character-card-attrs .attribute-name {
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: 999px;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-xs);
 }
 
-.badge-original {
-    background: var(--gold-pale);
-    border: 1px solid var(--gold);
-    color: var(--gold);
+.character-card-attrs .attribute-value {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
 }
 
-.badge-homebrew {
-    background: var(--blood-pale);
-    border: 1px solid var(--blood);
-    color: var(--blood);
+.character-card-attrs .attribute-mod {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: var(--space-xs);
 }
 
-/* HP Detail */
-.hp-display {
+.character-card-attrs .attribute-mod.text-success { color: var(--success); }
+.character-card-attrs .attribute-mod.text-danger { color: var(--danger); }
+
+/* Character Details - Bootstrap Styles */
+.character-detail-row {
     display: flex;
+    justify-content: space-between;
     align-items: baseline;
     gap: var(--space-sm);
-    flex-wrap: wrap;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px dotted var(--edge);
 }
 
-.hp-value {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: var(--blood);
+.character-detail-row:last-child {
+    border-bottom: none;
 }
 
-.hp-detail {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--gold);
-    background: var(--gold-pale);
-    padding: var(--space-xs) var(--space-sm);
+.character-detail-label {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+}
+
+.character-detail-value {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--ink);
+}
+
+/* Equipment List */
+.character-equipment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.character-equipment-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) 0;
+    color: var(--ink);
+}
+
+/* Reroll Button */
+.field-reroll {
+    border: 1px solid var(--edge);
     border-radius: var(--radius-sm);
-    border: 1px solid var(--gold);
+    background: var(--parchment-raised);
+    color: var(--gold);
+    transition: all 0.15s ease;
 }
 
-/* Alignment */
+.field-reroll:hover {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+    color: var(--gold);
+}
+
+.field-reroll .bi {
+    font-size: 0.9rem;
+}
+
+/* Alignment Colors */
 .alignment-ordeiro,
 .alignment-lawful {
     color: var(--success);
@@ -188,17 +230,6 @@
     font-weight: 600;
 }
 
-/* Character Card Enhancements */
-.character-header {
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-}
-
-.character-name {
-    flex: 1;
-    min-width: 150px;
-}
-
 /* Roll Log Enhancements */
 .roll-profession {
     color: var(--blood);
@@ -209,6 +240,68 @@
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+
+/* Bootstrap Overrides - Shadowdark Colors */
+.bg-dark {
+    background-color: var(--ink) !important;
+    color: var(--parchment) !important;
+}
+
+.bg-dark.text-white {
+    color: var(--parchment) !important;
+}
+
+.btn-outline-secondary {
+    border-color: var(--edge);
+    color: var(--ink);
+}
+
+.btn-outline-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-pale);
+}
+
+.btn-primary {
+    border-color: var(--blood);
+    background-color: var(--blood);
+}
+
+.btn-primary:hover {
+    border-color: var(--blood-light);
+    background-color: var(--blood-light);
+}
+
+.text-success {
+    color: var(--success) !important;
+}
+
+.text-danger {
+    color: var(--danger) !important;
+}
+
+.text-warning {
+    color: var(--gold) !important;
+}
+
+.badge.bg-danger {
+    background-color: var(--danger) !important;
+    color: var(--parchment) !important;
+}
+
+.badge.bg-gold {
+    background-color: var(--gold) !important;
+    color: var(--ink) !important;
+}
+
+.card.border-dark {
+    border-color: var(--edge) !important;
+}
+
+.card-header.bg-dark {
+    background-color: var(--ink) !important;
+    border-bottom: 1px solid var(--edge) !important;
 }
 
 .loader-icon {

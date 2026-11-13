@@ -75,29 +75,37 @@
         const availableGenerators = generators.filter(g => !g.comingSoon);
 
         if (availableGenerators.length === 0) {
-            generatorGrid.innerHTML = '<div class="card" style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl);"><p style="color: var(--ink-muted);">' + t.noGenerators + '</p></div>';
+            generatorGrid.innerHTML = '<div class="col-12"><div class="card bg-light text-center border-0 shadow-sm"><div class="card-body py-5"><i class="bi bi-dice6-fill text-muted display-4 mb-3"></i><p class="text-muted">' + t.noGenerators + '</p></div></div></div>';
             return;
         }
 
         generatorGrid.innerHTML = availableGenerators.map(gen => `
-            <a href="${gen.href}" class="generator-card" data-generator-id="${gen.id}" aria-label="${t.openGenerator}: ${gen.title}">
-                <div class="card-icon" aria-hidden="true"><span>${gen.icon}</span></div>
-                <span class="card-category">${gen.category}</span>
-                ${gen.badge ? '<span class="badge badge-primary" style="margin-bottom: var(--space-sm);">' + gen.badge + '</span>' : ''}
-                <h2>${gen.title}</h2>
-                <p>${gen.description}</p>
-                <div class="card-action"><span>${t.openGenerator}</span><span aria-hidden="true">→</span></div>
-            </a>
+            <div class="col">
+                <a href="${gen.href}" class="card h-100 shadow-sm border-dark text-dark text-decoration-none" data-generator-id="${gen.id}" aria-label="${t.openGenerator}: ${gen.title}">
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h6 class="card-title mb-0 fw-bold">${gen.title}</h6>
+                        ${gen.badge ? '<span class="badge bg-danger text-white">' + gen.badge + '</span>' : ''}
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="category-badge mb-3">
+                            <span class="badge bg-secondary text-white text-uppercase small">${gen.category}</span>
+                        </div>
+                        <p class="card-text flex-grow-1">${gen.description}</p>
+                        <div class="mt-auto">
+                            <span class="badge bg-info text-dark">${t.openGenerator}</span>
+                            <i class="bi bi-arrow-right float-end"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
         `).join("");
 
         const comingSoonGenerators = generators.filter(g => g.comingSoon || g.badge === "EM BREVE" || g.badge === "PLANEJADO");
         if (comingSoonGenerators.length > 0) {
             comingSoonGenerators.forEach(gen => {
-                const card = document.createElement("a");
-                card.className = "generator-card";
-                card.style.opacity = "0.6";
-                card.style.pointerEvents = "none";
-                card.innerHTML = '<div class="card-icon" aria-hidden="true"><span>' + gen.icon + '</span></div><span class="card-category">' + gen.category + '</span><span class="badge badge-iron" style="margin-bottom: var(--space-sm);">' + gen.badge + '</span><h2>' + gen.title + '</h2><p>' + gen.description + '</p><div class="card-action"><span>' + t.comingSoon + '</span><span aria-hidden="true">🔒</span></div>';
+                const card = document.createElement("div");
+                card.className = "col";
+                card.innerHTML = '<a href="#" class="card h-100 shadow-sm border-dark text-dark text-decoration-none" style="opacity: 0.6; pointer-events: none;" aria-disabled="true"><div class="card-header bg-dark text-white d-flex justify-content-between align-items-center"><h6 class="card-title mb-0 fw-bold">' + gen.title + '</h6><span class="badge bg-secondary text-white">' + gen.badge + '</span></div><div class="card-body d-flex flex-column"><div class="category-badge mb-3"><span class="badge bg-secondary text-white text-uppercase small">' + gen.category + '</span></div><p class="card-text flex-grow-1">' + gen.description + '</p><div class="mt-auto"><span class="badge bg-warning text-dark">' + t.comingSoon + '</span><i class="bi bi-lock float-end"></i></div></div></a>';
                 generatorGrid.appendChild(card);
             });
         }
