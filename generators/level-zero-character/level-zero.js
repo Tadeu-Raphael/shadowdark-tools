@@ -316,24 +316,24 @@ generate() {
 
         let ancestry;
         if (this.ancestryMode === "original") {
-            const roll = rollD8();
+            const roll = Math.floor(Math.random() * data.ancestriesOriginal.length) + 1;
             ancestry = data.ancestriesOriginal[roll - 1];
             this.rollLog.push({
                 character: index,
                 type: "ancestry",
                 roll: roll,
-                die: "d8",
+                die: "d" + data.ancestriesOriginal.length,
                 ancestry: ancestry.name
             });
         } else {
-            const roll = rollD30();
             const allAncestries = [...data.ancestriesOriginal, ...data.ancestriesHomebrew];
+            const roll = Math.floor(Math.random() * allAncestries.length) + 1;
             ancestry = allAncestries[roll - 1];
             this.rollLog.push({
                 character: index,
                 type: "ancestry",
                 roll: roll,
-                die: "d30",
+                die: "d" + allAncestries.length,
                 ancestry: ancestry.name,
                 ancestryType: ancestry.type
             });

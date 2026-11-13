@@ -107,6 +107,15 @@
     font-size: 0.9rem !important;
     font-style: italic;
 }
+/* Character Class/Ancestry Name */
+.character-class {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.03em;
+}
+
 /* Character Badges */
 .character-badges {
     display: flex;
