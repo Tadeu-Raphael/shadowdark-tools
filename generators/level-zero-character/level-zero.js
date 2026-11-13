@@ -70,6 +70,173 @@
         ]
     };
 
+    // Descrições do equipamento inicial, seguindo a seção Gear do livro.
+    // Itens de background sem verbete próprio recebem uma descrição curta por tipo.
+    const GEAR_DESCRIPTIONS = {
+        "pt-BR": {
+            "tocha": "Ilumina uma área próxima. Queima por 1 hora de tempo real.",
+            "adaga": "Arma pequena e fácil de esconder. Causa 1d4 de dano.",
+            "vara": "Vara de madeira com 3 m de comprimento.",
+            "arco curto e 5 flechas": "Munição para arcos curtos ou longos.",
+            "corda, 60'": "Corda de cânhamo com 18 m de comprimento.",
+            "óleo, frasco": "Abastece uma lanterna por 1 hora de tempo real. Um frasco cobre uma área próxima e queima por 4 rodadas, causando 1d4 de dano por rodada.",
+            "pé de cabra": "Concede vantagem em testes para abrir objetos emperrados.",
+            "pregos de ferro (10)": "Pregos resistentes. Cada um tem um orifício para passar corda; podem ser martelados com armas ou outros pregos de ferro.",
+            "pedra de fogo e aço": "Acendedor compacto. Com ele, tentativas rotineiras de acender uma fogueira sempre dão certo.",
+            "gancho de escalada": "Âncora de corda com três pontas curvas.",
+            "clava": "Arma simples de madeira. Causa 1d4 de dano.",
+            "caltrops (um saco)": "Pequenas pontas de ferro triangulares. Criaturas que pisam nelas sofrem 1 de dano e só podem se mover à metade da velocidade por 10 rodadas.",
+            "caltrops": "Pequenas pontas de ferro triangulares. Criaturas que pisam nelas sofrem 1 de dano e só podem se mover à metade da velocidade por 10 rodadas.",
+            "moeda": "Uma peça de ouro (PO) vale 10 peças de prata (PP) ou 100 peças de cobre (PC).",
+            "lanterna": "Ilumina até o dobro da distância próxima. Requer óleo e tem uma tampa para ocultar a luz.",
+            "espelho": "Um pequeno espelho polido.",
+            "vara de madeira": "Vara de madeira com 3 m de comprimento.",
+            "rações": "Suprimento de comida e água para uma pessoa por um dia.",
+            "corda": "Corda de cânhamo, útil para amarrar e escalar.",
+            "flask": "Recipiente de vidro que comporta uma dose de líquido.",
+            "arma": "Arma improvisada ou de trabalho, útil também como ferramenta.",
+            "roupas": "Vestuário simples, adequado ao uso diário.",
+            "bandagens": "Tiras limpas de tecido para cobrir ferimentos.",
+            "faca": "Lâmina curta para cortar e realizar tarefas cotidianas.",
+            "adaga cerimonial": "Lâmina curta usada em cerimônias. Causa 1d4 de dano.",
+            "arco curto": "Arma de disparo acompanhada de flechas.",
+            "espada curta": "Arma de lâmina curta. Causa 1d6 de dano.",
+            "lança": "Arma longa que pode ser usada para manter inimigos à distância. Causa 1d8 de dano.",
+            "cajado": "Bastão robusto que também serve como arma. Causa 1d6 de dano."
+        },
+        "en": {
+            "torch": "Casts light up to a near distance. Burns for one hour of real time.",
+            "dagger": "A small, easily concealed weapon. Deals 1d4 damage.",
+            "pole": "Wooden, 10' long.",
+            "shortbow and 5 arrows": "Ammunition for shortbows or longbows.",
+            "rope, 60'": "Hemp rope, 60' long.",
+            "oil, flask": "Fuels a lantern for one hour of real time. One flask covers a close area and burns for 4 rounds, dealing 1d4 damage each round.",
+            "crowbar": "Grants advantage on checks to pry open stuck objects.",
+            "iron spikes (10)": "Strong spikes. Each has a hole for threading rope. Can be hammered in with weapons or other iron spikes.",
+            "flint and steel": "A small fire starter. With it, routine attempts to light a fire always succeed.",
+            "grappling hook": "A rope anchor with three curved tines.",
+            "club": "A simple wooden weapon. Deals 1d4 damage.",
+            "caltrops (one bag)": "Tiny, triangle-shaped iron spikes. Creatures who step on them take 1 damage and can only move at half speed for 10 rounds.",
+            "coin": "One gold piece (gp) is worth 10 silver pieces (sp) or 100 copper pieces (cp).",
+            "lantern": "Casts light up to a double near distance. Requires oil and has a shutter to hide the light.",
+            "mirror": "A small, polished mirror.",
+            "rations": "One day of food and water supply for one person.",
+            "flask": "A glass container that holds one draught of liquid.",
+            "bandages": "Clean strips of cloth for covering wounds.",
+            "knife": "A short blade for cutting and everyday tasks.",
+            "shortsword": "A short-bladed weapon. Deals 1d6 damage.",
+            "spear": "A long weapon useful for keeping foes at a distance. Deals 1d8 damage.",
+            "staff": "A sturdy wooden staff that doubles as a weapon. Deals 1d6 damage.",
+            "clothing": "Simple clothes suited for everyday wear.",
+            "rope": "Hemp rope, useful for climbing and tying things up."
+        }
+    };
+
+    const WEAPON_STATS = {
+        "bastard sword": ["10 gp", "M", "C", "1d8/1d10", "V, 2 slots"],
+        "club": ["5 cp", "M", "C", "1d4", "-"],
+        "crossbow": ["8 gp", "R", "F", "1d6", "2H, L"],
+        "dagger": ["1 gp", "M/R", "C/N", "1d4", "F, Th"],
+        "greataxe": ["10 gp", "M", "C", "1d8/1d10", "V, 2 slots"],
+        "greatsword": ["12 gp", "M", "C", "1d12", "2H, 2 slots"],
+        "javelin": ["5 sp", "M/R", "C/F", "1d4", "Th"],
+        "longbow": ["8 gp", "R", "F", "1d8", "2H"],
+        "longsword": ["9 gp", "M", "C", "1d8", "-"],
+        "mace": ["5 gp", "M", "C", "1d6", "-"],
+        "shortbow": ["6 gp", "R", "F", "1d4", "2H"],
+        "shortsword": ["7 gp", "M", "C", "1d6", "-"],
+        "spear": ["5 sp", "M/R", "C/N", "1d6", "Th"],
+        "staff": ["5 sp", "M", "C", "1d4", "2H"],
+        "warhammer": ["10 gp", "M", "C", "1d10", "2H"]
+    };
+
+    const WEAPON_ALIASES = {
+        "espada bastarda": "bastard sword", "clava": "club", "besta": "crossbow",
+        "adaga": "dagger", "machado grande": "greataxe", "espadão": "greatsword",
+        "azagaia": "javelin", "arco longo": "longbow", "espada longa": "longsword",
+        "maça": "mace", "arco curto": "shortbow", "espada curta": "shortsword",
+        "lança": "spear", "cajado": "staff", "bastão": "staff", "martelo de guerra": "warhammer"
+    };
+
+    function getWeaponStats(item) {
+        const name = item.toLocaleLowerCase().replace(/\s*\([^)]*\)/g, "").trim();
+        const canonical = WEAPON_ALIASES[name] || name;
+        if (WEAPON_STATS[canonical]) return WEAPON_STATS[canonical];
+        const alias = Object.keys(WEAPON_ALIASES).find(key =>
+            ["adaga", "dagger", "arco curto", "shortbow"].includes(key) && name.startsWith(key + " ")
+        );
+        return alias ? WEAPON_STATS[WEAPON_ALIASES[alias]] : null;
+    }
+
+    function getWeaponDescription(item, lang) {
+        const stats = getWeaponStats(item);
+        if (!stats) return null;
+        const isPt = lang === "pt-BR";
+        const [cost, type, range, damage, properties] = stats;
+        const typeLabel = isPt ? "Tipo" : "Type";
+        const rangeLabel = isPt ? "Alcance" : "Range";
+        const damageLabel = isPt ? "Dano" : "Damage";
+        const propertiesLabel = isPt ? "Propriedades" : "Properties";
+        const explanations = {
+            F: isPt ? "Acuidade (F): usa FOR ou DES no ataque." : "Finesse (F): use STR or DEX when attacking.",
+            L: isPt ? "Recarga (L): você precisa abrir mão do movimento para recarregar esta arma." : "Loading (L): you must forgo moving to reload this weapon.",
+            Th: isPt ? "Arremesso (Th): pode ser arremessada para fazer um ataque à distância usando FOR ou DES." : "Thrown (Th): you may throw this weapon to make a ranged attack using STR or DEX.",
+            "2H": isPt ? "Duas mãos (2H): exige as duas mãos para ser usada." : "Two-handed (2H): requires both hands to use.",
+            V: isPt ? "Versátil (V): pode ser usada com uma ou duas mãos; use o dano maior com duas mãos." : "Versatile (V): can be used with one or two hands; use the higher damage with two hands."
+        };
+        const detail = `${cost} · ${typeLabel}: ${type} · ${rangeLabel}: ${range} · ${damageLabel}: ${damage} · ${propertiesLabel}: ${properties}`;
+        const propertyNotes = properties.split(", ").filter(code => explanations[code]).map(code => explanations[code]);
+        return [detail, ...propertyNotes].join(" ");
+    }
+
+    function getGearDescription(item, lang) {
+        const isPt = lang === "pt-BR";
+        const weaponDescription = getWeaponDescription(item, lang);
+        if (weaponDescription) return weaponDescription;
+        const dictionary = GEAR_DESCRIPTIONS[isPt ? "pt-BR" : "en"];
+        const normalized = item.toLocaleLowerCase().replace(/\s*\([^)]*\)/g, "").trim();
+        const exact = dictionary[normalized] || dictionary[item.toLocaleLowerCase().trim()];
+        if (exact) return exact;
+
+        // Descrições concisas para itens variados de background e profissões.
+        const patterns = isPt ? [
+            [/moed|coin|po\)|gp\)/, "Moedas de valor variável, usadas para comprar bens e serviços."],
+            [/ra[cç][ãa]o|hardtack|ration|p[ãa]o|loaf|gr[ãa]os|grain|oats|queijo|cheese/, "Provisão de alimento para uma pessoa; a quantidade indicada determina por quantos dias dura."],
+            [/corda|rope|linha|thread|fio/, "Fibra resistente para amarrar, prender ou reparar objetos."],
+            [/frasco|garrafa|vial|flask|bottle|odre/, "Recipiente portátil para guardar líquidos."],
+            [/bandagem|bandage|erva|herb|sal|salt|t[oô]nico|tonic|[áa]cido|acid|[áa]gua benta|holy water/, "Suprimento consumível usado em cuidados, preparo ou tarefas especializadas; as cargas indicadas mostram seus usos."],
+            [/arma|espada|sword|adaga|dagger|faca|knife|cutelo|cleaver|machado|axe|foice|sickle|martelo|hammer|clava|club|lan[cç]a|spear|bast[aã]o|staff|cajado|tridente|trident|navalha|razor|gancho|hook|chicote|whip|p[aá]|shovel|forcado|pitchfork|corrente|chain/, "Ferramenta robusta que também pode servir como arma. O dano entre parênteses indica quanto causa em combate."],
+            [/escudo|shield/, "Escudo de madeira que protege seu portador; o bônus indicado se aplica à Classe de Armadura."],
+            [/roupa|clothes|manto|cloak|peles|furs|avental|apron|bota|boots|luvas|gloves|capuz|hood|trapo|rag/, "Vestuário ou proteção simples, preparado para o trabalho ou para a viagem."],
+            [/chave|key|s[ií]mbolo|symbol|bras[aã]o|crest|distintivo|badge|amuleto|amulet|anel|ring|moeda de ferro/, "Objeto pessoal que identifica seu dono, guarda uma lembrança ou pode abrir portas sociais."],
+            [/livro|book|pergaminho|parchment|pena|quill|tinta|ink|carv[aã]o|charcoal|mapa|map/, "Material de escrita ou consulta, útil para registrar informações e conhecimentos."],
+            [/kit|ferramenta|tools|tesoura|shears|agulha|needle|form[aã]o|awl|cinzel|chisel|tenaz|tongs|escova|brush|rastrilho|currycomb/, "Conjunto de ferramentas de ofício, usado para trabalhos especializados."],
+            [/lanterna|lantern/, "Projeta luz em uma área próxima e pode ser fechada para ocultar a chama; requer óleo."],
+            [/vela|candle/, "Fonte de luz pequena e portátil, consumida enquanto permanece acesa."],
+            [/rede|net|armadilha|trap|cesto|basket|saco|sack|bolsa|pouch|bandeja|tray|tigela|bowl|barril|barrel/, "Recipiente ou ferramenta prática para carregar, guardar ou capturar objetos e criaturas."],
+            [/flauta|flute|ala[uú]de|lute|dado|die|sino|bell|garrafa quebrada|broken bottle|caneca|mug|cerveja|ale|vinho|wine|rum/, "Objeto simples de uso cotidiano, entretenimento ou sinalização."],
+            [/roupas|clothing/, "Vestuário simples para uso diário."]
+        ] : [
+            [/coin|gp\)|sp\)/, "Coins of varying value, used to purchase goods and services."],
+            [/rations|hardtack|loaf|grain|oats|cheese/, "Food supplies for one person; the listed quantity determines how long they last."],
+            [/rope|thread|line/, "Strong fiber for tying, securing, or repairing objects."],
+            [/flask|vial|bottle/, "A portable container for holding liquids."],
+            [/bandage|herb|salt|tonic|acid|holy water/, "A consumable supply for care, preparation, or specialized tasks; the listed uses show its charges."],
+            [/sword|dagger|knife|cleaver|axe|sickle|hammer|club|spear|staff|trident|razor|hook|whip|shovel|pitchfork|chain/, "A sturdy tool that can also serve as a weapon. Any damage listed in parentheses applies in combat."],
+            [/shield/, "A wooden shield that protects its bearer; the listed bonus applies to Armor Class."],
+            [/clothes|cloak|furs|apron|boots|gloves|hood|rags/, "Simple clothing or protection suited for work or travel."],
+            [/key|symbol|crest|badge|amulet|ring|iron coin/, "A personal object that identifies its owner, preserves a memory, or opens social doors."],
+            [/book|parchment|quill|ink|charcoal|map/, "Writing or reference material, useful for recording information and knowledge."],
+            [/kit|tools|shears|needle|awl|chisel|tongs|brush|currycomb/, "A set of trade tools used for specialized work."],
+            [/lantern/, "Casts light up to a near distance and can be shuttered to hide the flame; requires oil."],
+            [/candle/, "A small, portable light source that is consumed while lit."],
+            [/net|trap|basket|sack|pouch|tray|bowl|barrel/, "A practical container or tool for carrying, storing, or catching things."],
+            [/flute|lute|die|bell|mug|ale|wine|rum|bottle/, "A simple object for everyday use, entertainment, or signaling."]
+        ];
+        const fallback = patterns.find(([pattern]) => pattern.test(item.toLocaleLowerCase()));
+        return fallback ? fallback[1] : (isPt ? "Item útil de viagem ou de ofício." : "A useful travel or trade item.");
+    }
+
     // 3. Dados Oficiais de Background do Shadowdark RPG (d20 oficial)
     const OFFICIAL_BACKGROUNDS = {
         "pt-BR": [
@@ -77,7 +244,7 @@
             { roll: 2, name: "Procurado", desc: "Há um preço pela sua cabeça, mas você tem aliados.", equipment: ["Adaga (1d4)", "Capuz de viagem", "Cartaz de procurado com seu rosto"] },
             { roll: 3, name: "Iniciado de Culto", desc: "Você conhece segredos e rituais blasfemos.", equipment: ["Adaga cerimonial (1d4)", "Símbolo blasfemo", "Vela negra"] },
             { roll: 4, name: "Guilda dos Ladrões", desc: "Você tem conexões, contatos e dívidas.", equipment: ["Adaga (1d4)", "Gazua simples", "Moeda de ferro da guilda"] },
-            { roll: 5, name: "Banido", desc: "Seu povo o expulsou por supostos crimes.", equipment: ["Clava (1d6)", "Manto rasgado", "Ração dura (1 dia)"] },
+            { roll: 5, name: "Banido", desc: "Seu povo o expulsou por supostos crimes.", equipment: ["Clava (1d4)", "Manto rasgado", "Ração dura (1 dia)"] },
             { roll: 6, name: "Órfão", desc: "Um guardião incomum o resgatou e o criou.", equipment: ["Faca pequena (1d4)", "Amuleto do guardião", "Roupas simples"] },
             { roll: 7, name: "Aprendiz de Mago", desc: "Você tem um dom e um olhar para a magia.", equipment: ["Adaga (1d4)", "Pergaminho e carvão", "Frasco de tinta"] },
             { roll: 8, name: "Joalheiro", desc: "Você consegue avaliar facilmente valor e autenticidade.", equipment: ["Lente de aumento", "Martelo pequeno (1d4)", "Bolsa de veludo"] },
@@ -85,8 +252,8 @@
             { roll: 10, name: "Bárbaro", desc: "Você deixou a horda, mas ela nunca o deixou completamente.", equipment: ["Machadinha (1d6)", "Amuleto de osso", "Peles rústicas"] },
             { roll: 11, name: "Mercenário", desc: "Você lutou contra amigos e inimigos igualmente por sua moeda.", equipment: ["Espada curta (1d6)", "Distintivo de companhia", "Cerveja barata"] },
             { roll: 12, name: "Marinheiro", desc: "Pirata, corsário ou comerciante — os mares são seus.", equipment: ["Facão (1d6)", "Pedaço de corda (10m)", "Odre de rum"] },
-            { roll: 13, name: "Acólito", desc: "Você é bem treinado em ritos e doutrinas religiosas.", equipment: ["Cajado (1d6)", "Símbolo sagrado de madeira", "Livro de orações"] },
-            { roll: 14, name: "Soldado", desc: "Você serviu como um combatente em um exército organizado.", equipment: ["Lança (1d8)", "Brasão de infantaria", "Dado de jogo"] },
+            { roll: 13, name: "Acólito", desc: "Você é bem treinado em ritos e doutrinas religiosas.", equipment: ["Cajado (1d4)", "Símbolo sagrado de madeira", "Livro de orações"] },
+            { roll: 14, name: "Soldado", desc: "Você serviu como um combatente em um exército organizado.", equipment: ["Lança (1d6)", "Brasão de infantaria", "Dado de jogo"] },
             { roll: 15, name: "Patrulheiro", desc: "As florestas e terras selvagens são seu verdadeiro lar.", equipment: ["Arco curto (1d6) e 10 flechas", "Armadilha pequena", "Botas de couro"] },
             { roll: 16, name: "Batedor", desc: "Você sobreviveu com furtividade, observação e velocidade.", equipment: ["Arco curto (1d6) e 10 flechas", "Botas silenciosas", "Pederneira"] },
             { roll: 17, name: "Menestrel", desc: "Você viajou para longe com seu charme e talento.", equipment: ["Flauta rústica", "Adaga (1d4)", "Roupas chamativas"] },
@@ -99,7 +266,7 @@
             { roll: 2, name: "Wanted", desc: "There's a price on your head, but you have allies.", equipment: ["Dagger (1d4)", "Travel hood", "Wanted poster with your face"] },
             { roll: 3, name: "Cult Initiate", desc: "You know blasphemous secrets and rituals.", equipment: ["Ceremonial dagger (1d4)", "Blasphemous symbol", "Black candle"] },
             { roll: 4, name: "Thieves' Guild", desc: "You have connections, contacts, and debts.", equipment: ["Dagger (1d4)", "Simple thieves' pick", "Guild iron coin"] },
-            { roll: 5, name: "Banished", desc: "Your people cast you out for supposed crimes.", equipment: ["Club (1d6)", "Tattered cloak", "Hardtack (1 day ration)"] },
+            { roll: 5, name: "Banished", desc: "Your people cast you out for supposed crimes.", equipment: ["Club (1d4)", "Tattered cloak", "Hardtack (1 day ration)"] },
             { roll: 6, name: "Orphaned", desc: "An unusual guardian rescued and raised you.", equipment: ["Small knife (1d4)", "Guardian's amulet", "Simple clothes"] },
             { roll: 7, name: "Wizard's Apprentice", desc: "You have a knack and eye for magic.", equipment: ["Dagger (1d4)", "Parchment and charcoal", "Ink vial"] },
             { roll: 8, name: "Jeweler", desc: "You can easily appraise value and authenticity.", equipment: ["Magnifying glass", "Light hammer (1d4)", "Velvet pouch"] },
@@ -107,10 +274,10 @@
             { roll: 10, name: "Barbarian", desc: "You left the horde, but it never quite left you.", equipment: ["Hand axe (1d6)", "Bone charm", "Rough furs"] },
             { roll: 11, name: "Mercenary", desc: "You fought friend and foe alike for your coin.", equipment: ["Shortsword (1d6)", "Company badge", "Cheap ale"] },
             { roll: 12, name: "Sailor", desc: "Pirate, privateer, or merchant — the seas are yours.", equipment: ["Cutlass (1d6)", "Rope length (30 ft)", "Rum flask"] },
-            { roll: 13, name: "Acolyte", desc: "You're well trained in religious rites and doctrines.", equipment: ["Staff (1d6)", "Wooden holy symbol", "Prayer book"] },
-            { roll: 14, name: "Soldier", desc: "You served as a fighter in an organized army.", equipment: ["Spear (1d8)", "Infantry crest", "Gaming die"] },
-            { roll: 15, name: "Ranger", desc: "The woods and wilds are your true home.", equipment: ["Shortbow (1d6) and 10 arrows", "Small snare trap", "Leather boots"] },
-            { roll: 16, name: "Scout", desc: "You survived on stealth, observation, and speed.", equipment: ["Shortbow (1d6) and 10 arrows", "Silent boots", "Flint and steel"] },
+            { roll: 13, name: "Acolyte", desc: "You're well trained in religious rites and doctrines.", equipment: ["Staff (1d4)", "Wooden holy symbol", "Prayer book"] },
+            { roll: 14, name: "Soldier", desc: "You served as a fighter in an organized army.", equipment: ["Spear (1d6)", "Infantry crest", "Gaming die"] },
+            { roll: 15, name: "Ranger", desc: "The woods and wilds are your true home.", equipment: ["Shortbow (1d4) and 10 arrows", "Small snare trap", "Leather boots"] },
+            { roll: 16, name: "Scout", desc: "You survived on stealth, observation, and speed.", equipment: ["Shortbow (1d4) and 10 arrows", "Silent boots", "Flint and steel"] },
             { roll: 17, name: "Minstrel", desc: "You've traveled far with your charm and talent.", equipment: ["Simple flute", "Dagger (1d4)", "Flashy clothes"] },
             { roll: 18, name: "Scholar", desc: "You know much about ancient history and lore.", equipment: ["Quill and ink", "Ancient lore book", "Parchment"] },
             { roll: 19, name: "Noble", desc: "A famous name has opened many doors for you.", equipment: ["Fine dagger (1d4)", "Signet ring", "Coins (2d6 GP)"] },
@@ -129,14 +296,14 @@
             { name: "Carrieiro", desc: "Guia carretas pesadas por estradas de lama e atoleiros traiçoeiros.", equipment: ["Chicote (1d4)", "Corda (15m)", "Rações (3 dias)"] },
             { name: "Cesteiro", desc: "Trança cestas, gaiolas e esteiras com vime e paciência.", equipment: ["Faca pequena (1d4)", "Cesto grande", "Vime (10 usos)"] },
             { name: "Coveiro", desc: "Cavou covas na terra fria e conhece o silêncio dos cemitérios.", equipment: ["Pá (1d6)", "Lanterna", "Frasco de água benta (1 uso)"] },
-            { name: "Curandeiro Popular", desc: "Trata febres e feridas com ervas da floresta e superstição.", equipment: ["Bastão (1d6)", "Ervas medicinais (3 usos)", "Bandagens (3 usos)"] },
+            { name: "Curandeiro Popular", desc: "Trata febres e feridas com ervas da floresta e superstição.", equipment: ["Bastão (1d4)", "Ervas medicinais (3 usos)", "Bandagens (3 usos)"] },
             { name: "Doméstico", desc: "Conhece todos os cantos, passagens e fofocas da mansão.", equipment: ["Faca de cozinha (1d4)", "Chaves da casa", "Rações (1 dia)"] },
             { name: "Encarregado de Estábulo", desc: "Trata feridas de montarias, sabe ferrar cascos e acalmar cavalos.", equipment: ["Forcado (1d6)", "Escova e rastrilho", "Saco de aveia"] },
             { name: "Escravo Fugitivo", desc: "Escapou dos grilhões e jurou nunca mais dobrar os joelhos.", equipment: ["Corrente quebrada (1d6)", "Roupa em farrapos", "Pão duro (1 ração)"] },
             { name: "Estalajadeiro", desc: "Ouve todas as conversas ao balcão e sabe conter bêbados.", equipment: ["Caneca pesada (1d4)", "Garrafa de vinho barato", "Chave reserva"] },
             { name: "Ferreiro Aprendiz", desc: "Força bruta lapidada no fole da forja e no bater do malho.", equipment: ["Martelo de ferreiro (1d6)", "Avental de couro grosso", "Tenaz"] },
-            { name: "Guarda de Caravana", desc: "Vigiou rotas poeirentas contra bandidos de estrada e emboscadas.", equipment: ["Lança (1d8)", "Escudo de madeira (+1 CA)", "Distintivo"] },
-            { name: "Mendigo", desc: "Sobreviveu da caridade alheia e aprendeu a notar tudo sem ser visto.", equipment: ["Cajado (1d6)", "Tigela de esmolas", "Rações (1 dia)"] },
+            { name: "Guarda de Caravana", desc: "Vigiou rotas poeirentas contra bandidos de estrada e emboscadas.", equipment: ["Lança (1d6)", "Escudo de madeira (+1 CA)", "Distintivo"] },
+            { name: "Mendigo", desc: "Sobreviveu da caridade alheia e aprendeu a notar tudo sem ser visto.", equipment: ["Cajado (1d4)", "Tigela de esmolas", "Rações (1 dia)"] },
             { name: "Músico Ambulante", desc: "Ganha pão cantando baladas em praças e feiras de aldeia.", equipment: ["Alaúde/flauta", "Adaga (1d4)", "Rações (2 dias)"] },
             { name: "Padeiro", desc: "Acorda antes da alvorada para alimentar vilarejos com pão quente.", equipment: ["Rolo de massa (1d4)", "Saco de farinha", "Pães (3 rações)"] },
             { name: "Pescador", desc: "Lê marés, correntes e ventos melhor do que qualquer mapa.", equipment: ["Tridente (1d6)", "Rede de pesca", "Botas impermeáveis"] },
@@ -149,7 +316,7 @@
             { name: "Teceiro", desc: "Transforma lã e linho em tecidos grossos para o inverno.", equipment: ["Tesoura grande (1d4)", "Novelo de linha", "Agulhas"] },
             { name: "Trabalhador de Doca", desc: "Descarrega fardos de galeões mercantes dia e noite.", equipment: ["Gancho (1d6)", "Corda grossa (20m)", "Luvas de couro"] },
             { name: "Vendedor Ambulante", desc: "Viaja com quinquilharias e sabe convencer qualquer um a comprar.", equipment: ["Bengala (1d6)", "Bandeja de bugigangas", "Moedas (2d6 PO)"] },
-            { name: "Vigia Noturno", desc: "Ronda becos escuros com lanterna e clava enquanto a cidade dorme.", equipment: ["Lanterna", "Sino de alarme", "Clava (1d6)"] }
+            { name: "Vigia Noturno", desc: "Ronda becos escuros com lanterna e clava enquanto a cidade dorme.", equipment: ["Lanterna", "Sino de alarme", "Clava (1d4)"] }
         ],
         "en": [
             { name: "Butcher", desc: "Skilled in meat cuts, carcasses, and heavy cleavers.", equipment: ["Cleaver (1d6)", "Bloodstained apron", "Salt sack (3 uses)"] },
@@ -160,14 +327,14 @@
             { name: "Teamster", desc: "Drives heavy wagons through muddy roads and treacherous ruts.", equipment: ["Whip (1d4)", "Rope (50 ft)", "Rations (3 days)"] },
             { name: "Basket Weaver", desc: "Weaves baskets, cages, and mats with wicker and patience.", equipment: ["Small knife (1d4)", "Large basket", "Wicker (10 repair uses)"] },
             { name: "Gravedigger", desc: "Dug graves in cold soil and knows the silence of churchyards.", equipment: ["Shovel (1d6)", "Lantern", "Holy water flask (1 use)"] },
-            { name: "Hedge Healer", desc: "Treats fevers and wounds with woodland herbs and superstition.", equipment: ["Staff (1d6)", "Medicinal herbs (3 uses)", "Bandages (3 uses)"] },
+            { name: "Hedge Healer", desc: "Treats fevers and wounds with woodland herbs and superstition.", equipment: ["Staff (1d4)", "Medicinal herbs (3 uses)", "Bandages (3 uses)"] },
             { name: "Servant", desc: "Knows every corner, servant hall, and gossip of the manor.", equipment: ["Kitchen knife (1d4)", "House keys", "Rations (1 day)"] },
             { name: "Stable Hand", desc: "Tends mount wounds, shoes hooves, and calms skittish horses.", equipment: ["Pitchfork (1d6)", "Brush and currycomb", "Oats sack"] },
             { name: "Runaway Slave", desc: "Fled iron chains and swore never to bend the knee again.", equipment: ["Broken chain (1d6)", "Tattered rags", "Hardtack (1 ration)"] },
             { name: "Innkeeper", desc: "Hears every tavern rumor and knows how to subdue drunks.", equipment: ["Heavy mug (1d4)", "Cheap wine bottle", "Spare key"] },
             { name: "Blacksmith's Apprentice", desc: "Brute strength forged at the bellows and ringing anvil.", equipment: ["Smith's hammer (1d6)", "Thick leather apron", "Tongs"] },
-            { name: "Caravan Guard", desc: "Watched dusty trails against highwaymen and ambushes.", equipment: ["Spear (1d8)", "Wooden shield (+1 AC)", "Badge"] },
-            { name: "Beggar", desc: "Survived on spare coins and learned to watch without being noticed.", equipment: ["Staff (1d6)", "Alms bowl", "Rations (1 day)"] },
+            { name: "Caravan Guard", desc: "Watched dusty trails against highwaymen and ambushes.", equipment: ["Spear (1d6)", "Wooden shield (+1 AC)", "Badge"] },
+            { name: "Beggar", desc: "Survived on spare coins and learned to watch without being noticed.", equipment: ["Staff (1d4)", "Alms bowl", "Rations (1 day)"] },
             { name: "Traveling Musician", desc: "Earns crusts playing ballads in squares and village fairs.", equipment: ["Lute/flute", "Dagger (1d4)", "Rations (2 days)"] },
             { name: "Baker", desc: "Rises before dawn to feed settlements with warm loaves.", equipment: ["Rolling pin (1d4)", "Flour sack", "Loaves (3 rations)"] },
             { name: "Fisher", desc: "Reads tides, currents, and winds better than any map.", equipment: ["Trident (1d6)", "Fishing net", "Waterproof boots"] },
@@ -180,7 +347,7 @@
             { name: "Weaver", desc: "Spins wool and flax into sturdy cloth for harsh winters.", equipment: ["Large shears (1d4)", "Thread spool", "Needles"] },
             { name: "Dock Worker", desc: "Unloads cargo crates from trade galleons day and night.", equipment: ["Hook (1d6)", "Heavy rope (60 ft)", "Leather gloves"] },
             { name: "Peddler", desc: "Travels with knickknacks and can persuade anyone to buy.", equipment: ["Walking stick (1d6)", "Tray of trinkets", "Coins (2d6 GP)"] },
-            { name: "Night Watchman", desc: "Patrols dark alleys with lantern and cudgel while the town sleeps.", equipment: ["Lantern", "Alarm bell", "Club (1d6)"] }
+            { name: "Night Watchman", desc: "Patrols dark alleys with lantern and cudgel while the town sleeps.", equipment: ["Lantern", "Alarm bell", "Club (1d4)"] }
         ]
     };
 
@@ -920,14 +1087,14 @@
                                 <div class="detail-row">
                                     <span class="detail-label">${t.bgGearLabel}</span>
                                     <ul class="equipment-list">
-                                        ${char.backgroundGear.map(item => `<li>${this.escapeHtml(item)}</li>`).join("")}
+                                        ${char.backgroundGear.map(item => `<li><strong>${this.escapeHtml(item)}</strong><span class="equipment-description">${this.escapeHtml(getGearDescription(item, this.lang))}</span></li>`).join("")}
                                     </ul>
                                 </div>
                             ` : ""}
                             <div class="detail-row">
                                 <span class="detail-label">${t.startingGearLabel} (${char.gearCount})</span>
                                 <ul class="equipment-list">
-                                    ${char.startingGear.map(item => `<li>${this.escapeHtml(item)}</li>`).join("")}
+                                    ${char.startingGear.map(item => `<li><strong>${this.escapeHtml(item)}</strong><span class="equipment-description">${this.escapeHtml(getGearDescription(item, this.lang))}</span></li>`).join("")}
                                 </ul>
                             </div>
                         </div>
@@ -1136,14 +1303,14 @@
                 if (this.backgroundMode === "expanded" && char.backgroundGear && char.backgroundGear.length > 0) {
                     output += (isPt ? "EQUIPAMENTO DO BACKGROUND:\n" : "BACKGROUND GEAR:\n");
                     char.backgroundGear.forEach(item => {
-                        output += "  - " + item + "\n";
+                        output += "  - " + item + " — " + getGearDescription(item, this.lang) + "\n";
                     });
                     output += "\n";
                 }
 
                 output += (isPt ? "EQUIPAMENTO INICIAL (" : "STARTING GEAR (") + char.gearCount + (isPt ? " itens):\n" : " items):\n");
                 char.startingGear.forEach(item => {
-                    output += "  - " + item + "\n";
+                    output += "  - " + item + " — " + getGearDescription(item, this.lang) + "\n";
                 });
                 output += "\n";
             });

@@ -398,6 +398,19 @@
     padding: 0.08rem 0;
 }
 
+.equipment-list li + li {
+    margin-top: 0.35rem;
+}
+
+.equipment-description {
+    display: block;
+    margin-top: 0.08rem;
+    color: var(--muted, #777);
+    font-size: 0.92em;
+    line-height: 1.35;
+    text-align: left;
+}
+
 /* Animação do botão carregando */
 @keyframes spin {
     from { transform: rotate(0deg); }
