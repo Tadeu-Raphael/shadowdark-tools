@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Gerador de Personagem Nível 0 para Shadowdark RPG">
     <title>Gerador de Personagem Nível 0 — Shadowdark Tools</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8N2HIP2" crossorigin="anonymous">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,152 +12,174 @@
     <link rel="stylesheet" href="level-zero.css">
 </head>
 <body>
-    <div class="site-shell">
-        <!-- Navbar Bootstrap -->
-        <nav class="navbar navbar-expand-lg navbar-dark shadow-dark-nav" role="banner">
-            <div class="container-fluid">
-                <a class="navbar-brand sd-brand" href="../../index.html" aria-label="Shadowdark Tools - Início">
-                    <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
-                    <span class="ms-2">Shadowdark Tools</span>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../index.html">Início</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Geradores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#sobre">Sobre</a>
-                        </li>
-                    </ul>
+    <div class="site-shell" id="top">
+        <!-- Header Padronizado -->
+        <div id="site-header">
+            <header class="site-header" role="banner">
+                <div class="header-inner container-fluid">
+                    <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início">
+                        <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
+                        <span>Shadowdark Tools</span>
+                    </a>
+                    <nav class="site-navigation" aria-label="Navegação principal">
+                        <a href="../../index.html" class="home-link" id="nav-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header-nav-icon" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            <span id="nav-back-text">Início</span>
+                        </a>
+                        <a href="../../index.html#geradores" id="nav-generators">Geradores</a>
+                        <a href="#sobre" id="nav-about">Sobre</a>
+                    </nav>
                 </div>
-            </div>
-        </nav>
+            </header>
+        </div>
 
         <main class="site-main" role="main">
             <section class="generator-section py-4" aria-labelledby="gen-title">
                 <div class="container-fluid">
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <p class="eyebrow" id="gen-title">PERSONAGEM</p>
-                            <h1 class="display-5 fw-bold">Gerador de Personagem Nível 0</h1>
-                            <p class="section-description">
-                                Crie <strong>funis</strong> (personagens nível 0) para Shadowdark RPG.
-                                Role 3d6 para cada atributo, determine ancestralidade, background, alinhamento e equipamento.
-                                Perfeito para campanhas de origem brutais.
-                            </p>
-                        </div>
+                    <div class="generation-heading text-center mb-4">
+                        <p class="eyebrow" id="gen-title">PERSONAGEM</p>
+                        <h1 id="page-title">Gerador de Personagem Nível 0</h1>
+                        <p class="section-description" id="page-description">
+                            Crie <strong>funis</strong> (personagens nível 0) para Shadowdark RPG.
+                            Role 3d6 para cada atributo, determine ancestralidade, background, alinhamento e equipamento.
+                            Perfeito para campanhas de origem brutais.
+                        </p>
                     </div>
-                    <!-- Painel de Controles Bootstrap -->
-                    <div class="generator-panel card shadow-sm mb-4" role="application" aria-label="Painel de geração de personagem">
-                        <div class="card-body">
-                            <div class="row g-3 align-items-end">
-                                <div class="col-md-2">
-                                    <label class="form-label fw-semibold text-uppercase small">Quantidade</label>
-                                    <div class="input-group input-group-sm">
-                                        <button class="btn btn-outline-secondary qty-btn" type="button" data-action="decrease">−</button>
-                                        <input type="number" id="character-count" class="form-control qty-input text-center" value="4" min="1" max="20" aria-label="Número de personagens">
-                                        <button class="btn btn-outline-secondary qty-btn" type="button" data-action="increase">+</button>
-                                    </div>
+
+                    <!-- Painel de Configurações / Filtros (Apenas opções de configuração) -->
+                    <div class="generator-panel card shadow-sm mb-4" role="application" aria-label="Painel de configuração de personagem">
+                        <div class="generation-controls">
+                            <div class="control-group">
+                                <label class="form-label" for="character-count" id="lbl-char-count">Quantidade</label>
+                                <div class="input-with-buttons">
+                                    <button class="qty-btn" type="button" data-action="decrease" aria-label="Diminuir quantidade">−</button>
+                                    <input type="number" id="character-count" class="qty-input" value="4" min="1" max="20" aria-label="Número de personagens">
+                                    <button class="qty-btn" type="button" data-action="increase" aria-label="Aumentar quantidade">+</button>
                                 </div>
-                                <div class="col-md-2">
-                                    <label class="form-label fw-semibold text-uppercase small">Ancestralidade</label>
-                                    <select id="ancestry-mode" class="form-select form-select-sm" aria-label="Modo de ancestralidade">
-                                        <option value="original">Apenas Originais (d8)</option>
-                                        <option value="all">Todas + Homebrew (d30)</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label fw-semibold text-uppercase small">Background</label>
-                                    <select id="background-mode" class="form-select form-select-sm" aria-label="Modo de background">
-                                        <option value="detailed">Completo (Nome + Itens)</option>
-                                        <option value="raw">Apenas Nome</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label fw-semibold text-uppercase small">Idioma</label>
-                                    <select id="lang-select" class="form-select form-select-sm" aria-label="Idioma dos resultados">
-                                        <option value="pt-BR">Português (Brasil)</option>
-                                        <option value="en">English</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 d-flex gap-2">
-                                    <button type="button" id="generate-btn" class="btn btn-primary btn-lg flex-fill" aria-label="Gerar personagens">
-                                        <i class="bi bi-dice me-2"></i>Gerar Personagens
-                                    </button>
-                                    <button type="button" id="export-txt-btn" class="btn btn-outline-secondary flex-fill" disabled aria-label="Exportar como TXT">
-                                        <i class="bi bi-file-earmark-text me-2"></i>Exportar TXT
-                                    </button>
-                                    <button type="button" id="export-pdf-btn" class="btn btn-outline-secondary flex-fill" disabled aria-label="Exportar como PDF">
-                                        <i class="bi bi-file-earmark-pdf me-2"></i>Exportar PDF
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="form-label" for="ancestry-mode" id="lbl-ancestry">Ancestralidade</label>
+                                <select id="ancestry-mode" class="form-select" aria-label="Modo de ancestralidade">
+                                    <option value="original">Padrão do Sistema (d6)</option>
+                                    <option value="all">Expandido + Homebrew (d31)</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label class="form-label" for="background-mode" id="lbl-background">Background</label>
+                                <select id="background-mode" class="form-select" aria-label="Modo de background">
+                                    <option value="system">Padrão do Sistema (d20)</option>
+                                    <option value="expanded">Expandido (Sistema + Outros)</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label class="form-label" for="lang-select" id="lbl-lang">Idioma dos Resultados</label>
+                                <select id="lang-select" class="form-select" aria-label="Idioma dos resultados">
+                                    <option value="pt-BR">Português (Brasil)</option>
+                                    <option value="en">English</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Cards de Personagens - 4 por linha (col-md-3) -->
-                    <div class="generation-content row row-cols-1 row-sm-2 row-md-3 row-lg-4 g-3" id="generation-content" role="region" aria-label="Personagens gerados" aria-live="polite">
-                        <div class="col-12">
-                            <div class="card bg-light text-center border-0 shadow-sm">
-                                <div class="card-body py-5">
-                                    <i class="bi bi-dice6-fill text-muted display-4 mb-3"></i>
-                                    <p class="text-muted">Clique em <strong>Gerar Personagens</strong> para criar seus funis</p>
-                                    <p class="small text-muted">Cada personagem rola 3d6 para atributos, ancestralidade, background, alinhamento e equipamento</p>
-                                </div>
-                            </div>
+                    <!-- Barra de Ações (Estilo G-City: Gerar e Exportações) -->
+                    <nav class="generation-actions" aria-label="Ações da geração">
+                        <button type="button" id="generate-btn" class="generation-button generation-button--primary" aria-label="Gerar personagens">
+                            <img src="../../assets/icons/lucide/dice-5.svg" alt="" class="ui-icon" aria-hidden="true">
+                            <span id="btn-generate-text">Gerar Personagens</span>
+                        </button>
+                        <button type="button" id="export-txt-btn" class="generation-button generation-button--back" disabled aria-label="Exportar como TXT">
+                            <img src="../../assets/icons/lucide/file-text.svg" alt="" class="ui-icon" aria-hidden="true">
+                            <span id="btn-export-txt-text">Exportar TXT</span>
+                        </button>
+                        <button type="button" id="export-pdf-btn" class="generation-button generation-button--back" disabled aria-label="Exportar .PDF">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon" aria-hidden="true">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <path d="M8 12.5v4"/>
+                                <path d="M8 12.5h1.5a1 1 0 0 1 0 2H8"/>
+                                <path d="M12 12.5v4h1a1.5 1.5 0 0 0 0-3h-1"/>
+                                <path d="M16 12.5h2"/>
+                                <path d="M16 12.5v4"/>
+                                <path d="M16 14.5h1.5"/>
+                            </svg>
+                            <span id="btn-export-pdf-text">Exportar .PDF</span>
+                        </button>
+                    </nav>
+
+                    <!-- Cards de Personagens Gerados -->
+                    <div class="generation-content" id="generation-content" role="region" aria-label="Personagens gerados" aria-live="polite">
+                        <div class="empty-state">
+                            <img src="../../assets/icons/lucide/dice-5.svg" alt="" class="empty-dice ui-icon" aria-hidden="true">
+                            <p id="empty-title">Clique em <strong>Gerar Personagens</strong> para criar seus funis</p>
+                            <p class="empty-hint" id="empty-subtitle">Cada personagem rola 3d6 para atributos, ancestralidade, background, alinhamento e equipamento inicial</p>
                         </div>
                     </div>
 
-                    <!-- Registro de Rolagens -->
-                    <div class="generation-info card mt-4" id="generation-info" hidden>
-                        <div class="card-header bg-dark text-white">
-                            <h5 class="mb-0"><i class="bi bi-journal-text me-2"></i>Registro de Rolagens</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="roll-log" id="roll-log" style="max-height: 300px; overflow-y: auto;"></div>
-                        </div>
-                    </div>
+                    <!-- Registro de Rolagens (Estilo G-City) -->
+                    <section class="generation-info card" id="generation-info" hidden aria-label="Registro de rolagens">
+                        <h2>
+                            <img src="../../assets/icons/lucide/scroll-text.svg" alt="" class="ui-icon" aria-hidden="true">
+                            <span id="roll-log-heading">Registro de Rolagens</span>
+                        </h2>
+                        <div class="roll-log" id="roll-log"></div>
+                    </section>
                 </div>
             </section>
         </main>
 
-        <footer class="site-footer py-3" role="contentinfo">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="footer-caption small">Shadowdark Tools · Gerador de Personagem Nível 0</p>
-                        <div class="language-switch d-inline-flex mt-1" role="group" aria-label="Idioma">
-                            <button class="flag-button btn btn-sm btn-outline-secondary" aria-pressed="true" aria-label="Português (Brasil)" data-lang="pt-BR">
-                                <img src="../../assets/icons/lucide/flag-br.svg" alt="" aria-hidden="true">
-                            </button>
-                            <button class="flag-button btn btn-sm btn-outline-secondary" aria-pressed="false" aria-label="English" data-lang="en">
-                                <img src="../../assets/icons/lucide/flag-us.svg" alt="" aria-hidden="true">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <p class="footer-credit mb-1 small">
-                            Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> ·
-                            Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>
-                        </p>
-                        <p class="footer-credit mb-0 small">
-                            Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>.
-                            Este é um projeto de fã não oficial.
-                        </p>
+        <!-- Rodapé Padronizado -->
+        <div id="site-footer">
+            <footer class="site-footer" id="sobre" role="contentinfo">
+                <div class="container-fluid">
+                    <p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Personagem Nível 0</p>
+                    <p class="footer-credit" id="footer-credit-author">
+                        Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> ·
+                        Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>
+                    </p>
+                    <p class="footer-subcredit" id="footer-subcredit">
+                        Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>.
+                        Este é um projeto de fã não oficial.
+                    </p>
+                    <div class="language-switch" role="group" aria-label="Idioma">
+                        <button class="flag-button" type="button" aria-pressed="true" aria-label="Português (Brasil)" data-lang="pt-BR" data-lang-switch="pt" title="Português (Brasil)">
+                            <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="Brasil">
+                                <rect width="60" height="42" fill="#009b3a"/>
+                                <polygon points="30,5 56,21 30,37 4,21" fill="#fedf00"/>
+                                <circle cx="30" cy="21" r="9" fill="#002776"/>
+                                <path d="M21.5 19.2 Q30 16.5 38.5 23" stroke="#fff" stroke-width="1.6" fill="none"/>
+                            </svg>
+                        </button>
+                        <button class="flag-button" type="button" aria-pressed="false" aria-label="English" data-lang="en" data-lang-switch="en" title="English">
+                            <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="UK / USA">
+                                <defs>
+                                    <clipPath id="flag-left"><rect width="30" height="42"/></clipPath>
+                                    <clipPath id="flag-right"><rect x="30" width="30" height="42"/></clipPath>
+                                </defs>
+                                <g clip-path="url(#flag-left)">
+                                    <rect width="60" height="42" fill="#012169"/>
+                                    <path d="M0 0L60 42M60 0L0 42" stroke="#fff" stroke-width="7"/>
+                                    <path d="M0 0L60 42M60 0L0 42" stroke="#c8102e" stroke-width="3"/>
+                                    <path d="M30 0V42M0 21H60" stroke="#fff" stroke-width="11"/>
+                                    <path d="M30 0V42M0 21H60" stroke="#c8102e" stroke-width="6"/>
+                                </g>
+                                <g clip-path="url(#flag-right)">
+                                    <rect x="30" width="30" height="42" fill="#fff"/>
+                                    <g fill="#b22234">
+                                        <rect x="30" y="0" width="30" height="3.2"/><rect x="30" y="6.5" width="30" height="3.2"/>
+                                        <rect x="30" y="13" width="30" height="3.2"/><rect x="30" y="19.5" width="30" height="3.2"/>
+                                        <rect x="30" y="26" width="30" height="3.2"/><rect x="30" y="32.5" width="30" height="3.2"/>
+                                        <rect x="30" y="38.8" width="30" height="3.2"/>
+                                    </g>
+                                    <rect x="30" y="0" width="14" height="22.5" fill="#3c3b6e"/>
+                                </g>
+                            </svg>
+                        </button>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="../../js/ui-icons.js"></script>
     <script src="level-zero.js"></script>
 </body>

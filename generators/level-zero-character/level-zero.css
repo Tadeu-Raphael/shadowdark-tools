@@ -1,83 +1,54 @@
-/* Level Zero Character Generator Styles */
+/* Level Zero Character Generator Styles - Shadowdark Tools */
 /* Estilos específicos do gerador de personagem nível 0 */
 
-.generator-panel {
-    margin-bottom: var(--space-2xl);
+.generator-section {
+    width: min(100% - 2rem, 1200px);
+    margin: 0 auto;
+    padding: 2rem 0 3.5rem;
 }
 
+.generation-heading {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.generation-heading h1 {
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+    font-size: clamp(2rem, 4vw, 2.85rem);
+    letter-spacing: -0.02em;
+}
+
+.generation-heading .section-description {
+    max-width: 44rem;
+    margin: 0 auto;
+    color: var(--ink-muted);
+    font-size: 1.1rem;
+    line-height: 1.65;
+}
+
+/* Painel de Controles e Filtros */
 .generation-controls {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
-    padding: var(--space-lg);
-    background: var(--parchment-sunk);
-    border: 1px solid var(--edge);
-    border-radius: var(--radius-lg);
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1.25rem;
+    align-items: end;
 }
 
 .control-group {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    min-width: 0;
 }
 
 .control-group label {
+    margin-bottom: 0.45rem;
+    color: var(--ink-muted);
     font-family: var(--font-heading);
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--ink-muted);
-}
-
-.input-with-buttons {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-}
-
-.qty-btn {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-    line-height: 1;
-    padding: 0;
-}
-
-.qty-input {
-    width: 60px;
-    text-align: center;
-    padding: var(--space-xs) var(--space-sm);
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: 500;
-}
-
-.control-group select {
-    padding: var(--space-sm) var(--space-md);
-    font-family: inherit;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.generation-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-    justify-content: center;
-    margin-bottom: var(--space-xl);
-}
-
-.generation-actions .btn {
-    min-width: 160px;
-}
-
-.generation-actions .btn-lg {
-    min-width: 200px;
 }
 
 /* Empty State */
@@ -86,297 +57,417 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--space-2xl);
+    padding: 3.5rem 1.5rem;
     text-align: center;
-    color: var(--ink-faint);
     border: 2px dashed var(--edge);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-md);
     background: var(--parchment-sunk);
+    color: var(--ink-muted);
+    margin-top: 1rem;
 }
 
-.empty-icon {
-    margin-bottom: var(--space-md);
+.empty-dice {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 1.25rem;
+    opacity: 0.45;
+    filter: brightness(0) saturate(100%) invert(18%) sepia(50%) saturate(2800%) hue-rotate(345deg);
 }
 
 .empty-state p {
-    margin: var(--space-xs) 0;
-    color: var(--ink-muted);
+    margin: 0 0 0.35rem;
+    font-size: 1.1rem;
+    color: var(--ink);
 }
 
 .empty-hint {
-    font-size: 0.9rem !important;
+    font-size: 0.92rem !important;
+    color: var(--ink-muted) !important;
     font-style: italic;
 }
-/* Character Card - Bootstrap Styles */
-.character-card-attrs .attribute {
+
+/* Grid de Personagens */
+.generation-content {
+    width: 100%;
+}
+
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+    margin-top: 1rem;
+}
+
+/* Card de Personagem */
+.character-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--edge) !important;
+    border-radius: var(--radius-md) !important;
+    background: var(--parchment-raised);
+    box-shadow: var(--shadow-shallow) !important;
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.character-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium) !important;
+}
+
+.character-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.75rem 0.95rem;
+    background: var(--ink);
+    border-bottom: 2px solid var(--rule-dark);
+}
+
+.character-card__title {
+    margin: 0;
+    color: var(--parchment-raised);
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.character-card__badge {
+    flex: 0 0 auto;
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.character-card__badge.badge-original {
+    background: var(--gold);
+    color: var(--ink);
+}
+
+.character-card__badge.badge-homebrew {
+    background: var(--blood);
+    color: var(--parchment-raised);
+}
+
+.character-card__body {
+    display: flex;
+    flex-direction: column;
+    padding: 0.85rem;
+    flex-grow: 1;
+}
+
+/* Atributos (Grid 3 colunas) */
+.attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.45rem;
+    margin-bottom: 0.85rem;
+}
+
+.attribute-box {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: var(--space-sm);
-    background: var(--parchment-sunk);
+    justify-content: center;
+    padding: 0.45rem 0.2rem 0.4rem;
     border: 1px solid var(--edge);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
+    background: var(--parchment);
+    min-height: 76px;
 }
 
-.character-card-attrs .attribute-name {
-    font-family: var(--font-heading);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+.attribute-name {
     color: var(--ink-muted);
-    margin-bottom: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.15rem;
 }
 
-.character-card-attrs .attribute-value {
-    font-family: var(--font-mono);
-    font-size: 1.75rem;
-    font-weight: 500;
+.attribute-value {
     color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    font-weight: 700;
     line-height: 1;
 }
 
-.character-card-attrs .attribute-mod {
+.attribute-mod {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-top: var(--space-xs);
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-top: 0.15rem;
 }
 
-.character-card-attrs .attribute-mod.text-success { color: var(--success); }
-.character-card-attrs .attribute-mod.text-danger { color: var(--danger); }
-
-/* Character Details - Bootstrap Styles */
-.character-detail-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-sm);
-    padding: var(--space-sm) 0;
-    border-bottom: 1px dotted var(--edge);
+.attribute-mod.positive {
+    color: var(--success);
 }
 
-.character-detail-row:last-child {
-    border-bottom: none;
+.attribute-mod.negative {
+    color: var(--danger);
 }
 
-.character-detail-label {
-    font-family: var(--font-heading);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-}
-
-.character-detail-value {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: var(--ink);
-}
-
-/* Equipment List */
-.character-equipment-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 0.85rem;
-}
-
-.character-equipment-list li {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-xs) 0;
-    color: var(--ink);
-}
-
-/* Reroll Button */
+/* Botão de Re-rolar Atributo */
 .field-reroll {
-    border: 1px solid var(--edge);
-    border-radius: var(--radius-sm);
-    background: var(--parchment-raised);
-    color: var(--gold);
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink-faint);
+    cursor: pointer;
     transition: all 0.15s ease;
 }
 
-.field-reroll:hover {
-    border-color: var(--gold);
-    background: var(--gold-pale);
-    color: var(--gold);
+.field-reroll:hover,
+.field-reroll:focus-visible {
+    color: var(--blood);
+    background: var(--parchment-sunk);
 }
 
-.field-reroll .bi {
-    font-size: 0.9rem;
+.field-reroll img {
+    width: 12px;
+    height: 12px;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
 }
 
-/* Alignment Colors */
+.field-reroll:hover img {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+.rolling {
+    animation: pulse-value 0.3s ease infinite;
+}
+
+@keyframes pulse-value {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.9); }
+}
+
+/* Detalhes do Personagem */
+.character-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px dotted var(--edge);
+    font-size: 0.88rem;
+}
+
+.detail-row--block {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+}
+
+.detail-row--block .detail-header-line {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: baseline;
+}
+
+.detail-description {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--ink-muted);
+    line-height: 1.35;
+    text-align: left;
+    margin: 0.1rem 0 0;
+    overflow-wrap: break-word;
+}
+
+.ancestry-details .detail-description {
+    margin-top: 0.25rem;
+}
+
+.ancestry-trait {
+    margin: 0.25rem 0 0;
+    color: var(--ink);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.ancestry-trait .detail-label {
+    margin-right: 0.2rem;
+}
+
+.ancestry-trait strong {
+    color: var(--blood);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    color: var(--ink);
+    font-weight: 600;
+    text-align: right;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.hp-display {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+}
+
+.hp-value {
+    color: var(--blood);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.hp-detail {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+}
+
 .alignment-ordeiro,
 .alignment-lawful {
     color: var(--success);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .alignment-neutro,
 .alignment-neutral {
     color: var(--gold);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .alignment-caotico,
 .alignment-chaotic {
     color: var(--danger);
-    font-weight: 600;
+    font-weight: 700;
 }
 
-/* Roll Log Enhancements */
-.roll-profession {
-    color: var(--blood);
-    font-style: italic;
+.equipment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+    font-size: 0.82rem;
+    color: var(--ink);
 }
 
-/* Loading Spinner */
+.equipment-list li {
+    padding: 0.08rem 0;
+}
+
+/* Animação do botão carregando */
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
 
-/* Bootstrap Overrides - Shadowdark Colors */
-.bg-dark {
-    background-color: var(--ink) !important;
-    color: var(--parchment) !important;
-}
+/* Responsividade */
+@media (max-width: 768px) {
+    .generator-section {
+        padding: 1.5rem 0 2.5rem;
+    }
 
-.bg-dark.text-white {
-    color: var(--parchment) !important;
-}
+    .generation-heading h1 {
+        font-size: 2.15rem;
+    }
 
-.btn-outline-secondary {
-    border-color: var(--edge);
-    color: var(--ink);
-}
-
-.btn-outline-secondary:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--gold-pale);
-}
-
-.btn-primary {
-    border-color: var(--blood);
-    background-color: var(--blood);
-}
-
-.btn-primary:hover {
-    border-color: var(--blood-light);
-    background-color: var(--blood-light);
-}
-
-.text-success {
-    color: var(--success) !important;
-}
-
-.text-danger {
-    color: var(--danger) !important;
-}
-
-.text-warning {
-    color: var(--gold) !important;
-}
-
-.badge.bg-danger {
-    background-color: var(--danger) !important;
-    color: var(--parchment) !important;
-}
-
-.badge.bg-gold {
-    background-color: var(--gold) !important;
-    color: var(--ink) !important;
-}
-
-.card.border-dark {
-    border-color: var(--edge) !important;
-}
-
-.card-header.bg-dark {
-    background-color: var(--ink) !important;
-    border-bottom: 1px solid var(--edge) !important;
-}
-
-.loader-icon {
-    animation: spin 1s linear infinite;
-}
-
-/* Toast container */
-.toast-container {
-    position: fixed;
-    bottom: var(--space-lg);
-    right: var(--space-lg);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-}
-
-.toast {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-md);
-    background: var(--ink);
-    color: var(--parchment);
-    box-shadow: var(--shadow-deep);
-    animation: slide-in 0.3s ease;
-}
-
-.toast.success {
-    background: var(--success);
-}
-
-.toast.error {
-    background: var(--danger);
-}
-
-.toast.info {
-    background: var(--gold);
-    color: var(--ink);
-}
-
-@keyframes slide-in {
-    from { opacity: 0; transform: translateX(100px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* Responsive */
-@media (max-width: 700px) {
     .generation-controls {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .generation-actions {
         flex-direction: column;
-    }
-
-    .generation-actions .btn {
         width: 100%;
     }
 
-    .character-badges {
+    .generation-actions .generation-button {
         width: 100%;
-        justify-content: flex-end;
     }
 
-    .hp-display {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-xs);
+    .character-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Impressão */
+@media print {
+    #site-header,
+    #site-footer,
+    .generator-panel,
+    .generation-actions,
+    .generation-info,
+    .field-reroll {
+        display: none !important;
     }
 
-    .toast-container {
-        left: var(--space-md);
-        right: var(--space-md);
-        bottom: var(--space-md);
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .generator-section {
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .character-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1rem !important;
+    }
+
+    .character-card {
+        box-shadow: none !important;
+        border: 1px solid #444 !important;
+        break-inside: avoid;
+    }
+
+    .character-card__header {
+        background: #333 !important;
+        color: #fff !important;
     }
 }

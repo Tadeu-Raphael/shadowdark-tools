@@ -1,207 +1,211 @@
 /* Landing Page Styles - Shadowdark Tools */
-/* Estilos específicos da página inicial/catálogo */
+/* Estilos específicos da página inicial e do catálogo de ferramentas */
 
-.site-shell {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+.generator-section {
+    width: min(100% - 2rem, 1120px);
+    margin: 0 auto;
+    padding: 3.5rem 0 4.5rem;
+    text-align: center;
 }
 
-/* Header */
-.site-header {
-    width: min(100% - 2rem, 1200px);
-    margin: 1rem auto 0;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--edge);
-    background: var(--parchment-raised);
-    box-shadow: var(--shadow-shallow);
-    position: relative;
-    isolation: isolate;
+.generator-section h1 {
+    margin: 0 0 0.85rem;
+    color: var(--ink);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
 }
 
-.site-header::before {
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    border-radius: inherit;
-    background-image: var(--grain);
-    opacity: var(--grain-alpha);
-    mix-blend-mode: multiply;
-    content: "";
-    pointer-events: none;
+.section-description {
+    max-width: 42rem;
+    margin: 0 auto 3rem;
+    color: var(--ink-muted);
+    font-size: 1.15rem;
+    line-height: 1.7;
 }
 
-.site-header {
-    border-top: 4px solid var(--blood) !important;
+.section-description strong {
+    color: var(--ink);
+    font-weight: 600;
 }
 
-.header-inner {
+/* Grid de Ferramentas / Geradores (Estilo G-City) */
+.generator-grid {
+    display: grid;
+    width: min(100%, 54rem);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: stretch;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 1.5rem;
+}
+
+.generator-grid.has-single-card {
+    max-width: 32rem;
+}
+
+/* Card de Ferramenta */
+.tool-card,
+.generator-card {
     display: flex;
     width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-}
-
-.site-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    color: var(--ink);
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: -0.01em;
-}
-/* Footer */
-.site-footer {
-    width: min(100% - 2rem, 1200px);
-    margin: 1rem auto;
-    padding: 1.5rem;
-    border-radius: var(--radius-xl);
+    min-height: 20rem;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.75rem;
     border: 1px solid var(--edge);
-    background: var(--parchment-raised);
-    box-shadow: var(--shadow-shallow);
-    color: var(--ink-faint);
-    font-size: 0.85rem;
-    text-align: center;
+    border-left: 4px solid var(--blood);
+    border-radius: var(--radius-md);
+    background-color: var(--parchment-raised);
+    box-shadow: var(--shadow-medium);
+    text-align: left;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
     position: relative;
     isolation: isolate;
 }
 
-.site-footer::before {
-    position: absolute;
-    z-index: -1;
-    inset: 0;
-    border-radius: inherit;
-    background-image: var(--grain);
-    opacity: var(--grain-alpha);
-    mix-blend-mode: multiply;
-    content: "";
-    pointer-events: none;
+.tool-card:hover,
+.tool-card:focus-visible,
+.generator-card:hover,
+.generator-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--rule);
+    border-left-color: var(--gold);
+    box-shadow: var(--shadow-deep);
+    color: var(--ink);
 }
 
-.site-footer p {
-    margin: 0;
+.tool-card__topline {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
 }
 
-.footer-caption {
-    margin-bottom: var(--space-sm) !important;
-    color: var(--ink-muted);
-    font-family: var(--font-heading);
-    font-weight: 600;
+.tool-card__icon,
+.card-icon {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--edge);
+    background: var(--parchment-sunk);
+    font-size: 1.5rem;
+}
+
+.tool-card__icon img,
+.card-icon img {
+    width: 1.6rem;
+    height: 1.6rem;
+    opacity: 0.85;
+}
+
+.tool-card__badge {
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--blood);
+    border-radius: var(--radius-sm);
+    background: var(--blood);
+    color: var(--parchment-raised);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
-.language-switch {
-    display: flex;
-    justify-content: center;
-    margin-top: var(--space-sm);
-    gap: var(--space-sm);
-}
-
-.flag-button {
-    padding: 4px;
-    border: 2px solid transparent;
-    border-radius: var(--radius-sm);
-    background: none;
-    line-height: 0;
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity 0.15s, border-color 0.15s;
-}
-
-.flag-button:hover,
-.flag-button[aria-pressed="true"] {
-    opacity: 1;
-}
-
-.flag-button[aria-pressed="true"] {
-    border-color: var(--gold);
-}
-
-.flag-button svg {
-    display: block;
-    width: 28px;
-    height: 28px;
-    filter: sepia(0.3) saturate(1.5) hue-rotate(-20deg);
-}
-
-.flag-button[aria-pressed="true"] svg {
-    filter: sepia(0.6) saturate(2) hue-rotate(-15deg);
-}
-
-.footer-credit {
-    font-size: 0.8rem;
-}
-
-.footer-credit a {
+.tool-card__category,
+.card-category {
+    margin: 0 0 0.5rem;
     color: var(--blood);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
-.footer-credit a:hover,
-.footer-credit a:focus-visible {
-    border-bottom-color: var(--blood);
+.tool-card__title,
+.generator-card h2 {
+    margin: 0 0 0.75rem;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
 }
 
-/* Responsivo */
-@media (max-width: 700px) {
-    .site-header {
-        padding: 1rem;
-    }
+.tool-card__description,
+.generator-card p {
+    margin: 0 0 1.5rem;
+    color: var(--ink-muted);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
 
-    .header-inner {
-        flex-direction: column;
-        gap: var(--space-md);
-        text-align: center;
-    }
+.tool-card__action,
+.card-action {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--edge);
+    color: var(--blood);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
 
-    .site-brand {
-        font-size: 1.25rem;
-        justify-content: center;
-    }
+.tool-card__action img,
+.card-action img {
+    width: 16px;
+    height: 16px;
+    transition: transform 180ms ease;
+}
 
-    .site-navigation {
-        gap: var(--space-xs);
-    }
+.tool-card:hover .tool-card__action img,
+.generator-card:hover .card-action img {
+    transform: translateX(4px);
+}
 
-    .site-navigation a {
-        padding: var(--space-xs) var(--space-sm);
-        font-size: 0.8rem;
-    }
+/* Card Em Breve / Coming Soon */
+.tool-card--disabled,
+.generator-card--disabled {
+    opacity: 0.58;
+    pointer-events: none;
+    cursor: default;
+    border-left-color: var(--iron);
+}
 
+.tool-card--disabled .tool-card__badge {
+    border-color: var(--iron);
+    background: var(--iron);
+}
+
+@media (max-width: 600px) {
     .generator-section {
-        width: min(100% - 2rem, 1120px);
-        padding: 2.5rem 0;
+        padding: 2.25rem 0 3.5rem;
+    }
+
+    .generator-section h1 {
+        font-size: 2.15rem;
+    }
+
+    .section-description {
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
     }
 
     .generator-grid {
-        width: min(100%, 22rem);
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .site-footer {
-        padding: 1rem;
-    }
-
-    .generator-card {
-        min-height: auto;
-        padding: var(--space-lg);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
+        grid-template-columns: 1fr;
     }
 }

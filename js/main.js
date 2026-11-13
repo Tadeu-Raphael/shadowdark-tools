@@ -10,13 +10,40 @@
     const generators = [
         {
             id: "level-zero-character",
-            category: "PERSONAGEM",
-            title: "Gerador de Personagem Nível 0",
-            description: "Crie personagens nível 0 (funis) para Shadowdark RPG. Role atributos, profissão, equipamento inicial e HP. Perfeito para funis brutais e campanhas de origem.",
-            icon: "👤",
+            category: { "pt-BR": "PERSONAGEM", en: "CHARACTER" },
+            title: { "pt-BR": "Gerador de Personagem Nível 0", en: "Level 0 Character Generator" },
+            description: {
+                "pt-BR": "Monte um grupo de funis brutais com atributos 3d6, ancestralidade, background e equipamento inicial.",
+                en: "Build a brutal funnel party with 3d6 attributes, ancestry, background, and starting gear."
+            },
+            icon: "user.svg",
             href: "generators/level-zero-character/index.html",
-            badge: "NOVO",
-            featured: true
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
+        },
+        {
+            id: "dungeon-generator",
+            category: { "pt-BR": "MASMORRA", en: "DUNGEON" },
+            title: { "pt-BR": "Gerador de Masmorras", en: "Dungeon Generator" },
+            description: {
+                "pt-BR": "Masmorras processuais com salas, corredores, armadilhas, perigos, monstros e tesouros.",
+                en: "Procedural dungeons with rooms, corridors, traps, hazards, monsters, and treasures."
+            },
+            icon: "castle.svg",
+            badge: { "pt-BR": "EM BREVE", en: "COMING SOON" },
+            available: false
+        },
+        {
+            id: "encounter-generator",
+            category: { "pt-BR": "ENCONTROS", en: "ENCOUNTERS" },
+            title: { "pt-BR": "Gerador de Encontros", en: "Encounter Generator" },
+            description: {
+                "pt-BR": "Encontros aleatórios balanceados por nível com tabelas de reações, moral e tesouros.",
+                en: "Level-balanced encounters with reaction tables, morale checks, and treasures."
+            },
+            icon: "sword.svg",
+            badge: { "pt-BR": "PLANEJADO", en: "PLANNED" },
+            available: false
         }
     ];
 
@@ -53,18 +80,18 @@
     };
 
     let currentLang = "pt-BR";
-// Elementos DOM
+
+    // Elementos DOM
     const generatorGrid = document.getElementById("generator-grid");
     const langButtons = document.querySelectorAll(".flag-button");
     const navLinks = document.querySelectorAll(".site-navigation a");
 
     // Inicialização
     function init() {
+        loadPreferredLanguage();
         renderGenerators();
         setupLanguageSwitcher();
         setupNavigation();
-        setupKeyboardNavigation();
-        loadPreferredLanguage();
     }
 
     // Renderiza os cards de geradores
@@ -72,51 +99,57 @@
         if (!generatorGrid) return;
 
         const t = i18n[currentLang];
-        const availableGenerators = generators.filter(g => !g.comingSoon);
+        generatorGrid.innerHTML = "";
 
-        if (availableGenerators.length === 0) {
-            generatorGrid.innerHTML = '<div class="col-12"><div class="card bg-light text-center border-0 shadow-sm"><div class="card-body py-5"><i class="bi bi-dice6-fill text-muted display-4 mb-3"></i><p class="text-muted">' + t.noGenerators + '</p></div></div></div>';
-            return;
-        }
+        generators.forEach(gen => {
+            const title = gen.title[currentLang];
+            const category = gen.category[currentLang];
+            const description = gen.description[currentLang];
+            const badge = typeof gen.badge === "object" ? gen.badge[currentLang] : gen.badge;
 
-        generatorGrid.innerHTML = availableGenerators.map(gen => `
-            <div class="col">
-                <a href="${gen.href}" class="card h-100 shadow-sm border-dark text-dark text-decoration-none" data-generator-id="${gen.id}" aria-label="${t.openGenerator}: ${gen.title}">
-                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-                        <h6 class="card-title mb-0 fw-bold">${gen.title}</h6>
-                        ${gen.badge ? '<span class="badge bg-danger text-white">' + gen.badge + '</span>' : ''}
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <div class="category-badge mb-3">
-                            <span class="badge bg-secondary text-white text-uppercase small">${gen.category}</span>
-                        </div>
-                        <p class="card-text flex-grow-1">${gen.description}</p>
-                        <div class="mt-auto">
-                            <span class="badge bg-info text-dark">${t.openGenerator}</span>
-                            <i class="bi bi-arrow-right float-end"></i>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        `).join("");
+            const card = document.createElement("a");
+            card.className = "tool-card" + (gen.available ? "" : " tool-card--disabled");
+            if (gen.available) {
+                card.href = gen.href;
+                card.setAttribute("aria-label", `${t.openGenerator}: ${title}`);
+            } else {
+                card.href = "#";
+                card.setAttribute("aria-disabled", "true");
+                card.setAttribute("tabindex", "-1");
+            }
 
-        const comingSoonGenerators = generators.filter(g => g.comingSoon || g.badge === "EM BREVE" || g.badge === "PLANEJADO");
-        if (comingSoonGenerators.length > 0) {
-            comingSoonGenerators.forEach(gen => {
-                const card = document.createElement("div");
-                card.className = "col";
-                card.innerHTML = '<a href="#" class="card h-100 shadow-sm border-dark text-dark text-decoration-none" style="opacity: 0.6; pointer-events: none;" aria-disabled="true"><div class="card-header bg-dark text-white d-flex justify-content-between align-items-center"><h6 class="card-title mb-0 fw-bold">' + gen.title + '</h6><span class="badge bg-secondary text-white">' + gen.badge + '</span></div><div class="card-body d-flex flex-column"><div class="category-badge mb-3"><span class="badge bg-secondary text-white text-uppercase small">' + gen.category + '</span></div><p class="card-text flex-grow-1">' + gen.description + '</p><div class="mt-auto"><span class="badge bg-warning text-dark">' + t.comingSoon + '</span><i class="bi bi-lock float-end"></i></div></div></a>';
-                generatorGrid.appendChild(card);
-            });
-        }
+            card.innerHTML = `
+                <div class="tool-card__topline">
+                    <span class="tool-card__icon">
+                        <img src="assets/icons/lucide/${gen.icon}" alt="" aria-hidden="true">
+                    </span>
+                    <span class="tool-card__badge">${badge}</span>
+                </div>
+                <p class="tool-card__category">${category}</p>
+                <h2 class="tool-card__title">${title}</h2>
+                <p class="tool-card__description">${description}</p>
+                <span class="tool-card__action">
+                    <span>${gen.available ? t.openGenerator : t.comingSoon}</span>
+                    <img src="assets/icons/lucide/arrow-right.svg" alt="" aria-hidden="true">
+                </span>
+            `;
+
+            generatorGrid.appendChild(card);
+        });
     }
-// Configura troca de idioma
+
+    // Configura troca de idioma
     function setupLanguageSwitcher() {
         langButtons.forEach(btn => {
             btn.addEventListener("click", () => {
-                const lang = btn.dataset.lang;
+                // suporte a data-lang ou data-lang-switch
+                const lang = btn.dataset.lang || btn.dataset.langSwitch;
                 if (lang && lang !== currentLang) {
-                    switchLanguage(lang);
+                    // normalizar "pt" → "pt-BR"
+                    const normalizedLang = lang === "pt" ? "pt-BR" : lang;
+                    if (i18n[normalizedLang]) {
+                        switchLanguage(normalizedLang);
+                    }
                 }
             });
         });
@@ -127,76 +160,72 @@
         const t = i18n[lang];
 
         langButtons.forEach(btn => {
-            const isActive = btn.dataset.lang === lang;
-            btn.setAttribute("aria-pressed", isActive);
+            const btnLang = btn.dataset.lang || btn.dataset.langSwitch;
+            const normalizedBtnLang = btnLang === "pt" ? "pt-BR" : btnLang;
+            const isActive = normalizedBtnLang === lang;
+            btn.setAttribute("aria-pressed", isActive ? "true" : "false");
         });
 
-        const eyebrow = document.querySelector(".eyebrow");
+        const eyebrow = document.getElementById("titulo-principal");
         if (eyebrow) eyebrow.textContent = t.eyebrow;
 
-        const title = document.querySelector(".generator-section h1");
+        const title = document.getElementById("hero-title");
         if (title) title.innerHTML = t.title;
 
-        const desc = document.querySelector(".section-description");
+        const desc = document.getElementById("hero-desc");
         if (desc) desc.innerHTML = t.description;
 
-        const footerCaption = document.querySelector(".footer-caption");
+        const navHome = document.getElementById("nav-home");
+        if (navHome) navHome.textContent = t.home;
+
+        const navGenerators = document.getElementById("nav-generators");
+        if (navGenerators) navGenerators.textContent = t.generators;
+
+        const navAbout = document.getElementById("nav-about");
+        if (navAbout) navAbout.textContent = t.about;
+
+        const footerCaption = document.getElementById("footer-caption");
         if (footerCaption) footerCaption.textContent = t.footerCaption;
 
-        const footerCredits = document.querySelectorAll(".footer-credit");
-        if (footerCredits[0]) footerCredits[0].innerHTML = t.footerCredit1;
-        if (footerCredits[1]) footerCredits[1].innerHTML = t.footerCredit2;
+        const footerCredit1 = document.getElementById("footer-credit-author");
+        if (footerCredit1) footerCredit1.innerHTML = t.footerCredit1;
 
-        navLinks.forEach((link, index) => {
-            const keys = ["home", "generators", "about"];
-            if (keys[index]) link.textContent = t[keys[index]];
-        });
+        const footerCredit2 = document.getElementById("footer-subcredit");
+        if (footerCredit2) footerCredit2.innerHTML = t.footerCredit2;
+
+        document.documentElement.lang = lang;
+        localStorage.setItem("shadowdark-tools-lang", lang);
 
         renderGenerators();
-        localStorage.setItem("shadowdark-tools-lang", lang);
-        document.documentElement.lang = lang;
     }
 
     function loadPreferredLanguage() {
-        const saved = localStorage.getItem("shadowdark-tools-lang");
-        const browserLang = navigator.language.startsWith("pt") ? "pt-BR" : "en";
-        const preferred = saved || browserLang;
-        if (i18n[preferred]) switchLanguage(preferred);
+        const savedLang = localStorage.getItem("shadowdark-tools-lang") ||
+                          (navigator.language.startsWith("pt") ? "pt-BR" : "en");
+        if (savedLang && i18n[savedLang]) {
+            switchLanguage(savedLang);
+        }
     }
 
-    // Configura navegação ativa
     function setupNavigation() {
-        const currentPath = window.location.pathname;
         navLinks.forEach(link => {
-            const href = link.getAttribute("href");
-            if (href === currentPath || (currentPath === "/" && href === "index.html")) {
-                link.setAttribute("aria-current", "page");
-            }
+            link.addEventListener("click", (e) => {
+                const href = link.getAttribute("href");
+                if (href && href.startsWith("#")) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: "smooth" });
+                    }
+                }
+            });
         });
     }
 
-    // Navegação por teclado
-    function setupKeyboardNavigation() {
-        document.addEventListener("keydown", (e) => {
-            if (e.altKey && e.key >= "1" && e.key <= "3") {
-                e.preventDefault();
-                const index = parseInt(e.key) - 1;
-                if (navLinks[index]) navLinks[index].focus();
-            }
-        });
-    }
-// Inicializa quando DOM estiver pronto
+    // Inicializa quando o DOM estiver pronto
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", init);
     } else {
         init();
     }
-
-    // Expõe API pública para uso em outros scripts
-    window.ShadowdarkTools = {
-        getGenerators: () => generators,
-        getCurrentLanguage: () => currentLang,
-        switchLanguage,
-        i18n
-    };
-}());
+})();
