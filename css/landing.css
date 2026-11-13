@@ -1,0 +1,58 @@
+/* Landing Page Styles - Shadowdark Tools */
+/* Estilos específicos da página inicial/catálogo */
+
+.site-shell {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* Header */
+.site-header {
+    width: min(100% - 2rem, 1200px);
+    margin: 1rem auto 0;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--edge);
+    background: var(--parchment-raised);
+    box-shadow: var(--shadow-shallow);
+    position: relative;
+    isolation: isolate;
+}
+
+.site-header::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: inherit;
+    background-image: var(--grain);
+    opacity: var(--grain-alpha);
+    mix-blend-mode: multiply;
+    content: "";
+    pointer-events: none;
+}
+
+.site-header {
+    border-top: 4px solid var(--blood) !important;
+}
+
+.header-inner {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+}

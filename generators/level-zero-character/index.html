@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-shadowdark="parchment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerador de Personagem Nível 0 para Shadowdark RPG">
+    <title>Gerador de Personagem Nível 0 — Shadowdark Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/shadowdark-ui.css">
+    <link rel="stylesheet" href="level-zero.css">
+</head>
+<body>
+    <div class="site-shell">
+        <header class="site-header" role="banner">
+            <div class="header-inner container-fluid">
+                <a href="../../index.html" class="site-brand" aria-label="Shadowdark Tools - Início">
+                    <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" aria-hidden="true">
+                    <span>Shadowdark Tools</span>
+                </a>
+                <nav class="site-navigation" aria-label="Navegação principal">
+                    <a href="../../index.html">Início</a>
+                    <a href="#" aria-current="page">Geradores</a>
+                    <a href="#sobre">Sobre</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="site-main" role="main">
+            <section class="generator-section" aria-labelledby="gen-title">
+                <div class="container-fluid">
+                    <p class="eyebrow" id="gen-title">PERSONAGEM</p>
+                    <h1>Gerador de Personagem Nível 0</h1>
+                    <p class="section-description">
+                        Crie <strong>funis</strong> (personagens nível 0) para Shadowdark RPG.
+                        Role 3d6 para cada atributo, determine profissão, equipamento inicial e HP.
+                        Perfeito para campanhas de origem brutais.
+                    </p>
+<div class="generator-panel" role="application" aria-label="Painel de geração de personagem">
+                        <div class="generation-controls">
+                            <div class="control-group">
+                                <label for="character-count">Quantidade</label>
+                                <div class="input-with-buttons">
+                                    <button type="button" class="btn btn-sm btn-outline qty-btn" data-action="decrease" aria-label="Diminuir quantidade">−</button>
+                                    <input type="number" id="character-count" class="qty-input" value="4" min="1" max="20" aria-label="Número de personagens">
+                                    <button type="button" class="btn btn-sm btn-outline qty-btn" data-action="increase" aria-label="Aumentar quantidade">+</button>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label for="lang-select">Idioma dos resultados</label>
+                                <select id="lang-select" aria-label="Idioma dos resultados">
+                                    <option value="pt-BR">Português (Brasil)</option>
+                                    <option value="en">English</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="ancestry-mode">Ancestralidade</label>
+                                <select id="ancestry-mode" aria-label="Modo de ancestralidade">
+                                    <option value="original">Apenas Originais (d8)</option>
+                                    <option value="all">Todas + Homebrew (d30)</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="background-mode">Background</label>
+                                <select id="background-mode" aria-label="Modo de background">
+                                    <option value="detailed">Completo (Nome + Itens)</option>
+                                    <option value="raw">Apenas Nome</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="generation-actions">
+                            <button type="button" id="generate-btn" class="btn btn-primary btn-lg" aria-label="Gerar personagens">
+                                <img src="../../assets/icons/lucide/dice-5.svg" alt="" class="ui-icon" aria-hidden="true">
+                                <span>Gerar Personagens</span>
+                            </button>
+                            <button type="button" id="export-txt-btn" class="btn btn-secondary" disabled aria-label="Exportar como TXT">
+                                <img src="../../assets/icons/lucide/file-text.svg" alt="" class="ui-icon" aria-hidden="true">
+                                <span>Exportar TXT</span>
+                            </button>
+                            <button type="button" id="export-pdf-btn" class="btn btn-outline" disabled aria-label="Exportar como PDF">
+                                <img src="../../assets/icons/lucide/download.svg" alt="" class="ui-icon" aria-hidden="true">
+                                <span>Exportar PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="generation-content" id="generation-content" role="region" aria-label="Personagens gerados" aria-live="polite">
+                        <div class="empty-state">
+                            <img src="../../assets/icons/lucide/dice-5.svg" alt="" class="ui-icon empty-icon" aria-hidden="true" style="width: 4rem; height: 4rem; opacity: 0.3;">
+                            <p>Clique em <strong>Gerar Personagens</strong> para criar seus funis</p>
+                            <p class="empty-hint">Cada personagem rola 3d6 para atributos, profissão aleatória e equipamento inicial</p>
+                        </div>
+                    </div>
+
+                    <div class="generation-info" id="generation-info" hidden>
+                        <h2>Registro de Rolagens</h2>
+                        <div class="roll-log" id="roll-log"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            <div class="container-fluid">
+                <p class="footer-caption">Shadowdark Tools · Gerador de Personagem Nível 0</p>
+                <div class="language-switch" role="group" aria-label="Idioma">
+                    <button class="flag-button" aria-pressed="true" aria-label="Português (Brasil)" data-lang="pt-BR">
+                        <img src="../../assets/icons/lucide/flag-br.svg" alt="" aria-hidden="true">
+                    </button>
+                    <button class="flag-button" aria-pressed="false" aria-label="English" data-lang="en">
+                        <img src="../../assets/icons/lucide/flag-us.svg" alt="" aria-hidden="true">
+                    </button>
+                </div>
+                <p class="footer-credit">
+                    Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> ·
+                    Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>
+                </p>
+                <p class="footer-credit">
+                    Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>.
+                    Este é um projeto de fã não oficial.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../../js/ui-icons.js"></script>
+    <script src="level-zero.js"></script>
+</body>
+</html>
