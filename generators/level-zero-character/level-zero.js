@@ -377,7 +377,6 @@
                 { name: "Koboldo", type: "homebrew" },
                 { name: "Komodo", type: "homebrew" },
                 { name: "Meio-Miranha", type: "homebrew" },
-                { name: "Meio-Modrongo", type: "homebrew" },
                 { name: "Meio-Stigmu", type: "homebrew" },
                 { name: "Modrongo", type: "homebrew" },
                 { name: "Obsidianum", type: "homebrew" },
@@ -409,7 +408,13 @@
             lblBackground: "Background",
             lblLang: "Idioma dos Resultados",
             optAncestryOriginal: "Padrão do Sistema (d6)",
-            optAncestryAll: "Expandido + Homebrew (d31)",
+            optAncestryAll: "Expandido + Homebrew (d30)",
+            ancestryInfoButton: "Ver lista",
+            ancestryDialogTitle: "Ancestralidades cadastradas",
+            ancestryDialogSummary: "{count} ancestralidades disponíveis no modo Expandido + Homebrew.",
+            ancestryOriginalTitle: "Padrão do Sistema",
+            ancestryHomebrewTitle: "Homebrew",
+            ancestryDialogClose: "Fechar",
             optBgSystem: "Padrão do Sistema (d20)",
             optBgExpanded: "Customizado (Sistema + Profissões)",
             btnGenerate: "Gerar Personagens",
@@ -463,7 +468,6 @@
                 { name: "Kobold", type: "homebrew" },
                 { name: "Komodo", type: "homebrew" },
                 { name: "Half-Spider", type: "homebrew" },
-                { name: "Half-Mongrel", type: "homebrew" },
                 { name: "Half-Stigmu", type: "homebrew" },
                 { name: "Mongrel", type: "homebrew" },
                 { name: "Obsidianum", type: "homebrew" },
@@ -495,7 +499,13 @@
             lblBackground: "Background",
             lblLang: "Result Language",
             optAncestryOriginal: "System Standard (d6)",
-            optAncestryAll: "Expanded + Homebrew (d31)",
+            optAncestryAll: "Expanded + Homebrew (d30)",
+            ancestryInfoButton: "View list",
+            ancestryDialogTitle: "Registered ancestries",
+            ancestryDialogSummary: "{count} ancestries available in Expanded + Homebrew mode.",
+            ancestryOriginalTitle: "System Standard",
+            ancestryHomebrewTitle: "Homebrew",
+            ancestryDialogClose: "Close",
             optBgSystem: "System Standard (d20)",
             optBgExpanded: "Custom (System + Occupations)",
             btnGenerate: "Generate Characters",
@@ -622,6 +632,7 @@
             this.countInput = document.getElementById("character-count");
             this.langSelect = document.getElementById("lang-select");
             this.ancestryModeSelect = document.getElementById("ancestry-mode");
+            this.ancestryInfoDialog = document.getElementById("ancestry-info-dialog");
             this.backgroundModeSelect = document.getElementById("background-mode");
             this.contentEl = document.getElementById("generation-content");
             this.infoEl = document.getElementById("generation-info");
@@ -650,6 +661,11 @@
                 });
             });
             this.ancestryModeSelect.addEventListener("change", (e) => this.setAncestryMode(e.target.value));
+            document.getElementById("ancestry-info-btn").addEventListener("click", () => this.openAncestryInfo());
+            document.getElementById("ancestry-dialog-close").addEventListener("click", () => this.ancestryInfoDialog.close());
+            this.ancestryInfoDialog.addEventListener("click", (e) => {
+                if (e.target === this.ancestryInfoDialog) this.ancestryInfoDialog.close();
+            });
             this.backgroundModeSelect.addEventListener("change", (e) => this.setBackgroundMode(e.target.value));
 
             this.qtyBtns.forEach(btn => {
@@ -688,6 +704,19 @@
             });
 
             const t = SHADOWDARK_DATA[lang];
+
+            document.getElementById("ancestry-info-btn").textContent = t.ancestryInfoButton;
+            document.getElementById("ancestry-dialog-title").textContent = t.ancestryDialogTitle;
+            document.getElementById("ancestry-original-title").textContent = t.ancestryOriginalTitle;
+            document.getElementById("ancestry-homebrew-title").textContent = t.ancestryHomebrewTitle;
+            document.getElementById("ancestry-dialog-close").setAttribute("aria-label", t.ancestryDialogClose);
+            const allAncestries = [...t.ancestriesOriginal, ...t.ancestriesHomebrew];
+            document.getElementById("ancestry-dialog-summary").textContent =
+                t.ancestryDialogSummary.replace("{count}", String(allAncestries.length));
+            document.getElementById("ancestry-original-list").innerHTML = t.ancestriesOriginal
+                .map((ancestry) => `<li>${this.escapeHtml(ancestry.name)}</li>`).join("");
+            document.getElementById("ancestry-homebrew-list").innerHTML = t.ancestriesHomebrew
+                .map((ancestry) => `<li>${this.escapeHtml(ancestry.name)}</li>`).join("");
 
             // Atualiza textos estáticos
             const pageTitle = document.getElementById("page-title");
@@ -767,6 +796,10 @@
         setAncestryMode(mode) {
             this.ancestryMode = mode;
             localStorage.setItem("shadowdark-l0-ancestry", mode);
+        }
+
+        openAncestryInfo() {
+            this.ancestryInfoDialog.showModal();
         }
 
         setBackgroundMode(mode) {

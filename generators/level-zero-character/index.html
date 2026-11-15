@@ -59,10 +59,13 @@
                             </div>
                             <div class="control-group">
                                 <label class="form-label" for="ancestry-mode" id="lbl-ancestry">Ancestralidade</label>
+                                <div class="ancestry-mode-control">
                                 <select id="ancestry-mode" class="form-select" aria-label="Modo de ancestralidade">
                                     <option value="original">Padrão do Sistema (d6)</option>
-                                    <option value="all">Expandido + Homebrew (d31)</option>
+                                    <option value="all">Expandido + Homebrew (d30)</option>
                                 </select>
+                                <button type="button" id="ancestry-info-btn" class="ancestry-info-btn" aria-haspopup="dialog" aria-controls="ancestry-info-dialog">Ver lista</button>
+                                </div>
                             </div>
                             <div class="control-group">
                                 <label class="form-label" for="background-mode" id="lbl-background">Background</label>
@@ -126,6 +129,24 @@
                 </div>
             </section>
         </main>
+
+        <dialog id="ancestry-info-dialog" class="ancestry-info-dialog" aria-labelledby="ancestry-dialog-title">
+            <div class="ancestry-info-dialog__header">
+                <h2 id="ancestry-dialog-title">Ancestralidades cadastradas</h2>
+                <button type="button" id="ancestry-dialog-close" class="ancestry-dialog-close" aria-label="Fechar">&times;</button>
+            </div>
+            <p id="ancestry-dialog-summary"></p>
+            <div class="ancestry-info-dialog__lists">
+                <section aria-labelledby="ancestry-original-title">
+                    <h3 id="ancestry-original-title">Padrão do Sistema</h3>
+                    <ol id="ancestry-original-list"></ol>
+                </section>
+                <section aria-labelledby="ancestry-homebrew-title">
+                    <h3 id="ancestry-homebrew-title">Homebrew</h3>
+                    <ol id="ancestry-homebrew-list"></ol>
+                </section>
+            </div>
+        </dialog>
 
         <!-- Rodapé Padronizado -->
         <div id="site-footer">

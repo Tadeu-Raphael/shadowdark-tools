@@ -51,6 +51,105 @@
     text-transform: uppercase;
 }
 
+.ancestry-mode-control {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ancestry-mode-control .form-select {
+    min-width: 0;
+}
+
+.ancestry-info-btn {
+    flex: 0 0 auto;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-sm);
+    background: var(--parchment-raised);
+    color: var(--ink);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.ancestry-info-btn:hover,
+.ancestry-info-btn:focus-visible {
+    background: var(--parchment-sunk);
+}
+
+.ancestry-info-dialog {
+    width: min(42rem, calc(100% - 2rem));
+    max-height: min(85vh, 48rem);
+    padding: 1.25rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-md);
+    background: var(--parchment-raised);
+    color: var(--ink);
+    box-shadow: var(--shadow-medium);
+}
+
+.ancestry-info-dialog::backdrop {
+    background: rgb(14 12 10 / 68%);
+}
+
+.ancestry-info-dialog__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.ancestry-info-dialog__header h2 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+}
+
+.ancestry-dialog-close {
+    border: 0;
+    padding: 0 0.35rem;
+    background: transparent;
+    color: var(--ink-muted);
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+#ancestry-dialog-summary {
+    margin: 0.75rem 0 1rem;
+    color: var(--ink-muted);
+}
+
+.ancestry-info-dialog__lists {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.ancestry-info-dialog__lists h3 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+}
+
+.ancestry-info-dialog__lists ol {
+    margin: 0;
+    padding-left: 1.6rem;
+}
+
+.ancestry-info-dialog__lists li {
+    padding: 0.15rem 0;
+}
+
+@media (max-width: 520px) {
+    .ancestry-mode-control {
+        flex-wrap: wrap;
+    }
+
+    .ancestry-info-dialog__lists {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
 /* Empty State */
 .empty-state {
     display: flex;
