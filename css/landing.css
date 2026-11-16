@@ -32,8 +32,8 @@
 /* Grid de Ferramentas / Geradores (Estilo G-City) */
 .generator-grid {
     display: grid;
-    width: min(100%, 54rem);
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    width: min(100%, 68rem);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
     justify-content: center;
     margin: 0 auto;
@@ -207,5 +207,11 @@
 
     .generator-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .generator-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
