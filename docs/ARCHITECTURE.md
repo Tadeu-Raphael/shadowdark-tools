@@ -2,13 +2,13 @@
 
 ## Visão geral
 
-Shadowdark Tools é um site estático, executado no navegador e publicado no GitHub Pages. Não há servidor de aplicação, API, banco de dados, etapa de compilação ou gerenciador de dependências configurado no repositório. As páginas podem ser servidas localmente por HTTP, por exemplo com `python3 -m http.server 8000`.
+Shadowdark Tools é um site estático, executado no navegador e publicado no GitHub Pages. Não há servidor de aplicação, API, banco de dados ou etapa de compilação. O npm é usado para dependências e execução dos testes, sem dependência de runtime para os geradores. As páginas podem ser servidas localmente por HTTP, por exemplo com `python3 -m http.server 8000`.
 
 ## Camadas
 
 - **Catálogo:** `index.html`, `css/landing.css` e `js/main.js` formam a página principal. `main.js` define o catálogo dos geradores, monta seus cartões e administra idioma e navegação.
 - **Geradores:** cada diretório em `generators/` contém a página `index.html` e, normalmente, arquivos JavaScript, dados e CSS próprios. A página carrega scripts em ordem explícita; dados expostos em `window` devem ser carregados antes da lógica que os consome.
-- **Apresentação compartilhada:** `css/shadowdark-ui.css` define elementos e tokens comuns; `css/shadowdark-art-direction.css` concentra a direção visual. `css/landing.css` é específico do catálogo.
+- **Apresentação compartilhada:** `css/shadowdark-ui.css` define elementos e tokens comuns; `css/shadowdark-art-direction.css` concentra a direção visual. `css/landing.css` é específico do catálogo; `css/export-actions.css` padroniza os ícones de copiar/TXT/PDF.
 - **Recursos locais:** ícones Lucide ficam em `assets/icons/lucide/`; informações de licença estão em `licenses/`.
 - **Publicação:** `.github/workflows/deploy.yml` publica os arquivos estáticos no GitHub Pages.
 
@@ -18,7 +18,7 @@ Shadowdark Tools é um site estático, executado no navegador e publicado no Git
 2. A lógica inicializa idioma e controles, registra eventos e cria tabelas de referência.
 3. A ação do usuário escolhe opções e pede uma ou mais rolagens aleatórias.
 4. O gerador combina resultados com tabelas locais e monta o resultado no DOM.
-5. Quando disponíveis, ações de copiar e baixar usam o conteúdo renderizado. A preferência de idioma é guardada em `localStorage`.
+5. As ações compartilhadas de PDF em `js/export-actions.js` criam localmente um PDF paginado do conteúdo dos resultados; ações de copiar e TXT usam o conteúdo renderizado. A preferência de idioma é guardada em `localStorage`.
 
 A maioria dos geradores mantém estado e funções dentro de uma IIFE, sem módulos ES nem API pública. Alguns scripts de dados publicam objetos globais, como `window.TREASURE_DATA`, que são consumidos pelo script do gerador. Tabelas de armadilhas e hazards agora são compartilhadas entre os geradores de encontros e de masmorras; dados de monstros e tesouros também alimentam as salas da masmorra. A ordem das tags `<script>` é, portanto, parte do contrato de execução.
 
@@ -39,4 +39,4 @@ As interfaces oferecem português brasileiro e inglês. Os geradores mantêm tra
 
 ## Direção recomendada para testes
 
-Manter as tabelas e regras como lógica pura sempre que possível, injetar ou encapsular a fonte aleatória para tornar rolagens determinísticas e testar apresentação e interações em DOM separado. A suíte atual e seus comandos estão descritos em [test-plan.md](test-plan.md).
+Manter as tabelas e regras como lógica pura sempre que possível, injetar ou encapsular a fonte aleatória para tornar rolagens determinísticas e testar apresentação e interações em DOM separado. A suíte atual e seus comandos estão descritos em [TEST_PLAN.md](TEST_PLAN.md).

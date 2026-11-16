@@ -2,7 +2,7 @@
 
 ## Contexto do projeto
 
-Este repositório é um site estático de ferramentas para Shadowdark RPG. Leia `README.md` para a lista de recursos e `architecture.md` para a estrutura e os fluxos. Não há backend nem etapa de build. Os testes usam `node:test` e Playwright; veja `test-plan.md` para instalar e executar.
+Este repositório é um site estático de ferramentas para Shadowdark RPG. Leia `README.md` para a lista de recursos e `docs/ARCHITECTURE.md` para a estrutura e os fluxos. Não há backend nem etapa de build. Os testes usam `node:test` e Playwright; veja `docs/TEST_PLAN.md` para instalar e executar.
 
 ## Regras de alteração
 
@@ -20,7 +20,7 @@ Este repositório é um site estático de ferramentas para Shadowdark RPG. Leia 
 
 - Antes de concluir qualquer alteração de código, execute `npm test` e corrija falhas relacionadas à mudança. Se a suíte completa não puder ser executada, execute os testes aplicáveis disponíveis e informe claramente o bloqueio e o que ficou sem validar.
 - Para cada funcionalidade nova, crie testes unitários para regras e dados e testes Playwright para o fluxo visível no navegador. Para correções, acrescente ou ajuste casos de regressão que reproduzam o problema.
-- Atualize `test-plan.md` na mesma alteração para registrar a nova cobertura, os cenários relevantes e lacunas que permanecerem. Se o escopo dos comandos ou ferramentas de teste mudar, atualize também `package.json`, o README e o workflow de CI.
+- Atualize `docs/TEST_PLAN.md` na mesma alteração para registrar a nova cobertura, os cenários relevantes e lacunas que permanecerem. Se o escopo dos comandos ou ferramentas de teste mudar, atualize também `package.json`, o README e o workflow de CI.
 - Torne os testes aleatórios determinísticos com uma fonte de aleatoriedade controlada. Cubra limites, variantes e idiomas quando forem afetados.
 - Não afirme que algo foi validado por testes sem executar os testes correspondentes. Para alterações apenas documentais, revise links, nomes de arquivos e consistência com a árvore do repositório; não execute testes sem necessidade.
 

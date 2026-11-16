@@ -745,6 +745,7 @@
 
             // Elementos DOM
             this.generateBtn = document.getElementById("generate-btn");
+            this.copyResultsBtn = document.getElementById("copy-results-btn");
             this.exportTxtBtn = document.getElementById("export-txt-btn");
             this.exportPdfBtn = document.getElementById("export-pdf-btn");
             this.countInput = document.getElementById("character-count");
@@ -763,6 +764,7 @@
 
         init() {
             this.generateBtn.addEventListener("click", () => this.generate());
+            this.copyResultsBtn.addEventListener("click", () => this.copyResults());
             this.exportTxtBtn.addEventListener("click", () => this.exportTXT());
             this.exportPdfBtn.addEventListener("click", () => this.exportPDF());
             this.langSelect.addEventListener("change", (e) => this.setLanguage(e.target.value));
@@ -868,6 +870,9 @@
             const btnGenText = document.getElementById("btn-generate-text");
             if (btnGenText) btnGenText.textContent = t.btnGenerate;
 
+            const btnCopyResults = document.getElementById("btn-copy-results-text");
+            if (btnCopyResults) btnCopyResults.textContent = this.lang === "en" ? "Copy results" : "Copiar resultados";
+
             const btnExportTxt = document.getElementById("btn-export-txt-text");
             if (btnExportTxt) btnExportTxt.textContent = t.btnExportTxt;
 
@@ -960,6 +965,7 @@
                     <span id="btn-generate-text">${t.btnGenerate}</span>
                 `;
 
+                this.copyResultsBtn.disabled = false;
                 this.exportTxtBtn.disabled = false;
                 this.exportPdfBtn.disabled = false;
                 // Restore PDF button (icon + text, never overwrite innerHTML on it)
@@ -1503,8 +1509,50 @@
             this.showToast(SHADOWDARK_DATA[this.lang].exported, "success");
         }
 
+        async copyResults() {
+            try {
+                await navigator.clipboard.writeText(this.contentEl.innerText);
+                this.showToast(this.lang === "en" ? "Copied!" : "Copiado!", "success");
+            } catch (error) {
+                this.showToast(this.lang === "en" ? "Could not copy results" : "Não foi possível copiar os resultados", "error");
+            }
+        }
+
         exportPDF() {
-            window.print();
+            const cards = Array.from(this.contentEl.querySelectorAll(".character-card")).map((card, index) => ({
+                title: card.querySelector(".character-card__title")?.innerText || "",
+                badge: card.querySelector(".character-card__badge")?.innerText || "",
+                eyebrow: this.lang === "en" ? `CHARACTER ${index + 1} OF ${this.characters.length}` : `PERSONAGEM ${index + 1} DE ${this.characters.length}`,
+                stats: Array.from(card.querySelectorAll(".attribute-box")).map(attribute => {
+                    const name = attribute.querySelector(".attribute-name")?.innerText || "";
+                    const value = attribute.querySelector(".attribute-value")?.innerText || "";
+                    const modifier = attribute.querySelector(".attribute-mod")?.innerText || "";
+                    return `${name} ${value} (${modifier})`;
+                }),
+                sections: Array.from(card.querySelectorAll(".character-details .detail-row")).map(detail => {
+                    const label = detail.querySelector(".detail-label")?.textContent.trim().replace(/:$/, "") || "";
+                    const value = detail.querySelector(".detail-header-line .detail-value")?.textContent.trim()
+                        || detail.querySelector(".hp-display")?.textContent.replace(/\s+/g, " ").trim()
+                        || detail.querySelector(":scope > .detail-value")?.textContent.trim()
+                        || "";
+                    const heading = [label, value].filter(Boolean).join(" - ");
+                    const lines = [];
+                    detail.querySelectorAll(".detail-description, .ancestry-trait").forEach(paragraph => {
+                        const text = paragraph.textContent.replace(/\s+/g, " ").trim();
+                        if (text) lines.push(text);
+                    });
+                    detail.querySelectorAll(".equipment-list li").forEach(item => {
+                        const itemName = item.querySelector("strong")?.textContent.trim();
+                        const description = item.querySelector(".equipment-description")?.textContent.replace(/\s+/g, " ").trim();
+                        if (itemName) lines.push(description ? `${itemName}: ${description}` : itemName);
+                    });
+                    return { heading, lines };
+                }),
+            }));
+            const english = this.lang === "en";
+            const title = english ? "LEVEL 0 CHARACTERS" : "PERSONAGENS NÍVEL 0";
+            const subtitle = english ? `${cards.length} generated character${cards.length === 1 ? "" : "s"}` : `${cards.length} personagem(ns) gerado(s)`;
+            window.ShadowdarkExport.downloadCardsPdf({ title, subtitle, cards }, "shadowdark-level-zero-characters.pdf");
         }
 
         showToast(message, type) {

@@ -141,3 +141,59 @@ test('treasure generator localizes labels and tables to English', async ({ page 
   await expect(page.locator('#results .treasure-result')).toContainText('Type');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 });
+
+test('all generators expose icon actions and download a PDF of generated results', async ({ page }) => {
+  const flows = [
+    ['/generators/adventure-generator/', '#generate', '[data-export-pdf]'],
+    ['/generators/carousing-generator/', '#roll-button', '[data-export-pdf]'],
+    ['/generators/dungeon-map-generator/', '#generate', '[data-export-pdf]'],
+    ['/generators/encounter-generator/', '#generate-button', '[data-export-pdf]'],
+    ['/generators/level-zero-character/', '#generate-btn', '#export-pdf-btn'],
+    ['/generators/monster-generator/', '#generate', '[data-export-pdf]'],
+    ['/generators/npc-generator/', '#generate', '[data-export-pdf]'],
+    ['/generators/overland-hex-generator/', '#generate', '[data-export-pdf]'],
+    ['/generators/settlement-generator/', '#generate', '[data-export-pdf]'],
+    ['/generators/treasure-generator/', '#generate', '[data-export-pdf]'],
+  ];
+  await page.addInitScript(() => { Math.random = () => 0.42; });
+
+  for (const [path, generateSelector, pdfSelector] of flows) {
+    await page.goto(path);
+    for (const action of ['copy', 'txt']) {
+      const button = page.locator(`[data-export-action="${action}"]`);
+      await expect(button).toBeVisible();
+      const hasIcon = await button.evaluate(element => Boolean(element.querySelector('img')) || getComputedStyle(element, '::before').maskImage !== 'none');
+      expect(hasIcon).toBe(true);
+    }
+    const pdfButton = page.locator(pdfSelector);
+    await expect(pdfButton).toBeDisabled();
+    if (path.includes('level-zero-character')) await page.locator('#lang-select').selectOption('pt-BR');
+    await page.locator(generateSelector).click();
+    await expect(pdfButton).toBeEnabled({ timeout: 5000 });
+    const levelZeroName = path.includes('level-zero-character')
+      ? await page.locator('.character-card__title').first().innerText()
+      : null;
+    if (path.includes('level-zero-character')) {
+      await page.evaluate(() => { window.__printCalls = 0; window.print = () => { window.__printCalls += 1; }; });
+      const pdfIcon = await pdfButton.evaluate(button => ({ svg: button.querySelectorAll('svg').length, pseudo: getComputedStyle(button, '::before').maskImage }));
+      expect(pdfIcon.svg).toBe(1);
+      expect(pdfIcon.pseudo).toBe('none');
+    }
+    const downloadEvent = page.waitForEvent('download');
+    await pdfButton.click();
+    const download = await downloadEvent;
+    expect(download.suggestedFilename()).toMatch(/\.pdf$/);
+    const filePath = await download.path();
+    const content = await import('node:fs/promises').then(({ readFile }) => readFile(filePath));
+    expect(content.subarray(0, 8).toString()).toBe('%PDF-1.4');
+    if (levelZeroName) {
+      const pdfText = new TextDecoder('windows-1252').decode(content);
+      expect(pdfText).toContain('PERSONAGENS NÍVEL 0');
+      expect(pdfText).toContain(levelZeroName);
+      expect(pdfText).toContain('PERSONAGEM 1 DE 4');
+      expect(pdfText).toContain('/Count 4');
+      expect(pdfText).toContain('0.95 0.94 0.91 rg');
+      expect(await page.evaluate(() => window.__printCalls)).toBe(0);
+    }
+  }
+});

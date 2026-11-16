@@ -4,7 +4,7 @@
 
 A infraestrutura usa `node:test` para testes unitários de contrato dos arquivos de dados e Playwright para integração no Chromium. Os scripts estão em `tests/unit/` e `tests/integration/`; `package.json` define os comandos e `.github/workflows/tests.yml` executa a suíte em pushes e pull requests. A execução local requer Node.js 22+, Python 3, `npm install` e `npx playwright install chromium`.
 
-As funções de regras dos geradores ainda ficam dentro de IIFEs e não são diretamente importáveis. A cobertura unitária atual valida parsing, presença dos dados, tabelas não vazias, cobertura d100 e dimensões de tabelas mágicas. Os testes Playwright cobrem a geração real nas dez páginas e fluxos de variantes recém-adicionadas. Ao refatorar regras futuras para funções puras, complemente os contratos de dados com testes diretos dos limites e resultados da regra.
+As funções de regras dos geradores ainda ficam dentro de IIFEs e não são diretamente importáveis. A cobertura unitária atual valida parsing, presença dos dados, tabelas não vazias, cobertura d100, dimensões de tabelas mágicas e estrutura/segmentação dos PDFs gerados. Os testes Playwright cobrem a geração real nas dez páginas e fluxos de variantes recém-adicionadas. Ao refatorar regras futuras para funções puras, complemente os contratos de dados com testes diretos dos limites e resultados da regra.
 
 ## Testes unitários de lógica
 
@@ -30,7 +30,7 @@ Executar as páginas servidas por HTTP, tanto na raiz local quanto em caminho eq
 3. **Geração ponta a ponta:** usar valores fixos nos controles e uma fonte aleatória controlada para gerar resultados reproduzíveis e verificar texto, estrutura e controles habilitados.
 4. **Troca de idioma:** trocar PT/EN antes e depois de gerar; validar rótulos, opções, referências, resultados, idioma do documento e persistência após recarregar.
 5. **Controles condicionais:** conferir campos que aparecem ou somem conforme modo, seleção, quantidade ou opção de geração, sem perder o valor relevante.
-6. **Exportação:** validar copiar para área de transferência e baixar TXT, conteúdo, nome do arquivo e codificação dos caracteres acentuados.
+6. **Exportação:** validar copiar para área de transferência, ícones dos botões e downloads TXT/PDF após gerar; verificar nome, MIME type e conteúdo atual nos dez geradores. No nível 0, verificar PDF com uma ficha por página, título, cartões de personagem formatados e nome em destaque e ausência de impressão da página.
 7. **Fluxos entre geradores:** no assentamento, escolher resultados de taverna/loja e confirmar geração detalhada coerente; no terreno, verificar nomes direcionados ao gerador de assentamentos e referências cruzadas.
 8. **Responsividade e acessibilidade básica:** verificar layouts móvel/desktop, associação de labels, ordem de tabulação, foco visível, botões desabilitados sem resultados e anúncio da região de resultados.
 

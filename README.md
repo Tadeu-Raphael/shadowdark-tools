@@ -22,7 +22,7 @@ O catálogo oferece dez geradores. A interface pode ser usada em português (Bra
 | **Terrenos Hexagonais** | Gera mapas de viagem pelo ermo com terreno, nível de perigo, pontos de interesse e cataclismos. A tabela de nomes de assentamentos está integrada ao gerador de assentamentos. |
 | **Tesouros** | Gera tesouro por nível, itens mundanos e gemas, itens luxuosos, dádivas (juramentos, segredos e bênçãos) e itens mágicos com atributos por tipo. Inclui as tabelas de referência de tesouro, gemas, itens luxuosos, bênçãos e propriedades de armaduras, poções, pergaminhos, varinhas, utilitários e armas. |
 
-Os resultados dos geradores podem ser copiados ou baixados como TXT quando essa opção está disponível. As tabelas de referência ficam acessíveis na própria ferramenta.
+Os resultados dos geradores podem ser copiados e baixados como TXT ou PDF. As tabelas de referência ficam acessíveis na própria ferramenta.
 
 ## Testes automatizados
 
@@ -60,10 +60,12 @@ Acesse <http://localhost:8000>. Também é possível usar `npx serve .`.
 shadowdark-tools/
 ├── index.html
 ├── css/
+│   ├── export-actions.css
 │   ├── shadowdark-ui.css
 │   ├── shadowdark-art-direction.css
 │   └── landing.css
 ├── js/
+│   ├── export-actions.js
 │   ├── main.js
 │   └── ui-icons.js
 ├── assets/icons/lucide/
@@ -80,6 +82,11 @@ shadowdark-tools/
 │   └── treasure-generator/
 ├── licenses/
 ├── .github/workflows/deploy.yml
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── TEST_PLAN.md
+│   └── UI_UX_GUIDELINES.md
+├── AGENTS.md
 ├── LICENSE
 └── README.md
 ```

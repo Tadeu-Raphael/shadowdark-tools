@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../css/shadowdark-ui.css">
     <link rel="stylesheet" href="encounter.css">
     <link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
+    <link rel="stylesheet" href="../../css/export-actions.css">
 </head>
 <body>
     <div class="site-shell" id="top">
@@ -97,14 +98,14 @@
                         <div class="encounter-results__header">
                             <h2 id="results-heading">Resultados</h2>
                             <div class="encounter-results__actions">
-                                <button id="copy-button" class="encounter-button" type="button" disabled>
+                                <button id="copy-button" class="encounter-button" type="button" disabled data-export-action="copy">
                                     <img src="../../assets/icons/lucide/clipboard-list.svg" alt="" aria-hidden="true">
                                     <span id="copy-label">Copiar</span>
                                 </button>
-                                <button id="export-button" class="encounter-button" type="button" disabled>
+                                <button id="export-button" class="encounter-button" type="button" disabled data-export-action="txt">
                                     <img src="../../assets/icons/lucide/file-text.svg" alt="" aria-hidden="true">
                                     <span id="export-label">Baixar TXT</span>
-                                </button>
+                                </button> <button type="button" class="encounter-button" data-export-pdf data-export-content="result-list" data-filename="shadowdark-encounters.pdf" data-export-action="pdf" disabled>Exportar PDF</button>
                             </div>
                         </div>
                         <div id="result-list" class="encounter-result-list">
@@ -258,6 +259,6 @@
     </div>
     <script src="../../js/ui-icons.js"></script>
     <script src="extra-tables.js"></script>
-    <script src="encounter.js"></script>
+    <script src="../../js/export-actions.js"></script><script src="encounter.js"></script>
 </body>
 </html>

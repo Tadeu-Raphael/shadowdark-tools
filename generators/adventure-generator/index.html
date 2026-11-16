@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Pirata+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../css/shadowdark-ui.css"><link rel="stylesheet" href="adventure.css">
     <link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
+    <link rel="stylesheet" href="../../css/export-actions.css">
 </head>
 <body>
 <div class="site-shell" id="top">
@@ -17,7 +18,7 @@
     <main class="site-main"><section class="adventure-page"><div class="container-fluid">
         <header class="adventure-heading"><p class="eyebrow" id="eyebrow">MESTRE</p><h1 id="title">Gerador de Aventuras</h1><p id="intro">Combine três resultados para criar o objetivo, o obstáculo e o local da sua próxima aventura.</p></header>
         <section class="adventure-controls card"><label for="result-count" id="count-label">Quantidade</label><input id="result-count" class="form-select" type="number" min="1" max="10" value="1"><button type="button" id="generate" class="adventure-button adventure-button--primary"><img src="../../assets/icons/lucide/dice-5.svg" alt=""><span id="generate-label">Gerar aventuras</span></button></section>
-        <section class="adventure-results" aria-live="polite"><div class="adventure-results__header"><h2 id="results-title">Resultados</h2><div><button type="button" class="adventure-button" id="copy" disabled>Copiar</button> <button type="button" class="adventure-button" id="download" disabled>Baixar TXT</button></div></div><div id="results"><div class="adventure-empty" id="empty">Clique em “Gerar aventuras” para combinar as tabelas.</div></div></section>
+        <section class="adventure-results" aria-live="polite"><div class="adventure-results__header"><h2 id="results-title">Resultados</h2><div><button type="button" class="adventure-button" id="copy" disabled data-export-action="copy">Copiar</button> <button type="button" class="adventure-button" id="download" disabled data-export-action="txt">Baixar TXT</button> <button type="button" class="adventure-button" data-export-pdf data-export-content="results" data-filename="shadowdark-adventures.pdf" data-export-action="pdf" disabled>Exportar PDF</button></div></div><div id="results"><div class="adventure-empty" id="empty">Clique em “Gerar aventuras” para combinar as tabelas.</div></div></section>
         <div class="adventure-tables">
             <details class="card"><summary id="adventure-table-title">Tabela do gerador de aventuras (d20)</summary><p id="adventure-help">Use uma ou mais linhas de cada coluna; ajuste as palavras de ligação conforme necessário.</p><div class="table-responsive"><table><thead><tr><th>d20</th><th id="col-one">Detalhe 1</th><th id="col-two">Detalhe 2</th><th id="col-three">Detalhe 3</th></tr></thead><tbody id="adventure-body"></tbody></table></div></details>
             <details class="card"><summary id="site-table-title">Tabela de nomes de locais (d20)</summary><div class="table-responsive"><table><thead><tr><th>d20</th><th id="name-one">Nome 1</th><th id="name-two">Nome 2</th><th id="name-three">Nome 3</th></tr></thead><tbody id="site-body"></tbody></table></div></details>
@@ -26,5 +27,5 @@
     </div></section></main>
     <div id="site-footer"><footer class="site-footer" id="sobre" role="contentinfo"><div class="container-fluid"><p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Aventuras</p><p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p><p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p><div class="adventure-language-switch" role="group" aria-label="Idioma"><button data-lang="pt-BR" aria-pressed="true">PT</button><button data-lang="en" aria-pressed="false">EN</button></div></div></footer></div>
 </div>
-<script src="../../js/ui-icons.js"></script><script src="adventure-data.js"></script><script src="adventure.js"></script>
+<script src="../../js/ui-icons.js"></script><script src="adventure-data.js"></script><script src="../../js/export-actions.js"></script><script src="adventure.js"></script>
 </body></html>

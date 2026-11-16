@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../css/shadowdark-ui.css">
     <link rel="stylesheet" href="level-zero.css">
     <link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
+    <link rel="stylesheet" href="../../css/export-actions.css">
 </head>
 <body>
     <div class="site-shell" id="top">
@@ -91,11 +92,15 @@
                             <img src="../../assets/icons/lucide/dice-5.svg" alt="" class="ui-icon" aria-hidden="true">
                             <span id="btn-generate-text">Gerar Personagens</span>
                         </button>
-                        <button type="button" id="export-txt-btn" class="generation-button generation-button--back" disabled aria-label="Exportar como TXT">
+                        <button type="button" id="copy-results-btn" data-export-action="copy" class="generation-button generation-button--back" disabled aria-label="Copiar resultados">
+                            <img src="../../assets/icons/lucide/clipboard-list.svg" alt="" class="ui-icon" aria-hidden="true">
+                            <span id="btn-copy-results-text">Copiar resultados</span>
+                        </button>
+                        <button type="button" id="export-txt-btn" class="generation-button generation-button--back" disabled aria-label="Exportar como TXT" data-export-action="txt">
                             <img src="../../assets/icons/lucide/file-text.svg" alt="" class="ui-icon" aria-hidden="true">
                             <span id="btn-export-txt-text">Exportar TXT</span>
                         </button>
-                        <button type="button" id="export-pdf-btn" class="generation-button generation-button--back" disabled aria-label="Exportar .PDF">
+                        <button type="button" id="export-pdf-btn" class="generation-button generation-button--back" disabled aria-label="Exportar .PDF" data-export-action="pdf">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ui-icon" aria-hidden="true">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                 <polyline points="14 2 14 8 20 8"/>
@@ -203,6 +208,6 @@
     </div>
 
     <script src="../../js/ui-icons.js"></script>
-    <script src="level-zero.js"></script>
+    <script src="../../js/export-actions.js?v=character-pdf-layout-2"></script><script src="level-zero.js?v=character-pdf-layout-2"></script>
 </body>
 </html>
