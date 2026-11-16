@@ -15,7 +15,7 @@ As funções de regras dos geradores ainda ficam dentro de IIFEs e não são dir
 - **Festanças:** custo, consequência, evento, bônus e recompensa para faixas normais e expandidas; validar que valor selecionado no controle corresponde ao gasto exibido.
 - **NPCs:** NPC comum, rival individual e grupo; validar ancestrais, alinhamento, ocupações, quantidade e campos específicos de rivais.
 - **Assentamentos:** tipo, tamanho, distritos, alinhamento e pontos de interesse; rolagens de taverna/loja devem gerar conteúdo pelos mesmos dados/regras de seus geradores próprios.
-- **Masmorras:** tipo e tamanho do local, número de salas, conexões, níveis de perigo e conteúdo, incluindo armadilhas e hazards.
+- **Masmorras:** tipo e tamanho do local, número de salas, conexões, nível do grupo, conteúdo de sala, perfil de monstro derivado dos dados do gerador de monstros, tesouro d100 pelo nível do grupo e armadilhas/hazards compartilhados com o gerador de encontros. Cobrir todas essas categorias, limites de nível e troca de idioma no resultado.
 - **Terrenos hexagonais:** sequência circular de terreno, regras de novo hex, perigo, POIs e cataclismo; verificar limites e distribuição por faixa.
 - **Monstros:** modificador de combate aplicado ao nível médio do grupo, faixa de dano/ataques e quantidade permitida de mutações.
 - **Tesouros:** faixa d100 por nível, chance de 50% para monstros errantes, gemas e multiplicador de gema gigante, subrolagens de item luxuoso, tipos de dádiva, qualidade, personalidade, tipo de item mágico e atributos específicos de armaduras, poções, pergaminhos, utilitários, varinhas e armas.
@@ -46,5 +46,6 @@ Executar as páginas servidas por HTTP, tanto na raiz local quanto em caminho eq
 
 - `npm test` passa localmente e no CI.
 - Fluxos essenciais de cada página passam no navegador sem erros de execução.
+- A integração da masmorra confirma conteúdo de armadilha, hazards, tesouro e monstro, inclusive a troca de idioma.
 - Testes que dependem de rolagens usam aleatoriedade controlada, sem depender de serviços externos.
 - Cada nova funcionalidade acrescenta cobertura unitária da regra/tabela e cobertura de integração do fluxo visível.

@@ -20,7 +20,7 @@ Shadowdark Tools é um site estático, executado no navegador e publicado no Git
 4. O gerador combina resultados com tabelas locais e monta o resultado no DOM.
 5. Quando disponíveis, ações de copiar e baixar usam o conteúdo renderizado. A preferência de idioma é guardada em `localStorage`.
 
-A maioria dos geradores mantém estado e funções dentro de uma IIFE, sem módulos ES nem API pública. Alguns scripts de dados publicam objetos globais, como `window.TREASURE_DATA`, que são consumidos pelo script do gerador. A ordem das tags `<script>` é, portanto, parte do contrato de execução.
+A maioria dos geradores mantém estado e funções dentro de uma IIFE, sem módulos ES nem API pública. Alguns scripts de dados publicam objetos globais, como `window.TREASURE_DATA`, que são consumidos pelo script do gerador. Tabelas de armadilhas e hazards agora são compartilhadas entre os geradores de encontros e de masmorras; dados de monstros e tesouros também alimentam as salas da masmorra. A ordem das tags `<script>` é, portanto, parte do contrato de execução.
 
 ## Geradores atuais
 

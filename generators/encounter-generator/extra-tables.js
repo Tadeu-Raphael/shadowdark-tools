@@ -56,6 +56,34 @@
                 { roll: "00", text: "A radiant being appears to you with a message of warning", textPt: "Um ser radiante aparece com uma mensagem de alerta" }
             ]
         },
+        traps: [
+            { name: ["Besta", "Crossbow"], trigger: ["Fio de disparo", "Tripwire"], effect: ["1d6", "1d6"] },
+            { name: ["Chuva de agulhas", "Hail of needles"], trigger: ["Placa de pressão", "Pressure plate"], effect: ["1d6 / sono", "1d6 / sleep"] },
+            { name: ["Gás tóxico", "Toxic gas"], trigger: ["Abrir uma porta", "Opening a door"], effect: ["1d6 / paralisia", "1d6 / paralyze"] },
+            { name: ["Rede farpada", "Barbed net"], trigger: ["Alavanca ou botão", "Switch or button"], effect: ["1d6 / cegueira", "1d6 / blind"] },
+            { name: ["Pedregulho rolante", "Rolling boulder"], trigger: ["Degrau falso na escada", "False step on stairs"], effect: ["2d8", "2d8"] },
+            { name: ["Lâmina cortante", "Slicing blade"], trigger: ["Fechar uma porta", "Closing a door"], effect: ["2d8 / sono", "2d8 / sleep"] },
+            { name: ["Fosso com estacas", "Spiked pit"], trigger: ["Romper um feixe de luz", "Breaking a light beam"], effect: ["2d8 / paralisia", "2d8 / paralyze"] },
+            { name: ["Azagaia", "Javelin"], trigger: ["Puxar uma alavanca", "Pulling a lever"], effect: ["2d8 / confusão", "2d8 / confuse"] },
+            { name: ["Glifo mágico", "Magical glyph"], trigger: ["Pronunciar uma palavra", "A word is spoken"], effect: ["3d10", "3d10"] },
+            { name: ["Explosão de fogo", "Blast of fire"], trigger: ["Gancho em um fio", "Hook on a thread"], effect: ["3d10 / paralisia", "3d10 / paralyze"] },
+            { name: ["Bloco em queda", "Falling block"], trigger: ["Remover um objeto", "Removing an object"], effect: ["3d10 / inconsciência", "3d10 / unconscious"] },
+            { name: ["Estátua amaldiçoada", "Cursed statue"], trigger: ["Lançar uma magia", "Casting a spell"], effect: ["3d10 / petrificação", "3d10 / petrify"] }
+        ],
+        hazards: [
+            { movement: ["Areia movediça", "Quicksand"], damage: ["Poças de ácido", "Acid pools"], weaken: ["Fumaça cegante", "Blinding smoke"] },
+            { movement: ["Estrepes", "Caltrops"], damage: ["Rochas explosivas", "Exploding rocks"], weaken: ["Campo magnético", "Magnetic field"] },
+            { movement: ["Entulho solto", "Loose debris"], damage: ["Água gelada", "Icy water"], weaken: ["Runas exaustivas", "Exhausting runes"] },
+            { movement: ["Campo de piche", "Tar field"], damage: ["Lava", "Lava"], weaken: ["Zona antimagia", "Antimagic zone"] },
+            { movement: ["Trepadeiras agarradoras", "Grasping vines"], damage: ["Granizo pesado", "Pummeling hail"], weaken: ["Apagam fontes de luz", "Snuffs light sources"] },
+            { movement: ["Ladeira íngreme", "Steep incline"], damage: ["Jatos de vapor", "Steam vents"], weaken: ["Som desorientador", "Disorienting sound"] },
+            { movement: ["Gelo escorregadio", "Slippery ice"], damage: ["Mofo tóxico", "Toxic mold"], weaken: ["Silêncio mágico", "Magical silence"] },
+            { movement: ["Correnteza", "Rushing water"], damage: ["Detritos em queda", "Falling debris"], weaken: ["Frio entorpecente", "Numbing cold"] },
+            { movement: ["Teias pegajosas", "Sticky webs"], damage: ["Chuva ácida", "Acid rain"], weaken: ["Cheiro nauseante", "Sickening smell"] },
+            { movement: ["Vento de vendaval", "Gale force wind"], damage: ["Cortina de fogo", "Curtain of fire"], weaken: ["Esporos que induzem sono", "Sleep-inducing spores"] },
+            { movement: ["Piso engordurado", "Greased floor"], damage: ["Campo eletrificado", "Electrified field"], weaken: ["Reflexos confusos", "Confusing reflections"] },
+            { movement: ["Terreno ilusório", "Illusory terrain"], damage: ["Fluxo gravitacional", "Gravity flux"], weaken: ["Roubo de memórias", "Memory-stealing"] }
+        ],
         rumors: {
             entries: [
                 { roll: "01", text: "An armored beast the size of a ship is rampaging nearby", textPt: "Uma fera encouraçada do tamanho de um navio está devastando a região" },

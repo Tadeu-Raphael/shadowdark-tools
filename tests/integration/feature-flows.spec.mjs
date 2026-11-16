@@ -1,5 +1,45 @@
 import { expect, test } from '@playwright/test';
 
+test('dungeon rooms include linked trap, hazard, treasure, and monster generators', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('shadowdark-tools-lang', 'pt-BR');
+    window.setDungeonRolls = () => {
+      const die = (sides, result) => (result - 0.5) / sides;
+      window.randomQueue = [
+        die(10, 3), die(6, 2), die(12, 7),
+        die(10, 4), die(6, 2), die(12, 8),
+        die(10, 8), die(6, 2), die(12, 9),
+        die(10, 9), die(6, 2), die(100, 1),
+        die(10, 5), die(6, 2), die(20, 10), die(3, 2),
+        die(12, 4), die(12, 6), die(6, 3), die(2, 1), die(2, 1),
+      ];
+      Math.random = () => window.randomQueue.length ? window.randomQueue.shift() : 0.42;
+    };
+    Math.random = () => 0.42;
+  });
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/generators/dungeon-map-generator/');
+  await page.locator('#size').selectOption('0');
+  await page.locator('#site-type').selectOption('0');
+  await page.locator('#danger').selectOption('0');
+  await page.locator('#party-level').selectOption('4');
+  await page.evaluate(() => window.setDungeonRolls());
+  await page.locator('#generate').click();
+  const linked = page.locator('.dungeon-room-linked');
+  await expect(linked).toHaveCount(5);
+  await expect(linked.nth(0)).toContainText('Armadilha');
+  await expect(linked.nth(1)).toContainText('Hazard');
+  await expect(linked.nth(2)).toContainText('Hazard');
+  await expect(linked.nth(3)).toContainText('Tesouro 4–6');
+  await expect(linked.nth(4)).toContainText('Monstro');
+  await page.locator('[data-lang="en"]').click();
+  await expect(linked.nth(0)).toContainText('Trap');
+  await expect(linked.nth(3)).toContainText('Treasure 4–6');
+  await expect(linked.nth(4)).toContainText('Monster');
+  expect(errors).toEqual([]);
+});
+
 test('treasure generator supports each generation mode', async ({ page }) => {
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));

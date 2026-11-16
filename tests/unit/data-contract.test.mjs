@@ -51,6 +51,14 @@ test('all external table scripts parse and publish their expected data global', 
   }
 });
 
+test('shared encounter trap and hazard tables can feed dungeon rooms', async () => {
+  const data = await loadData('generators/encounter-generator/extra-tables.js', 'ENCOUNTER_EXTRA_TABLES');
+  assert.equal(data.traps.length, 12);
+  assert.equal(data.hazards.length, 12);
+  assert.ok(data.traps.every((entry) => entry.name.length === 2 && entry.trigger.length === 2 && entry.effect.length === 2));
+  assert.ok(data.hazards.every((entry) => entry.movement.length === 2 && entry.damage.length === 2 && entry.weaken.length === 2));
+});
+
 test('treasure d100 tiers cover every roll from 01 through 00', async () => {
   const data = await loadData('generators/treasure-generator/treasure-data.js', 'TREASURE_DATA');
   assert.equal(data.ranges.length, 50);
@@ -60,7 +68,7 @@ test('treasure d100 tiers cover every roll from 01 through 00', async () => {
     const [first, last = first] = range.split('–').map(Number);
     return Array.from({ length: last - first + 1 }, (_, offset) => first + offset);
   });
-  assert.deepEqual(expanded, Array.from({ length: 100 }, (_, index) => index + 1));
+  assert.deepEqual(Array.from(expanded), Array.from({ length: 100 }, (_, index) => index + 1));
   for (const tier of data.tiers) {
     assert.equal(tier.rows.length, data.ranges.length);
     assert.ok(tier.rows.every((row) => Array.isArray(row) && row.length === 2));

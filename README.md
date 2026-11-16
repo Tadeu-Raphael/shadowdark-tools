@@ -18,7 +18,7 @@ O catálogo oferece dez geradores. A interface pode ser usada em português (Bra
 | **Monstros** | Cria monstros por nível médio do grupo, com função de combate, qualidade, força, fraqueza, ataques e até três mutações. |
 | **NPCs** | Gera NPCs comuns, rivais individuais e grupos rivais, com nomes, características, ocupações e dados de grupo. |
 | **Cidades e Assentamentos** | Cria assentamentos por tipo e distritos, pontos de interesse, tavernas, comidas, bebidas e lojas. |
-| **Mapas de Masmorras** | Gera mapas esquemáticos com salas conectadas, perigo, conteúdo, objetivo e tabelas de referência. |
+| **Mapas de Masmorras** | Gera mapas esquemáticos com salas conectadas, perigo, objetivo e conteúdo detalhado vinculado aos geradores de monstros, tesouros, armadilhas e hazards. |
 | **Terrenos Hexagonais** | Gera mapas de viagem pelo ermo com terreno, nível de perigo, pontos de interesse e cataclismos. A tabela de nomes de assentamentos está integrada ao gerador de assentamentos. |
 | **Tesouros** | Gera tesouro por nível, itens mundanos e gemas, itens luxuosos, dádivas (juramentos, segredos e bênçãos) e itens mágicos com atributos por tipo. Inclui as tabelas de referência de tesouro, gemas, itens luxuosos, bênçãos e propriedades de armaduras, poções, pergaminhos, varinhas, utilitários e armas. |
 
