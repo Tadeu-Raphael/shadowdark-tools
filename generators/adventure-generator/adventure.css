@@ -1,0 +1,33 @@
+.adventure-page { width: min(100% - 2rem, 1100px); margin: 0 auto; padding: 2.25rem 0 3.5rem; }
+.adventure-heading { max-width: 48rem; margin: 0 auto 1.75rem; text-align: center; }
+.adventure-heading h1 { margin: 0 0 .75rem; }
+.adventure-heading > p:last-child { margin: 0 auto; font-size: 1.1rem; }
+.adventure-controls { display: grid; grid-template-columns: 1fr minmax(5rem, 8rem) auto; align-items: end; gap: 1rem; padding: 1.25rem; border: 1px solid var(--edge); border-radius: var(--radius-md); background: var(--parchment-raised); box-shadow: var(--shadow-shallow); }
+.adventure-controls label { color: var(--ink-muted); font: 700 .75rem var(--font-heading); letter-spacing: .05em; text-transform: uppercase; }
+.adventure-controls .form-select { width: 100%; min-height: 2.7rem; padding: .45rem .65rem; border: 1px solid var(--edge); border-radius: var(--radius-sm); background: var(--parchment); color: var(--ink); font: inherit; }
+.adventure-button { display: inline-flex; min-height: 2.65rem; align-items: center; justify-content: center; gap: .45rem; padding: .5rem .85rem; border: 1px solid var(--edge); border-radius: var(--radius-sm); background: var(--parchment-raised); color: var(--ink); cursor: pointer; font: 700 .9rem var(--font-heading); }
+.adventure-button img { width: 1.1rem; height: 1.1rem; filter: brightness(0) invert(1); }
+.adventure-button:disabled { opacity: .5; cursor: not-allowed; }
+.adventure-button--primary { min-height: 2.8rem; padding-inline: 1rem; border-color: var(--blood); background: var(--blood); color: var(--parchment-raised); }
+.adventure-results { margin: 1.5rem 0; }
+.adventure-results__header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
+.adventure-results__header h2 { margin: 0; font-size: 1.45rem; }
+.adventure-result, .adventure-empty { margin: 0 0 .75rem; padding: 1rem 1.1rem; border: 1px solid var(--edge); border-left: 3px solid var(--gold); border-radius: var(--radius-md); background: var(--parchment-raised); box-shadow: var(--shadow-shallow); }
+.adventure-result h3 { margin: 0 0 .45rem; font-size: 1.08rem; }
+.adventure-result p { margin: .2rem 0 .6rem; font-size: 1.08rem; }
+.adventure-result h4 { margin: .75rem 0 .25rem; color: var(--ink-muted); font: 700 .75rem var(--font-heading); letter-spacing: .05em; text-transform: uppercase; }
+.adventure-result small { color: var(--ink-faint); font-family: var(--font-mono); }
+.adventure-empty { color: var(--ink-muted); text-align: center; }
+.adventure-tables { display: grid; gap: 1rem; }
+.adventure-tables details { overflow: hidden; border: 1px solid var(--edge); border-radius: var(--radius-md); background: var(--parchment-raised); box-shadow: var(--shadow-shallow); }
+.adventure-tables summary { padding: 1rem 1.15rem; cursor: pointer; font-family: var(--font-heading); font-weight: 700; }
+.adventure-tables details > p { margin: 0; padding: 0 1rem .75rem; color: var(--ink-muted); }
+.adventure-tables table { width: 100%; border-collapse: collapse; }
+.adventure-tables th, .adventure-tables td { padding: .45rem .65rem; border-top: 1px solid var(--edge); text-align: left; vertical-align: top; }
+.adventure-tables th { background: var(--parchment-sunk); font: 700 .75rem var(--font-heading); }
+.adventure-tables td:first-child { width: 3rem; color: var(--blood); font-family: var(--font-mono); }
+.adventure-source { margin: 1rem 0; color: var(--ink-faint); font-size: .9rem; font-style: italic; text-align: center; }
+.adventure-language-switch { display: flex; justify-content: center; gap: .5rem; margin-top: 1rem; }
+.adventure-language-switch button { padding: .35rem .7rem; border: 1px solid var(--edge); border-radius: var(--radius-sm); background: var(--parchment); color: var(--ink-muted); cursor: pointer; font: 700 .78rem var(--font-heading); }
+.adventure-language-switch button[aria-pressed="true"] { border-color: var(--blood); background: var(--blood); color: var(--parchment-raised); }
+@media(max-width:600px) { .adventure-controls { grid-template-columns: 1fr 6rem; } .adventure-controls .adventure-button { grid-column: 1 / -1; } .adventure-results__header { align-items: flex-start; flex-direction: column; } }

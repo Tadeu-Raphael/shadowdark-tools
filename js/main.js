@@ -46,6 +46,32 @@
             href: "generators/encounter-generator/index.html",
             badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
             available: true
+        },
+        {
+            id: "adventure-generator",
+            category: { "pt-BR": "AVENTURAS", en: "ADVENTURES" },
+            title: { "pt-BR": "Gerador de Aventuras", en: "Adventure Generator" },
+            description: {
+                "pt-BR": "Crie objetivos, obstáculos e nomes de locais combinando as tabelas d20 do livro.",
+                en: "Create goals, obstacles, and adventuring site names from the book’s d20 tables."
+            },
+            icon: "scroll-text.svg",
+            href: "generators/adventure-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
+        },
+        {
+            id: "npc-generator",
+            category: { "pt-BR": "NPCs", en: "NPCs" },
+            title: { "pt-BR": "Gerador de NPCs", en: "NPC Generator" },
+            description: {
+                "pt-BR": "Crie NPCs marcantes, rivais individuais ou grupos de exploradores rivais.",
+                en: "Create memorable NPCs, individual rivals, or rival adventuring parties."
+            },
+            icon: "user.svg",
+            href: "generators/npc-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         }
     ];
 
