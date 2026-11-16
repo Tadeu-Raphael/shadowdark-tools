@@ -1,0 +1,46 @@
+(function () {
+    "use strict";
+    window.SETTLEMENT_DATA = {
+        types: [["Village","Vila",3,4],["Town","Cidade pequena",4,4],["City","Cidade",6,6],["Metropolis","Metrópole",8,8]],
+        districts: [["Slums","Bairros pobres"],["Low district","Distrito baixo"],["Artisan district","Distrito dos artesãos"],["Market","Mercado"],["High district","Distrito nobre"],["Temple district","Distrito dos templos"],["University district","Distrito universitário"],["Castle district","Distrito do castelo"]],
+        alignment: [["Lawful","Ordeira"],["Neutral","Neutra"],["Chaotic","Caótica"]],
+        points: [
+            [["Seedy flophouse","Pensão sórdida"],["Poor tavern","Taverna pobre"],["Poor tavern","Taverna pobre"],["Criminal safehouse","Esconderijo criminoso"],["Poor shop","Loja pobre"],["Witch/warlock's hovel","Cabana de bruxa ou feiticeiro"]],
+            [["Graveyard","Cemitério"],["Poor tavern","Taverna pobre"],["Poor tavern","Taverna pobre"],["Poor shop","Loja pobre"],["Standard shop","Loja comum"],["Warehouses/sheds","Armazéns e depósitos"]],
+            [["Stocks and pillories","Troncos e pelourinhos"],["Modest temple","Templo modesto"],["Standard tavern","Taverna comum"],["Standard tavern","Taverna comum"],["Standard tavern","Taverna comum"],["Wealthy shop","Loja luxuosa"]],
+            [["Fortune teller","Cartomante"],["Rare and exotic goods","Produtos raros e exóticos"],["Rare and exotic goods","Produtos raros e exóticos"],["Rare and exotic goods","Produtos raros e exóticos"],["Apothecary","Botica"],["Illicit black market","Mercado negro ilegal"]],
+            [["Guildhouse","Sede de guilda"],["Wealthy tavern","Taverna luxuosa"],["Wealthy tavern","Taverna luxuosa"],["Manor house","Solar"],["Wealthy shop","Loja luxuosa"],["City Watch outpost","Posto da Guarda da Cidade"]],
+            [["Ruined temple","Templo em ruínas"],["Minor deity's chapel","Capela de uma divindade menor"],["Minor deity's chapel","Capela de uma divindade menor"],["Forbidden shrine","Santuário proibido"],["Major god's temple","Templo de uma divindade maior"],["Revered holy site","Local sagrado venerado"]],
+            [["Library","Biblioteca"],["Lecture hall","Sala de aula"],["Lecture hall","Sala de aula"],["Standard tavern","Taverna comum"],["Standard tavern","Taverna comum"],["Wizard's tower","Torre de mago"]],
+            [["Royal bathhouse","Termas reais"],["City Watch's garrison","Guarnição da Guarda da Cidade"],["City Watch's garrison","Guarnição da Guarda da Cidade"],["Theater or coliseum","Teatro ou coliseu"],["Theater or coliseum","Teatro ou coliseu"],["Royal castle","Castelo real"]]
+        ],
+        tavernNames: [
+            ["The Crimson","O","Rat","Rato Carmesim","High-stakes gambling","Jogos de azar de alto risco"],["The Dancing","A","Wench","Taberneira Dançante","Illicit poison sales","Venda ilegal de venenos"],["The Dog &","O Cão e o","Lantern","Lampião","Wizard patrons","Fregueses magos"],["The Rusty","A","Eel","Enguia Enferrujada","Cult rituals in the basement","Rituais de culto no porão"],["The Demon's","O","Goblet","Cálice do Demônio","Rare food and drinks","Comidas e bebidas raras"],
+            ["The Singing","O","Trident","Tridente Cantante","Dancing contests","Concursos de dança"],["The Boar &","A","Candle","Vela do Javali","Violent brawls","Brigas violentas"],["The Silver","A","Dagger","Adaga Prateada","Ancient tunnels in the cellar","Túneis antigos na adega"],["The Filthy","A","Wheel","Roda Imunda","Thugs for hire","Capangas de aluguel"],["The Captain's","O","Pig","Porco do Capitão","Thieves' Guild spies","Espiões da Guilda dos Ladrões"],
+            ["The Jolly","A","Snake","Serpente Alegre","Hostility toward spellcasters","Hostilidade contra conjuradores"],["The Wise","O","Camel","Camelo Sábio","City Watch patrons","Fregueses da Guarda da Cidade"],["Cloak &","Capa e","Dragon","Dragão","Underground pit fighting","Lutas clandestinas em arena"],["The Royal","O","Axe","Machado Real","Famous bard performances","Apresentações de bardos famosos"],["The Gilded","O","Bell","Sino Dourado","Treasonable meetings","Reuniões conspiratórias"],
+            ["The Blade &","A Lâmina e o","Tankard","Caneco","Ban on all weapons","Proibição de todas as armas"],["The Drunken","O","Shield","Escudo Bêbado","Hostility toward non-regulars","Hostilidade contra quem não é freguês habitual"],["Cup &","Cálice e","Blade","Lâmina","Exotic taxidermy collection","Coleção de animais empalhados exóticos"],["The Jeweled","A","Anvil","Bigorna Joalhada","Pirate and smuggler patrons","Fregueses piratas e contrabandistas"],["The Frog &","O Sapo e o","Bard","Bardo","Drinking contests","Competições de bebida"]
+        ],
+        food: [
+            [["Boiled cabbage","Repolho cozido"],["Alligator steak","Bife de jacaré"],["Fried basilisk eyes","Olhos de basilisco fritos"]],[["Dates and olives","Tâmaras e azeitonas"],["Rosemary ham","Presunto ao alecrim"],["Giant snake filet","Filé de cobra gigante"]],[["Goat stew","Ensopado de cabra"],["Raw flailfish","Peixe-escorpião cru"],["Griffon eggs","Ovos de grifo"]],[["Pickled eggs","Ovos em conserva"],["Seared venison","Carne de caça selada"],["Candied scarabs","Escaravelhos cristalizados"]],[["Cheese and bread","Queijo e pão"],["Buttered ostrich","Avestruz na manteiga"],["Baked troll bones","Ossos de troll assados"]],[["Hearty broth","Caldo reforçado"],["Spicy veal curry","Curry de vitela picante"],["Cockatrice wings","Asas de cocatriz"]],[["Meat pastry","Empada de carne"],["Salted frog legs","Pernas de rã salgadas"],["Crispy silkworms","Larvas de seda crocantes"]],[["Mushroom kebab","Espetinho de cogumelos"],["Herbed snails","Caracóis com ervas"],["Roasted stingbat","Morcego-ferrão assado"]],[["Roasted pigeon","Pombo assado"],["Grilled tiger eel","Enguia-tigre grelhada"],["Dire lobster tail","Cauda de lagosta atroz"]],[["Garlic flatbread","Pão achatado com alho"],["Spit-roasted boar","Javali assado no espeto"],["Wyvern tongue","Língua de wyvern"]],[["Turkey leg","Coxa de peru"],["Saffron duck neck","Pescoço de pato com açafrão"],["Shrieking seaweed","Alga marinha gritante"]],[["Rat-on-a-stick","Rato no espeto"],["Crimson pudding","Pudim carmesim"],["Dragon shanks","Pernas de dragão"]]
+        ],
+        drinks: [
+            ["Barnacle grog. 1 cp, DC 9 Constitution check or blind 1 hour","Rum de craca. 1 pc; teste de Constituição CD 9 ou fica cego por 1 hora"],
+            ["Watered-down swill. 3 cp, toxic, -1 Constitution 1 hour","Bebida aguada. 3 pc; tóxica, –1 em Constituição por 1 hora"],
+            ["Vinegary wine. 5 cp, stains teeth purple, -1 Charisma 1 hour","Vinho avinagrado. 5 pc; mancha os dentes de roxo, –1 em Carisma por 1 hora"],
+            ["Stale ale. 5 cp, dulls the senses, -1 Wisdom 1 hour","Cerveja choca. 5 pc; entorpece os sentidos, –1 em Sabedoria por 1 hora"],
+            ["Clear spirits. 1 sp, burns, ends 1 bad effect of another drink","Destilado forte. 1 pp; queima ao descer e encerra 1 efeito ruim de outra bebida"],
+            ["House ale. 2 sp, crisp and clean, first mug is free","Cerveja da casa. 2 pp; leve e refrescante, a primeira caneca é grátis"],
+            ["Autumn mead. 3 sp, floral, doubles effects of next drink","Hidromel de outono. 3 pp; floral, dobra os efeitos da próxima bebida"],
+            ["Halfling summer wine. 5 sp, sparkling, +1 Charisma 1 hour","Vinho de verão halfling. 5 pp; frisante, +1 em Carisma por 1 hora"],
+            ["Elvish brandy. 5 sp, spiced, +1 Intelligence 1 hour","Conhaque élfico. 5 pp; condimentado, +1 em Inteligência por 1 hora"],
+            ["Dwarvish gold ale. 5 sp, icy cold, regain 1d4 HP per mug","Cerveja dourada anã. 5 pp; gelada, recupera 1d4 PV por caneca"],
+            ["Aged royal wine. 2 gp, smooth and rich, +1 Wisdom 1 hour","Vinho real envelhecido. 2 po; encorpado e suave, +1 em Sabedoria por 1 hora"],
+            ["Van Dinkle whiskey. 20 gp a sip, only 5 bottles made, +1 XP","Uísque Van Dinkle. 20 po o gole; só existem 5 garrafas, +1 XP"]
+        ],
+        shops: {
+            poor: [["Filthy bakery","Padaria imunda"],["Used adventuring gear","Equipamento de aventura usado"],["Dead body collector","Coletor de cadáveres"],["Pawn shop/fence","Penhorista/receptador"],["Moneylender","Agente de empréstimos"],["Manure collector","Coletor de esterco"],["Tannery","Curtume"],["Back-alley chirurgeon","Cirurgião de beco"],["Ratcatcher","Caçador de ratos"],["Fishmonger","Peixeiro"],["Gambling house","Casa de apostas"],["Drug den","Boca de fumo"]],
+            standard: [["Brewer","Cervejeiro"],["Butcher","Açougueiro"],["Tailor","Alfaiate"],["Common blacksmith","Ferreiro comum"],["Adventuring gear","Equipamento de aventura"],["Leatherworker","Coureiro"],["Shipwright/carpenter","Carpinteiro/construtor naval"],["Stonemason","Pedreiro"],["Herald/town crier","Arauto/guarda da cidade"],["Livestock","Criação de animais"]],
+            wealthy: [["Fine tailor","Alfaiate refinado"],["Glassblower","Soprador de vidro"],["Jeweler","Joalheiro"],["Apothecary","Boticário"],["Artist","Artista"],["Scribe","Escriba"],["Guildhall","Sede de guilda"],["Goldsmith","Ourives"],["Master blacksmith","Mestre ferreiro"],["Antiques and curios","Antiguidades e curiosidades"]]
+        }
+    };
+})();

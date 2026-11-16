@@ -72,6 +72,19 @@
             href: "generators/npc-generator/index.html",
             badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
             available: true
+        },
+        {
+            id: "settlement-generator",
+            category: { "pt-BR": "CIDADES", en: "SETTLEMENTS" },
+            title: { "pt-BR": "Gerador de Cidades e Assentamentos", en: "City & Settlement Generator" },
+            description: {
+                "pt-BR": "Crie assentamentos por distritos e gere tavernas, pontos de interesse e lojas.",
+                en: "Build settlements by district and generate taverns, points of interest, and shops."
+            },
+            icon: "map.svg",
+            href: "generators/settlement-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         }
     ];
 
