@@ -1,0 +1,16 @@
+{
+  "name": "shadowdark-tools",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static Shadowdark RPG generators",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "node --test tests/unit/*.test.mjs",
+    "test:integration": "playwright test",
+    "test:integration:ui": "playwright test --ui",
+    "test:install-browser": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}

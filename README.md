@@ -24,6 +24,20 @@ O catálogo oferece dez geradores. A interface pode ser usada em português (Bra
 
 Os resultados dos geradores podem ser copiados ou baixados como TXT quando essa opção está disponível. As tabelas de referência ficam acessíveis na própria ferramenta.
 
+## Testes automatizados
+
+Instale Node.js 22 ou superior e Python 3. Instale as dependências e o Chromium do Playwright, depois execute a suíte completa:
+
+```bash
+npm install
+npx playwright install chromium
+npm test
+```
+
+`npm run test:unit` valida os contratos e dimensões das tabelas. `npm run test:integration` executa os fluxos no Chromium, servindo o site localmente por HTTP. Os mesmos testes rodam em cada push e pull request pelo workflow `Tests`.
+
+Ao adicionar ou alterar uma funcionalidade, inclua um teste unitário para regras/dados e um teste de integração para o fluxo observável na página. Para novos resultados aleatórios, controle a fonte aleatória no teste em vez de depender de uma rolagem imprevisível.
+
 ## Acesso online
 
 **GitHub Pages:** <https://tadeu-raphael.github.io/shadowdark-tools/>
