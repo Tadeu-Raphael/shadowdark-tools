@@ -7,7 +7,7 @@
 
 ## Geradores
 
-O catálogo oferece dez geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
+A homepage separa as ferramentas para jogadores (Personagem Nível 0 e Festanças) das ferramentas para mestres (as outras oito). O catálogo oferece dez geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
 
 | Gerador | Recursos |
 | --- | --- |

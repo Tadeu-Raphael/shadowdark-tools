@@ -10,6 +10,7 @@
     const generators = [
         {
             id: "level-zero-character",
+            audience: "players",
             category: { "pt-BR": "PERSONAGEM", en: "CHARACTER" },
             title: { "pt-BR": "Gerador de Personagem Nível 0", en: "Level 0 Character Generator" },
             description: {
@@ -23,6 +24,7 @@
         },
         {
             id: "carousing-generator",
+            audience: "players",
             category: { "pt-BR": "FESTANÇAS", en: "CAROUSING" },
             title: { "pt-BR": "Gerador de Festanças", en: "Carousing Generator" },
             description: {
@@ -36,6 +38,7 @@
         },
         {
             id: "encounter-generator",
+            audience: "gms",
             category: { "pt-BR": "ENCONTROS", en: "ENCOUNTERS" },
             title: { "pt-BR": "Gerador de Encontros", en: "Encounter Generator" },
             description: {
@@ -49,6 +52,7 @@
         },
         {
             id: "adventure-generator",
+            audience: "gms",
             category: { "pt-BR": "AVENTURAS", en: "ADVENTURES" },
             title: { "pt-BR": "Gerador de Aventuras", en: "Adventure Generator" },
             description: {
@@ -62,6 +66,7 @@
         },
         {
             id: "monster-generator",
+            audience: "gms",
             category: { "pt-BR": "MONSTROS", en: "MONSTERS" },
             title: { "pt-BR": "Gerador de Monstros", en: "Monster Generator" },
             description: {
@@ -75,6 +80,7 @@
         },
         {
             id: "npc-generator",
+            audience: "gms",
             category: { "pt-BR": "NPCs", en: "NPCs" },
             title: { "pt-BR": "Gerador de NPCs", en: "NPC Generator" },
             description: {
@@ -88,6 +94,7 @@
         },
         {
             id: "settlement-generator",
+            audience: "gms",
             category: { "pt-BR": "CIDADES", en: "SETTLEMENTS" },
             title: { "pt-BR": "Gerador de Cidades e Assentamentos", en: "City & Settlement Generator" },
             description: {
@@ -101,6 +108,7 @@
         },
         {
             id: "overland-hex-generator",
+            audience: "gms",
             category: { "pt-BR": "TERRENOS", en: "TERRAIN" },
             title: { "pt-BR": "Gerador de Terrenos", en: "Overland Terrain Generator" },
             description: {
@@ -114,6 +122,7 @@
         },
         {
             id: "treasure-generator",
+            audience: "gms",
             category: { "pt-BR": "TESOUROS", en: "TREASURE" },
             title: { "pt-BR": "Gerador de Tesouros", en: "Treasure Generator" },
             description: {
@@ -127,6 +136,7 @@
         },
         {
             id: "dungeon-map-generator",
+            audience: "gms",
             category: { "pt-BR": "MASMORRAS", en: "DUNGEONS" },
             title: { "pt-BR": "Gerador de Mapas de Masmorras", en: "Dungeon Map Generator" },
             description: {
@@ -147,6 +157,8 @@
             title: "Shadowdark Tools",
             description: "Ferramentas utilitárias para mestres e jogadores de <strong>Shadowdark RPG</strong>. Geradores, calculadoras e referências rápidas para suas masmorras.",
             generators: "Geradores",
+            playersHeading: "Para jogadores",
+            gmsHeading: "Para mestres",
             about: "Sobre",
             home: "Início",
             footerCaption: "Shadowdark Tools · Ferramentas para RPG",
@@ -161,6 +173,8 @@
             title: "Shadowdark Tools",
             description: "Utility tools for <strong>Shadowdark RPG</strong> GMs and players. Generators, calculators, and quick references for your dungeons.",
             generators: "Generators",
+            playersHeading: "For players",
+            gmsHeading: "For GMs",
             about: "About",
             home: "Home",
             footerCaption: "Shadowdark Tools · RPG Utilities",
@@ -175,7 +189,8 @@
     let currentLang = "pt-BR";
 
     // Elementos DOM
-    const generatorGrid = document.getElementById("generator-grid");
+    const playerGeneratorGrid = document.getElementById("player-generator-grid");
+    const gmGeneratorGrid = document.getElementById("gm-generator-grid");
     const langButtons = document.querySelectorAll(".flag-button");
     const navLinks = document.querySelectorAll(".site-navigation a");
 
@@ -189,10 +204,13 @@
 
     // Renderiza os cards de geradores
     function renderGenerators() {
-        if (!generatorGrid) return;
+        if (!playerGeneratorGrid || !gmGeneratorGrid) return;
 
         const t = i18n[currentLang];
-        generatorGrid.innerHTML = "";
+        playerGeneratorGrid.innerHTML = "";
+        gmGeneratorGrid.innerHTML = "";
+        document.getElementById("players-heading").textContent = t.playersHeading;
+        document.getElementById("gms-heading").textContent = t.gmsHeading;
 
         generators.forEach(gen => {
             const title = gen.title[currentLang];
@@ -227,7 +245,8 @@
                 </span>
             `;
 
-            generatorGrid.appendChild(card);
+            const targetGrid = gen.audience === "players" ? playerGeneratorGrid : gmGeneratorGrid;
+            targetGrid.appendChild(card);
         });
     }
 

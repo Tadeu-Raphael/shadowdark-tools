@@ -40,8 +40,15 @@
                         Geradores, calculadoras e referências rápidas para suas masmorras.
                     </p>
 
-                    <div class="generator-grid" id="generator-grid" role="list">
-                        <!-- Cards serão inseridos dinamicamente via JS -->
+                    <div class="generator-groups" id="generator-groups">
+                        <section class="generator-group" aria-labelledby="players-heading">
+                            <h2 class="generator-group__heading" id="players-heading">Para jogadores</h2>
+                            <div class="generator-grid generator-grid--players" id="player-generator-grid" role="list"></div>
+                        </section>
+                        <section class="generator-group" aria-labelledby="gms-heading">
+                            <h2 class="generator-group__heading" id="gms-heading">Para mestres</h2>
+                            <div class="generator-grid" id="gm-generator-grid" role="list"></div>
+                        </section>
                     </div>
                 </div>
             </section>

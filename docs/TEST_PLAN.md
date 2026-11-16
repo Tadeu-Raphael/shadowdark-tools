@@ -25,7 +25,7 @@ As funções de regras dos geradores ainda ficam dentro de IIFEs e não são dir
 
 Executar as páginas servidas por HTTP, tanto na raiz local quanto em caminho equivalente a subdiretório de publicação. Em cada teste, capturar erros de console e respostas de recursos locais com falha.
 
-1. **Catálogo:** abrir a página principal, confirmar os dez cartões ativos, idioma selecionado, navegação para cada rota e ausência de links quebrados.
+1. **Catálogo:** abrir a página principal, confirmar os dez cartões ativos agrupados entre jogadores (personagem nível 0 e festanças) e mestres (oito ferramentas), confirmar que grades com um ou dois cartões ficam centralizadas, alternar os títulos de grupo PT/EN, validar navegação e ausência de links quebrados.
 2. **Inicialização das páginas:** abrir cada gerador diretamente, confirmar que dados e lógica foram carregados na ordem certa e que as tabelas de referência aparecem.
 3. **Geração ponta a ponta:** usar valores fixos nos controles e uma fonte aleatória controlada para gerar resultados reproduzíveis e verificar texto, estrutura e controles habilitados.
 4. **Troca de idioma:** trocar PT/EN antes e depois de gerar; validar rótulos, opções, referências, resultados, idioma do documento e persistência após recarregar.
