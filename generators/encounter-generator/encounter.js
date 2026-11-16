@@ -7,7 +7,7 @@
             eyebrow: "MESTRE", title: "Gerador de Encontros",
             description: "Role nas tabelas de encontros aleatórios por ambiente e use os resultados como estão ou como inspiração para a cena.",
             environment: "Ambiente", count: "Quantidade", generate: "Rolar encontros",
-            sourceLanguage: "As descrições dos resultados permanecem no idioma do livro fornecido.",
+            sourceLanguage: "As descrições dos encontros são exibidas em português.",
             specialRule: "Regra da tabela: 98–99 gera dois resultados adicionais; se algum deles também cair em 98–99, repita essa rolagem.",
             results: "Resultados", copy: "Copiar", copied: "Copiado", copyFailed: "Não foi possível copiar",
             download: "Baixar TXT", tableSummary: "Consultar a tabela d100",
@@ -25,7 +25,7 @@
             eyebrow: "GAME MASTER", title: "Encounter Generator",
             description: "Roll on the random encounter tables by environment and use the results as written or as inspiration for the scene.",
             environment: "Environment", count: "Quantity", generate: "Roll encounters",
-            sourceLanguage: "Encounter descriptions remain in the language of the supplied book.",
+            sourceLanguage: "Encounter descriptions are displayed in English.",
             specialRule: "Table rule: 98–99 produces two additional results; if either is also 98–99, reroll that result.",
             results: "Results", copy: "Copy", copied: "Copied", copyFailed: "Could not copy",
             download: "Download TXT", tableSummary: "Browse the d100 table",
@@ -78,6 +78,10 @@
     function titleFor(table) {
         const pair = TITLES[table.id];
         return pair ? pair[language === "pt-BR" ? 0 : 1] : table.title;
+    }
+
+    function entryText(entry) {
+        return language === "pt-BR" ? (entry.textPt || entry.text) : entry.text;
     }
 
     function setLanguage(nextLanguage) {
@@ -181,7 +185,7 @@
         article.appendChild(header);
 
         const description = document.createElement("p");
-        description.textContent = result.entry.text;
+        description.textContent = entryText(result.entry);
         article.appendChild(description);
 
         if (result.combined) {
@@ -190,7 +194,7 @@
             result.combined.forEach((subResult, subIndex) => {
                 const item = document.createElement("p");
                 item.className = "encounter-combined-item";
-                item.textContent = `${subIndex + 1}. d100 ${formatRoll(subResult.roll)} (${subResult.entry.roll}): ${subResult.entry.text}`;
+                item.textContent = `${subIndex + 1}. d100 ${formatRoll(subResult.roll)} (${subResult.entry.roll}): ${entryText(subResult.entry)}`;
                 combined.appendChild(item);
             });
             article.appendChild(combined);
@@ -254,22 +258,22 @@
     function renderTable(table) {
         const query = searchInput.value.trim().toLocaleLowerCase();
         tableBody.innerHTML = "";
-        table.entries.filter((entry) => !query || `${entry.roll} ${entry.text}`.toLocaleLowerCase().includes(query)).forEach((entry) => {
+        table.entries.filter((entry) => !query || `${entry.roll} ${entryText(entry)}`.toLocaleLowerCase().includes(query)).forEach((entry) => {
             const row = document.createElement("tr");
             const roll = document.createElement("td");
             roll.textContent = entry.roll;
             const text = document.createElement("td");
-            text.textContent = entry.text;
+            text.textContent = entryText(entry);
             row.append(roll, text);
             tableBody.appendChild(row);
         });
     }
 
     function resultAsText(result, index) {
-        const output = [`${TEXT[language].resultTitle} ${index + 1} — ${titleFor(result.table)} — d100 ${formatRoll(result.roll)}`, result.entry.text];
+        const output = [`${TEXT[language].resultTitle} ${index + 1} — ${titleFor(result.table)} — d100 ${formatRoll(result.roll)}`, entryText(result.entry)];
         if (result.combined) {
             result.combined.forEach((subResult, subIndex) => {
-                output.push(`${subIndex + 1}. d100 ${formatRoll(subResult.roll)} (${subResult.entry.roll}): ${subResult.entry.text}`);
+                output.push(`${subIndex + 1}. d100 ${formatRoll(subResult.roll)} (${subResult.entry.roll}): ${entryText(subResult.entry)}`);
             });
         }
         return output.join("\n");
