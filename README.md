@@ -7,7 +7,7 @@
 
 ## Geradores
 
-O catálogo oferece oito geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
+O catálogo oferece nove geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
 
 | Gerador | Recursos |
 | --- | --- |
@@ -15,6 +15,7 @@ O catálogo oferece oito geradores. A interface pode ser usada em português (Br
 | **Festanças** | Gera resultados padrão ou expandidos, com gasto, consequência, acontecimentos e recompensas. |
 | **Encontros** | Rola encontros por ambiente, inclui detalhes do encontro e oferece tabelas independentes de acontecimentos, rumores, armadilhas e perigos. |
 | **Aventuras** | Combina as tabelas d20 de objetivo, complicação e nome de local. |
+| **Monstros** | Cria monstros por nível médio do grupo, com função de combate, qualidade, força, fraqueza, ataques e até três mutações. |
 | **NPCs** | Gera NPCs comuns, rivais individuais e grupos rivais, com nomes, características, ocupações e dados de grupo. |
 | **Cidades e Assentamentos** | Cria assentamentos por tipo e distritos, pontos de interesse, tavernas, comidas, bebidas e lojas. |
 | **Mapas de Masmorras** | Gera mapas esquemáticos com salas conectadas, perigo, conteúdo, objetivo e tabelas de referência. |
@@ -45,6 +46,7 @@ shadowdark-tools/
 ├── index.html
 ├── css/
 │   ├── shadowdark-ui.css
+│   ├── shadowdark-art-direction.css
 │   └── landing.css
 ├── js/
 │   ├── main.js
@@ -56,6 +58,7 @@ shadowdark-tools/
 │   ├── dungeon-map-generator/
 │   ├── encounter-generator/
 │   ├── level-zero-character/
+│   ├── monster-generator/
 │   ├── npc-generator/
 │   ├── overland-hex-generator/
 │   └── settlement-generator/
@@ -69,7 +72,8 @@ Cada gerador tem sua página HTML, estilos e lógica próprios. Os geradores que
 
 ## Interface e idiomas
 
-- Tema inspirado em pergaminhos e na identidade visual de Shadowdark.
+- Direção visual monocromática: moldura preta, páginas brancas, títulos ornamentais e divisórias marcantes.
+- Cabeçalhos de tabelas em preto e branco; texto funcional em fonte sem serifa de alto contraste.
 - Layout responsivo para telas grandes e pequenas.
 - Interface em português brasileiro e inglês.
 - Idioma detectado pelo navegador e preferência guardada em `localStorage`.

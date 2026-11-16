@@ -1,0 +1,290 @@
+/* Direção de arte monocromática inspirada nas páginas de Shadowdark.
+   A folha é carregada depois dos estilos locais para manter o catálogo coeso. */
+:root,
+[data-shadowdark="parchment"] {
+    color-scheme: light;
+    --parchment: #ffffff;
+    --parchment-raised: #ffffff;
+    --parchment-sunk: #f4f4f4;
+    --parchment-dark: #1a1a1a;
+    --ink: #000000;
+    --ink-muted: #1a1a1a;
+    --ink-faint: #444444;
+    --ink-light: #f4f4f4;
+    --edge: #000000;
+    --rule: #000000;
+    --rule-dark: #000000;
+    --blood: #000000;
+    --blood-light: #1a1a1a;
+    --blood-pale: #f4f4f4;
+    --gold: #000000;
+    --gold-light: #1a1a1a;
+    --gold-pale: #f4f4f4;
+    --iron: #1a1a1a;
+    --iron-light: #444444;
+    --shadow: #000000;
+    --danger: #000000;
+    --success: #000000;
+    --warning: #000000;
+    --shadow-shallow: none;
+    --shadow-medium: none;
+    --shadow-deep: none;
+    --font-heading: "Pirata One", "Cinzel", Georgia, serif;
+    --font-body: "Inter", Arial, sans-serif;
+    --font-mono: "JetBrains Mono", "Courier New", monospace;
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-xl: 0;
+}
+
+html { background: #000; }
+body {
+    background: #000 !important;
+    background-image: none !important;
+    color: #000;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+}
+.site-main {
+    width: min(100%, 1200px);
+    margin-inline: auto;
+    background: #fff;
+    color: #000;
+}
+.site-main p { color: #1a1a1a; }
+.site-main h1 {
+    margin: 0 0 1rem;
+    padding: .65rem 1rem .8rem;
+    border: 0;
+    border-bottom: 3px solid #000;
+    background: #000;
+    color: #fff !important;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    letter-spacing: .015em;
+    line-height: 1.12;
+    text-align: center;
+    text-transform: uppercase;
+}
+.site-main h2 {
+    padding-bottom: .45rem;
+    border-bottom: 2px solid #000;
+    color: #000;
+    font-family: var(--font-body);
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    font-weight: 800;
+    letter-spacing: .055em;
+    text-transform: uppercase;
+}
+.site-main h3,
+.site-main h4,
+.site-main summary,
+.site-main label,
+.site-main th {
+    font-family: var(--font-body);
+    font-weight: 800;
+    letter-spacing: .035em;
+    text-transform: uppercase;
+}
+.site-main h3 { font-size: 1.05rem; }
+.site-main h4 { font-size: .82rem; }
+.eyebrow {
+    color: #000 !important;
+    font-family: var(--font-body) !important;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .15em;
+}
+
+.site-header,
+.site-footer {
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+.site-header::before,
+.site-footer::before,
+.tool-card::before,
+.generator-card::before,
+.generator-panel::before,
+.generation-info::before { display: none !important; }
+.site-brand,
+.site-brand:hover,
+.site-navigation a,
+.site-navigation a:hover,
+.site-navigation a:focus-visible,
+.site-navigation a.active,
+.site-navigation a[aria-current="page"] {
+    color: #fff !important;
+    font-family: var(--font-body);
+}
+.site-brand { font-weight: 800; }
+.site-brand .ui-icon,
+.site-navigation .ui-icon,
+.generation-info h2 .ui-icon { filter: brightness(0) invert(1) !important; }
+.site-navigation a { border-color: transparent; font-weight: 700; }
+.site-navigation a:hover,
+.site-navigation a:focus-visible,
+.site-navigation a.active,
+.site-navigation a[aria-current="page"] {
+    border-color: #fff;
+    background: #1a1a1a !important;
+}
+.site-navigation a.home-link { border-color: #fff !important; background: #fff !important; color: #000 !important; }
+.site-navigation a.home-link:hover { background: #f4f4f4 !important; color: #000 !important; }
+.site-navigation a.home-link svg,
+.site-navigation a.home-link .header-nav-icon { color: #000 !important; stroke: #000 !important; }
+.site-footer { border-top: 2px solid #fff !important; }
+.site-footer .footer-caption,
+.site-footer .footer-credit,
+.site-footer .footer-subcredit,
+.site-footer .footer-credit a,
+.site-footer .footer-subcredit a { color: #fff !important; }
+.site-footer .footer-credit a,
+.site-footer .footer-subcredit a { text-decoration: underline; }
+.flag-button svg,
+.flag-button img { filter: grayscale(1) contrast(1.25); }
+.flag-button[aria-pressed="true"] { border-color: #fff; }
+
+.card,
+.generator-panel,
+.generation-info,
+.tool-card,
+.generator-card,
+.generator-panel,
+.generation-info,
+.site-main details,
+.site-main article,
+.site-main [class*="-empty"] {
+    border-color: #000 !important;
+    border-radius: 0 !important;
+    background-color: #fff !important;
+    box-shadow: none !important;
+}
+.tool-card,
+.generator-card { border: 1px solid #000 !important; border-top: 4px solid #000 !important; }
+.tool-card:hover,
+.tool-card:focus-visible,
+.generator-card:hover,
+.generator-card:focus-visible {
+    transform: none !important;
+    border-color: #000 !important;
+    background: #f4f4f4 !important;
+    box-shadow: none !important;
+}
+.tool-card__icon,
+.card-icon { border: 1px solid #000; border-radius: 0; background: #f4f4f4; }
+.tool-card__icon img,
+.card-icon img { filter: grayscale(1) contrast(2); }
+.tool-card__badge,
+.badge { border: 1px solid #000 !important; border-radius: 0 !important; background: #000 !important; color: #fff !important; }
+.tool-card__category,
+.card-category,
+.tool-card__action,
+.card-action { color: #000 !important; }
+.tool-card__action,
+.card-action { border-color: #000; }
+
+.site-main button,
+.site-main .btn,
+.site-main select,
+.site-main input,
+.site-main textarea,
+.site-main summary {
+    border-radius: 0 !important;
+    font-family: var(--font-body);
+}
+.site-main button,
+.site-main .btn {
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+    text-transform: uppercase;
+    letter-spacing: .035em;
+    font-weight: 800;
+}
+.site-main button:hover:not(:disabled),
+.site-main .btn:hover:not(:disabled) {
+    transform: none !important;
+    border-color: #000 !important;
+    box-shadow: none !important;
+}
+.site-main button:disabled { opacity: .45; }
+.site-main button[class*="primary"],
+.site-main .btn-primary,
+.site-main .generation-button--primary {
+    border-color: #000 !important;
+    background: #000 !important;
+    color: #fff !important;
+}
+.site-main button[class*="primary"] img,
+.site-main .btn-primary img,
+.site-main .generation-button--primary img { filter: brightness(0) invert(1); }
+.site-main select,
+.site-main input,
+.site-main textarea,
+.site-main .form-select,
+.site-main .form-control {
+    border-color: #000 !important;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+.site-main :focus-visible { outline-color: #000 !important; }
+.site-main .generator-panel,
+.site-main [class$="-controls"] { border: 1px solid #000 !important; }
+.site-main [class$="-guide"],
+.site-main .generation-info { border-left: 3px solid #000 !important; }
+
+.site-main table { border-collapse: collapse; color: #000; }
+.site-main th {
+    border: 1px solid #000 !important;
+    background: #000 !important;
+    color: #fff !important;
+    font-size: .72rem !important;
+    letter-spacing: .055em !important;
+    text-align: left;
+}
+.site-main td { border-color: #000 !important; color: #000; }
+.site-main tbody tr:nth-child(even) { background: #f4f4f4; }
+.site-main tbody tr:hover { background: #e8e8e8; }
+.site-main details { border: 1px solid #000 !important; }
+.site-main details > summary {
+    border-bottom: 1px solid #000;
+    background: #000;
+    color: #fff;
+    font-size: .86rem;
+    letter-spacing: .055em;
+}
+.site-main details[open] > summary { margin-bottom: .5rem; }
+.site-main .source,
+.site-main [class$="-source"] { color: #444 !important; }
+.site-main .generation-info h2 { border-bottom: 2.5px solid #000; }
+.encounter-divider { height: 2px !important; background: #000 !important; }
+
+/* Hexes remain distinguishable through alternating paper values, not color. */
+.overland-map { border: 1px solid #fff !important; background: #1a1a1a !important; }
+.overland-hex,
+.overland-hex--terrain-0,
+.overland-hex--terrain-1,
+.overland-hex--terrain-2,
+.overland-hex--terrain-3,
+.overland-hex--terrain-4,
+.overland-hex--terrain-5,
+.overland-hex--terrain-6 {
+    border: 1px solid #000 !important;
+    background: #fff !important;
+    color: #000 !important;
+}
+.overland-hex--terrain-1,
+.overland-hex--terrain-3,
+.overland-hex--terrain-5 { background: #f4f4f4 !important; }
+.overland-result__poi { border-left: 3px solid #000 !important; background: #f4f4f4 !important; }
+
+@media (max-width: 600px) {
+    .site-header { padding: .8rem 1rem; }
+    .site-main h1 { font-size: clamp(2rem, 11vw, 3rem); }
+}

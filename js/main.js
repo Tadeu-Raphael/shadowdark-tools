@@ -61,6 +61,19 @@
             available: true
         },
         {
+            id: "monster-generator",
+            category: { "pt-BR": "MONSTROS", en: "MONSTERS" },
+            title: { "pt-BR": "Gerador de Monstros", en: "Monster Generator" },
+            description: {
+                "pt-BR": "Crie monstros com nível, função de combate, forças, fraquezas e mutações.",
+                en: "Create monsters with a level, combat role, strengths, weaknesses, and mutations."
+            },
+            icon: "skull.svg",
+            href: "generators/monster-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
+        },
+        {
             id: "npc-generator",
             category: { "pt-BR": "NPCs", en: "NPCs" },
             title: { "pt-BR": "Gerador de NPCs", en: "NPC Generator" },
