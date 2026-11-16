@@ -22,16 +22,17 @@
             available: true
         },
         {
-            id: "dungeon-generator",
-            category: { "pt-BR": "MASMORRA", en: "DUNGEON" },
-            title: { "pt-BR": "Gerador de Masmorras", en: "Dungeon Generator" },
+            id: "carousing-generator",
+            category: { "pt-BR": "FESTANÇAS", en: "CAROUSING" },
+            title: { "pt-BR": "Gerador de Festanças", en: "Carousing Generator" },
             description: {
-                "pt-BR": "Masmorras processuais com salas, corredores, armadilhas, perigos, monstros e tesouros.",
-                en: "Procedural dungeons with rooms, corridors, traps, hazards, monsters, and treasures."
+                "pt-BR": "Role o resultado de uma festança no estilo Shadowdark, com opção de acontecimentos expandidos.",
+                en: "Roll a Shadowdark-style carousing outcome, with an expanded events option."
             },
-            icon: "castle.svg",
-            badge: { "pt-BR": "EM BREVE", en: "COMING SOON" },
-            available: false
+            icon: "coins.svg",
+            href: "generators/carousing-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         },
         {
             id: "encounter-generator",

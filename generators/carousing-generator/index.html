@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-shadowdark="parchment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerador de festanças para Shadowdark RPG">
+    <title>Gerador de Festanças — Shadowdark Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/shadowdark-ui.css">
+    <link rel="stylesheet" href="carousing.css">
+</head>
+<body>
+    <div class="site-shell" id="top">
+        <div id="site-header">
+            <header class="site-header" role="banner">
+                <div class="header-inner container-fluid">
+                    <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início">
+                        <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
+                        <span>Shadowdark Tools</span>
+                    </a>
+                    <nav class="site-navigation" aria-label="Navegação principal">
+                        <a href="../../index.html" id="nav-home">Início</a>
+                        <a href="../../index.html#geradores" id="nav-generators">Geradores</a>
+                        <a href="#sobre" id="nav-about">Sobre</a>
+                    </nav>
+                </div>
+            </header>
+        </div>
+
+        <main class="site-main">
+            <section class="carousing-page" aria-labelledby="page-title">
+                <div class="container-fluid">
+                    <header class="carousing-heading">
+                        <p class="eyebrow" id="page-eyebrow">MESTRE</p>
+                        <h1 id="page-title">Gerador de Festanças</h1>
+                        <p id="page-description">Escolha quanto o personagem gastou e role para descobrir as consequências da festança.</p>
+                    </header>
+
+                    <section class="carousing-controls card" aria-label="Configurações da festança">
+                        <div class="carousing-control">
+                            <label for="cost-select" id="cost-label">Gasto</label>
+                            <select id="cost-select" class="form-select"></select>
+                        </div>
+                        <div class="carousing-control">
+                            <label for="mode-select" id="mode-label">Versão</label>
+                            <select id="mode-select" class="form-select">
+                                <option value="standard">Padrão</option>
+                                <option value="expanded">Expandida</option>
+                            </select>
+                        </div>
+                        <div class="carousing-control carousing-control--count">
+                            <label for="result-count" id="count-label">Quantidade</label>
+                            <input id="result-count" class="form-select" type="number" value="1" min="1" max="10">
+                        </div>
+                        <button type="button" id="roll-button" class="carousing-button carousing-button--primary">
+                            <img src="../../assets/icons/lucide/dice-5.svg" alt="" aria-hidden="true">
+                            <span id="roll-label">Rolar festança</span>
+                        </button>
+                    </section>
+
+                    <p id="cost-description" class="carousing-cost-note"></p>
+                    <p class="carousing-rule-note" id="rule-note">Role 1d8 e some o bônus do gasto. Na versão expandida, role também 1d6 para descobrir o acontecimento.</p>
+
+                    <section class="carousing-results" aria-labelledby="results-heading" aria-live="polite">
+                        <div class="carousing-results__header">
+                            <h2 id="results-heading">Resultados</h2>
+                            <div class="carousing-results__actions">
+                                <button id="copy-button" class="carousing-button" type="button" disabled>
+                                    <img src="../../assets/icons/lucide/clipboard-list.svg" alt="" aria-hidden="true">
+                                    <span id="copy-label">Copiar</span>
+                                </button>
+                                <button id="export-button" class="carousing-button" type="button" disabled>
+                                    <img src="../../assets/icons/lucide/file-text.svg" alt="" aria-hidden="true">
+                                    <span id="export-label">Baixar TXT</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="result-list" class="carousing-result-list">
+                            <div class="carousing-empty" id="empty-state">Escolha o gasto e role para descobrir o resultado da festança.</div>
+                        </div>
+                    </section>
+
+                    <details class="carousing-reference card">
+                        <summary id="reference-title">Consultar custos e bônus</summary>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th id="reference-cost">Gasto</th><th id="reference-event">Festança</th><th id="reference-bonus">Bônus</th></tr></thead>
+                                <tbody id="cost-table-body"></tbody>
+                            </table>
+                        </div>
+                    </details>
+                    <p class="carousing-source" id="source-note">Tabela padrão de festanças adaptada do Livro de Regras de Shadowdark, páginas 92–93. Os acontecimentos expandidos são baseados no material fornecido.</p>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer">
+            <footer class="site-footer" id="sobre" role="contentinfo">
+                <div class="container-fluid">
+                    <p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Festanças</p>
+                    <p class="footer-credit" id="footer-credit-author">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p>
+                    <p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p>
+                    <div class="carousing-language-switch" role="group" aria-label="Idioma">
+                        <button type="button" data-lang="pt-BR" aria-pressed="true">PT</button>
+                        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="../../js/ui-icons.js"></script>
+    <script src="carousing-data.js"></script>
+    <script src="carousing.js"></script>
+</body>
+</html>

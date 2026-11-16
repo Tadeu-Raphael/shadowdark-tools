@@ -38,6 +38,36 @@
                         <p id="page-description">Role nas tabelas de encontros aleatórios por ambiente e use os resultados como estão ou como inspiração para a cena.</p>
                     </header>
 
+                    <section class="encounter-guide card" aria-labelledby="guide-heading">
+                        <div class="encounter-guide__heading">
+                            <p class="eyebrow" id="guide-eyebrow">REGRAS RÁPIDAS</p>
+                            <h2 id="guide-heading">Como usar encontros aleatórios</h2>
+                        </div>
+                        <div class="encounter-guide__grid">
+                            <article class="encounter-guide__item">
+                                <h3 id="purpose-title">Propósito</h3>
+                                <p id="purpose-copy">Encontros aleatórios mantêm a pressão do tempo. Se o grupo demorar demais, aumenta o risco de novos encontros.</p>
+                            </article>
+                            <article class="encounter-guide__item">
+                                <h3 id="frequency-title">Frequência</h3>
+                                <p id="frequency-copy">O Mestre verifica encontros durante rodadas de exploração, conforme o perigo do ambiente:</p>
+                                <ul>
+                                    <li id="unsafe-frequency"><strong>Inseguro:</strong> a cada 3 rodadas.</li>
+                                    <li id="risky-frequency"><strong>Arriscado:</strong> a cada 2 rodadas.</li>
+                                    <li id="deadly-frequency"><strong>Letal:</strong> a cada rodada.</li>
+                                </ul>
+                            </article>
+                            <article class="encounter-guide__item">
+                                <h3 id="check-guide-title">Teste de encontro</h3>
+                                <p id="check-guide-copy">Role 1d6: um encontro acontece com resultado 1. O Mestre também pode testar após um ruído alto.</p>
+                            </article>
+                            <article class="encounter-guide__item">
+                                <h3 id="travel-guide-title">Viagem e distância</h3>
+                                <p id="travel-guide-copy">Em viagens pelo ermo, conte horas em vez de rodadas. Quando criaturas surgirem, determine a distância inicial abaixo.</p>
+                            </article>
+                        </div>
+                    </section>
+
                     <section class="encounter-controls card" aria-label="Configurações do encontro">
                         <div class="encounter-control">
                             <label for="environment-select" id="environment-label">Ambiente</label>
@@ -46,6 +76,10 @@
                         <div class="encounter-control encounter-control--count">
                             <label for="encounter-count" id="count-label">Quantidade</label>
                             <input id="encounter-count" class="form-select" type="number" value="1" min="1" max="10">
+                        </div>
+                        <div class="encounter-control encounter-control--charisma">
+                            <label for="encounter-charisma-modifier" id="encounter-charisma-label">Mod. Carisma</label>
+                            <input id="encounter-charisma-modifier" class="form-select" type="number" value="0" min="-10" max="10">
                         </div>
                         <button type="button" id="generate-button" class="encounter-button encounter-button--primary">
                             <img src="../../assets/icons/lucide/dice-5.svg" alt="" aria-hidden="true">
@@ -90,6 +124,81 @@
                     </details>
 
                     <p class="encounter-source" id="source-credit">Tabelas extraídas do Livro de Regras fornecido, páginas 142–185.</p>
+
+                    <section class="encounter-support" aria-labelledby="support-heading">
+                        <header class="encounter-support__heading">
+                            <p class="eyebrow" id="support-eyebrow">NA CENA</p>
+                            <h2 id="support-heading">Detalhes do encontro</h2>
+                            <p id="support-description">Role cada detalhe quando precisar; a reação aceita o modificador de Carisma de quem interage.</p>
+                        </header>
+                        <div class="encounter-support__grid">
+                            <article class="encounter-extra-card">
+                                <h3 id="check-card-title">Verificar encontro</h3>
+                                <p id="check-card-copy">Escolha o perigo da área. O teste é 1d6; em 1, o gerador rola um encontro na tabela d100 selecionada.</p>
+                                <label for="danger-level" id="danger-level-label">Perigo da área</label>
+                                <select id="danger-level" class="form-select">
+                                    <option value="unsafe">Inseguro · a cada 3 rodadas</option>
+                                    <option value="risky">Arriscado · a cada 2 rodadas</option>
+                                    <option value="deadly">Letal · a cada rodada</option>
+                                </select>
+                                <button type="button" class="encounter-button" id="check-encounter-button">Rolar teste d6</button>
+                                <p class="encounter-extra-card__result" id="check-encounter-result" aria-live="polite"></p>
+                            </article>
+                            <article class="encounter-extra-card">
+                                <h3 id="distance-title">Distância inicial</h3>
+                                <p id="distance-copy">Quando criaturas errantes aparecem, role 1d6.</p>
+                                <button type="button" class="encounter-button" data-roll="distance" id="distance-button">Rolar d6</button>
+                                <p class="encounter-extra-card__result" id="distance-result" aria-live="polite"></p>
+                            </article>
+                            <article class="encounter-extra-card">
+                                <h3 id="activity-title">O que estão fazendo?</h3>
+                                <p id="activity-copy">Role 2d6 para determinar a atividade atual das criaturas.</p>
+                                <button type="button" class="encounter-button" data-roll="activity" id="activity-button">Rolar 2d6</button>
+                                <p class="encounter-extra-card__result" id="activity-result" aria-live="polite"></p>
+                            </article>
+                            <article class="encounter-extra-card">
+                                <h3 id="reaction-title">Reação</h3>
+                                <p id="reaction-copy">Role 2d6 e some o modificador de Carisma do personagem que interage. Mortos-vivos e algumas criaturas vis são sempre hostis.</p>
+                                <label for="charisma-modifier" id="charisma-label">Modificador de Carisma</label>
+                                <input id="charisma-modifier" class="form-select" type="number" value="0" min="-10" max="10">
+                                <button type="button" class="encounter-button" data-roll="reaction" id="reaction-button">Rolar 2d6</button>
+                                <p class="encounter-extra-card__result" id="reaction-result" aria-live="polite"></p>
+                            </article>
+                            <article class="encounter-extra-card">
+                                <h3 id="treasure-title">Tesouro</h3>
+                                <p id="treasure-copy">Há 50% de chance de uma criatura ou grupo encontrado ter tesouro.</p>
+                                <button type="button" class="encounter-button" data-roll="treasure" id="treasure-button">Rolar d100</button>
+                                <p class="encounter-extra-card__result" id="treasure-result" aria-live="polite"></p>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="encounter-special-tables" aria-labelledby="special-tables-heading">
+                        <header class="encounter-support__heading">
+                            <p class="eyebrow" id="special-eyebrow">PERIGOS</p>
+                            <h2 id="special-tables-heading">Armadilhas e hazards</h2>
+                            <p id="special-tables-description">Role estas tabelas separadamente para acrescentar uma armadilha ou um perigo ambiental à cena.</p>
+                        </header>
+                        <div class="encounter-special-tables__grid">
+                            <article class="encounter-special-card">
+                                <div class="encounter-special-card__heading">
+                                    <div><h3 id="traps-title">Armadilhas</h3><p id="traps-copy">Armadilhas</p><p class="encounter-special-card__guidance" id="traps-guidance"></p></div>
+                                    <button type="button" class="encounter-button" data-roll="trap" id="trap-button">Rolar d12</button>
+                                </div>
+                                <div class="encounter-extra-card__result" id="trap-result" aria-live="polite"></div>
+                                <div class="table-responsive"><table><thead><tr><th>d12</th><th id="trap-column">Armadilha</th><th id="trigger-column">Gatilho</th><th id="effect-column">Dano ou efeito</th></tr></thead><tbody id="trap-table-body"></tbody></table></div>
+                            </article>
+                            <article class="encounter-special-card">
+                                <div class="encounter-special-card__heading">
+                                    <div><h3 id="hazards-title">Hazards</h3><p id="hazards-copy">Hazards</p><p class="encounter-special-card__guidance" id="hazards-guidance"></p></div>
+                                    <button type="button" class="encounter-button" data-roll="hazard" id="hazard-button">Rolar d12</button>
+                                </div>
+                                <div class="encounter-extra-card__result" id="hazard-result" aria-live="polite"></div>
+                                <div class="table-responsive"><table><thead><tr><th>d12</th><th id="movement-column">Movimento</th><th id="damage-column">Dano</th><th id="weaken-column">Enfraquecimento</th></tr></thead><tbody id="hazard-table-body"></tbody></table></div>
+                            </article>
+                        </div>
+                    </section>
+
                 </div>
             </section>
         </main>
