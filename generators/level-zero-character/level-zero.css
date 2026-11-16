@@ -139,6 +139,13 @@
     padding: 0.15rem 0;
 }
 
+.ancestry-info-dialog__lists li p {
+    margin: 0.2rem 0 0.4rem;
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
 @media (max-width: 520px) {
     .ancestry-mode-control {
         flex-wrap: wrap;

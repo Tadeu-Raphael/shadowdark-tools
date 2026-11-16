@@ -38,12 +38,13 @@
             category: { "pt-BR": "ENCONTROS", en: "ENCOUNTERS" },
             title: { "pt-BR": "Gerador de Encontros", en: "Encounter Generator" },
             description: {
-                "pt-BR": "Encontros aleatórios balanceados por nível com tabelas de reações, moral e tesouros.",
-                en: "Level-balanced encounters with reaction tables, morale checks, and treasures."
+                "pt-BR": "Gere encontros aleatórios usando as 22 tabelas d100 por ambiente do livro de regras.",
+                en: "Generate random encounters using 22 environment-based d100 tables from the rulebook."
             },
             icon: "sword.svg",
-            badge: { "pt-BR": "PLANEJADO", en: "PLANNED" },
-            available: false
+            href: "generators/encounter-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         }
     ];
 

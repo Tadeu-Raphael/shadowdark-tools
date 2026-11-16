@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-shadowdark="parchment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerador de encontros aleatórios para Shadowdark RPG">
+    <title>Gerador de Encontros — Shadowdark Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/shadowdark-ui.css">
+    <link rel="stylesheet" href="encounter.css">
+</head>
+<body>
+    <div class="site-shell" id="top">
+        <div id="site-header">
+            <header class="site-header" role="banner">
+                <div class="header-inner container-fluid">
+                    <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início">
+                        <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
+                        <span>Shadowdark Tools</span>
+                    </a>
+                    <nav class="site-navigation" aria-label="Navegação principal">
+                        <a href="../../index.html" id="nav-home">Início</a>
+                        <a href="../../index.html#geradores" id="nav-generators">Geradores</a>
+                        <a href="#sobre" id="nav-about">Sobre</a>
+                    </nav>
+                </div>
+            </header>
+        </div>
+
+        <main class="site-main">
+            <section class="encounter-page" aria-labelledby="page-title">
+                <div class="container-fluid">
+                    <header class="encounter-heading">
+                        <p class="eyebrow" id="page-eyebrow">MESTRE</p>
+                        <h1 id="page-title">Gerador de Encontros</h1>
+                        <p id="page-description">Role nas tabelas de encontros aleatórios por ambiente e use os resultados como estão ou como inspiração para a cena.</p>
+                    </header>
+
+                    <section class="encounter-controls card" aria-label="Configurações do encontro">
+                        <div class="encounter-control">
+                            <label for="environment-select" id="environment-label">Ambiente</label>
+                            <select id="environment-select" class="form-select"></select>
+                        </div>
+                        <div class="encounter-control encounter-control--count">
+                            <label for="encounter-count" id="count-label">Quantidade</label>
+                            <input id="encounter-count" class="form-select" type="number" value="1" min="1" max="10">
+                        </div>
+                        <button type="button" id="generate-button" class="encounter-button encounter-button--primary">
+                            <img src="../../assets/icons/lucide/dice-5.svg" alt="" aria-hidden="true">
+                            <span id="generate-label">Rolar encontros</span>
+                        </button>
+                    </section>
+
+                    <p class="source-language-note" id="source-language-note">As descrições dos resultados permanecem no idioma do livro fornecido.</p>
+                    <p class="encounter-rule-note" id="special-rule-note">Regra da tabela: 98–99 gera dois resultados adicionais; se algum deles também cair em 98–99, repita essa rolagem.</p>
+
+                    <section class="encounter-results" aria-labelledby="results-heading" aria-live="polite">
+                        <div class="encounter-results__header">
+                            <h2 id="results-heading">Resultados</h2>
+                            <div class="encounter-results__actions">
+                                <button id="copy-button" class="encounter-button" type="button" disabled>
+                                    <img src="../../assets/icons/lucide/clipboard-list.svg" alt="" aria-hidden="true">
+                                    <span id="copy-label">Copiar</span>
+                                </button>
+                                <button id="export-button" class="encounter-button" type="button" disabled>
+                                    <img src="../../assets/icons/lucide/download.svg" alt="" aria-hidden="true">
+                                    <span id="export-label">Baixar TXT</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="result-list" class="encounter-result-list">
+                            <div class="encounter-empty" id="empty-state">Escolha um ambiente e role para gerar um encontro.</div>
+                        </div>
+                    </section>
+
+                    <details class="encounter-table card">
+                        <summary id="table-summary">Consultar a tabela d100</summary>
+                        <div class="encounter-table__toolbar">
+                            <p id="table-description">A tabela do ambiente selecionado, com os intervalos usados na rolagem.</p>
+                            <input id="table-search" type="search" class="form-select" placeholder="Filtrar resultados" aria-label="Filtrar resultados da tabela">
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th id="roll-column">d100</th><th id="entry-column">Encontro</th></tr></thead>
+                                <tbody id="table-body"></tbody>
+                            </table>
+                        </div>
+                    </details>
+
+                    <p class="encounter-source" id="source-credit">Tabelas extraídas do Livro de Regras fornecido, páginas 142–185.</p>
+                </div>
+            </section>
+        </main>
+
+        <div id="site-footer">
+            <footer class="site-footer" id="sobre" role="contentinfo">
+                <div class="container-fluid">
+                    <p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Encontros</p>
+                    <p class="footer-credit" id="footer-credit-author">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p>
+                    <p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p>
+                    <div class="encounter-language-switch" role="group" aria-label="Idioma">
+                        <button type="button" data-lang="pt-BR" aria-pressed="true">PT</button>
+                        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="../../js/ui-icons.js"></script>
+    <script src="encounter.js"></script>
+</body>
+</html>

@@ -35,39 +35,49 @@
         ]
     };
 
-    // 2. Nomes Anteriores (Legado/Expandidos para misturar nas customizadas)
-    const LEGACY_FIRST_NAMES = {
-        "pt-BR": [
-            "Aldo", "Breno", "Ciro", "Dante", "Elói", "Fabrício", "Gael", "Heitor", "Ivo", "Jairo",
-            "Kai", "Lorenzo", "Mauro", "Nico", "Otávio", "Pietro", "Quico", "Rafael", "Sérgio", "Thiago",
-            "Ulisses", "Vitor", "Wagner", "Xisto", "Yago", "Zeca", "Adela", "Bruna", "Catarina", "Dora",
-            "Elisa", "Fátima", "Gisela", "Helena", "Íris", "Joana", "Lara", "Mara", "Nina", "Olga",
-            "Paula", "Quitéria", "Rosa", "Sofia", "Teresa", "Úrsula", "Vera", "Xênia", "Yara", "Zélia"
-        ],
-        "en": [
-            "Aldric", "Bran", "Corin", "Dain", "Eamon", "Finn", "Gareth", "Hale", "Ivar", "Joren",
-            "Kael", "Lorin", "Merek", "Nolan", "Owen", "Perrin", "Quinn", "Rowan", "Soren", "Tomas",
-            "Ulric", "Vance", "Wyn", "Xander", "Yorick", "Zane", "Aelith", "Brynn", "Cora", "Dara",
-            "Elara", "Fiona", "Gwen", "Hela", "Iris", "Jenna", "Kira", "Lira", "Mara", "Nora",
-            "Orla", "Pippa", "Quinn", "Rhian", "Sara", "Tara", "Una", "Vera", "Wynne", "Xara", "Yara", "Zara"
-        ]
+    // Tabelas próprias (d20) para as ancestralidades homebrew e para Koboldo.
+    const HOMEBREW_CHARACTER_NAMES = {
+        "Kobold": ["Krik", "Zik", "Vek", "Rikkit", "Sszik", "Tikk", "Krek", "Vix", "Nokk", "Zruk", "Skrit", "Kazz", "Rax", "Tikri", "Snik", "Kett", "Vorrik", "Zekk", "Rikk", "Skrakk"],
+        "Boitatami": ["Zharveth", "Kharzun", "Vyrasha", "Thazrik", "Rhazhka", "Zorveth", "Khezara", "Drazhul", "Varkhessa", "Zyrran", "Qazreth", "Thurvakka", "Mazhira", "Rhazhul", "Khorvessa", "Zharakka", "Vezhkar", "Drazhara", "Skarveth", "Zhurakai"],
+        "Caramuru": ["Neruvai", "Thalazhur", "Marevyn", "Nerithal", "Selyrra", "Pelavon", "Oshyra", "Mariveth", "Koralyth", "Neryssan", "Aqoryn", "Delythra", "Tethyron", "Muirasha", "Salavyr", "Ephyrel", "Nymorai", "Lirivelle", "Kasmyr", "Vaeluneth"],
+        "Cueio": ["Araveth", "Qirava", "Melthyn", "Pavoryn", "Nimvella", "Thessira", "Hovaryn", "Bramvella", "Lukaryn", "Daphel", "Nimvarra", "Kottaryn", "Pivveth", "Velvyr", "Dewvara", "Zelveth", "Merriveth", "Buvvara", "Hazvella", "Kethari"],
+        "Cuguja": ["Noctyra", "Strixara", "Huvorin", "Nyxaryn", "Orryvek", "Muunveth", "Tavoryn", "Eulorys", "Nyxavelle", "Fetharyn", "Orlunyx", "Varkyra", "Auraleth", "Sovaryn", "Nythjarel", "Peryvyn", "Orylvak", "Morveth", "Vigoryn", "Lunethra"],
+        "Exum": ["Malakhyr", "Veyrasha", "Azrathiel", "Nerezhka", "Belisyr", "Morvaneh", "Kaldryss", "Zarethyn", "Ebonara", "Damarveth", "Valthyra", "Sevrynn", "Oryaz", "Ravessia", "Noxavyr", "Velmoryn", "Astarakh", "Drevasha", "Mordraya", "Iscarveth"],
+        "Gattito": ["Mithravelle", "Velkira", "Pavressa", "Savylyn", "Wyspara", "Myettara", "Zindevyn", "Talvora", "Morressa", "Silveth", "Pyrasha", "Vantyra", "Mevessa", "Twyrren", "Softhara", "Lynavyr", "Favelyn", "Duskyra", "Pryssara", "Nythwessa"],
+        "Gigas": ["Bolvaryn", "Talveth", "Mammoryn", "Okenvar", "Gravoryx", "Harthavon", "Brontyra", "Karnovar", "Thrumveth", "Magnoryn", "Rumvarya", "Koldravan", "Torraveth", "Drommara", "Garruvyn", "Huldara", "Vastoryn", "Bastivor", "Morvadep", "Rugnaveth"],
+        "Jacae": ["Sauryvak", "Miravella", "Kharvyn", "Skalveth", "Krovasha", "Murveth", "Rhaedavyr", "Vessyka", "Mosavyr", "Tarkasha", "Brakveth", "Silthavyn", "Mavrasha", "Rilaveth", "Krovella", "Fenvyr", "Saurenvar", "Murdasha", "Thikveth", "Varnyra"],
+        "Jaguart": ["Vulparin", "Zlyvasha", "Renavyr", "Quivara", "Fexglora", "Veylinn", "Ruzkaveth", "Tavoryn", "Rennasha", "Fenyr", "Qlevaryth", "Saffyra", "Wiskara", "Ruzaveth", "Ambravyn", "Vulparyn", "Merravik", "Kesthira", "Fynavyr", "Zorasha"],
+        "Jajaraca": ["Sszaravyn", "Vennokh", "Koylasha", "Najyra", "Hyssaveth", "Sibyrra", "Vaskhyn", "Ophirasha", "Krythavyn", "Zesshara", "Zlythira", "Neraskhyn", "Venavyr", "Zlytharae", "Rhazaveth", "Kobryx", "Ekdysara", "Vyparyn", "Sseraveth", "Fanghoryn"],
+        "Komodo": ["Dravokh", "Kezharya", "Skalethyr", "Vyrnasha", "Azhkoryn", "Zardaveth", "Zembravyr", "Krazhika", "Sythrava", "Volkrasha", "Threxavyr", "Rhazharyn", "Zindraveth", "Moltharya", "Korravyn", "Vezharya", "Sezhaveth", "Drakmoryn", "Ignivara", "Zorvethyn"],
+        "Meio-Miranha": ["Arakhyra", "Syrkaveth", "Vebrynn", "Tesshara", "Sphinnarith", "Velisara", "Ezthyra", "Nexavelle", "Tharynavyn", "Syrkoryn", "Koththara", "Anassyr", "Vefthyn", "Spindara", "Lomaveth", "Araxyra", "Dorsavyn", "Veseryra", "Tanyaveth", "Myrmasha"],
+        "Meio-Stigmu": ["Skorvasha", "Styrhoryn", "Khepryra", "Pensereth", "Karapaxyn", "Tavlasha", "Serraveth", "Venatryx", "Klavrya", "Akridasha", "Skorrenvar", "Pensyrra", "Khadriveth", "Skorrixa", "Tarsavyn", "Vexharya", "Khepryss", "Stryhorya", "Khelisara", "Oryxaveth"],
+        "Modrongo": ["Grushvak", "Morgutha", "Thrakvyn", "Brakkara", "Grommaveth", "Urzakh", "Dreggora", "Kraghvara", "Murgavyn", "Rukhara", "Skarneth", "Vroggath", "Grakkora", "Durnaveth", "Hroshka", "Krellvyn", "Mogrutha", "Zuggara", "Thrumveth", "Gorvakh"],
+        "Obsidianum": ["Obryxara", "Vitryss", "Noxaveth", "Sharvya", "Umbravyn", "Ebonara", "Savelthyr", "Vezperyx", "Khalxira", "Morkaveth", "Nyxavara", "Glomvyr", "Onyxara", "Vitravyn", "Duzkryss", "Kharonyx", "Silithra", "Morvaveth", "Obskuryn", "Ravixara"],
+        "Pia-do-Ka": ["Perravyn", "Lyrasha", "Madriveth", "Fandoryn", "Kazendra", "Rosavelle", "Veloryn", "Minuvara", "Gamboryx", "Tavishara", "Belavyn", "Rondaveth", "Dalivara", "Meloryn", "Karilona", "Sathyrra", "Jovavelle", "Revaryn", "Pavanyx", "Kharmont"],
+        "Rabudo": ["Kantoryn", "Ekuvar", "Stryvara", "Marathyn", "Galavara", "Hokhlevyn", "Pavthera", "Dapelmara", "Lonaveth", "Harthovyn", "Korvessa", "Brindavyr", "Troveth", "Krupara", "Merrigavyn", "Sadelveth", "Flivara", "Ronsavyr", "Kavalloryn", "Huvlina"],
+        "Recortante": ["Morvaskyn", "Varizhara", "Shyvaryn", "Boraveth", "Fekzimir", "Mimrasha", "Flazavyn", "Elshavara", "Vezhaskara", "Maniveth", "Ekhoryn", "Gizaveth", "Pazhymara", "Meldrava", "Skheyn", "Raveloryn", "Miraveth", "Shanjavyr", "Khymerra", "Wyldaveth"],
+        "Sao": ["Aurelsha", "Seravyn", "Vezperiel", "Halkyra", "Lumyneth", "Azaryel", "Solavelle", "Elyndravyn", "Kelestra", "Mavryel", "Oriphara", "Davneth", "Samayel", "Velorya", "Kaelithra", "Asteravyn", "Noktyel", "Ithurasha", "Zophaveth", "Ravyel"],
+        "Thanobre": ["Palloryn", "Aethraveth", "Nhalyra", "Umbraviel", "Vakuun", "Orvaneth", "Sthylavyr", "Morvasha", "Kaeluma", "Paloryn", "Vuydrasha", "Nadhyra", "Eidoveth", "Threnavara", "Asteryn", "Siderya", "Morvostar", "Noxaviel", "Kvasaryx", "Eklipsara"],
+        "Tiuzinho": ["Tzivara", "Phelyn", "Qovaren", "Zhyraveth", "Ulthara", "Veymora", "Qirveth", "Drazhyra", "Thavoryn", "Kelmaveth", "Zyvella", "Pheranor", "Vumeryn", "Kezhara", "Oraveth", "Ylvaryn", "Methavora", "Rhyzeth", "Kovalyra", "Nyzharin"],
+        "Troca-Pele": ["Elzavyn", "Boryvara", "Vezhoryn", "Mivareth", "Gharasha", "Sekhyndra", "Lokharyn", "Maniveth", "Ekhavora", "Mazkoryn", "Zheveth", "Twyzara", "Myravyn", "Aldeveth", "Vyzhara", "Fazavyn", "Rhemaveth", "Kaztoryn", "Imavora", "Fakethra"],
+        "Vlummi": ["Lhyravyn", "Luvareth", "Wykarya", "Ghivara", "Felykaryn", "Dhivaveth", "Aurylyra", "Zharavyn", "Methara", "Laneryx", "Fozaryn", "Tuvinkara", "Luziveth", "Ghyvamara", "Thyravyn", "Lyvemara", "Vezharyra", "Ghylamoryn", "Vyspaveth", "Shymvara"],
     };
 
-    const LEGACY_LAST_NAMES = {
-        "pt-BR": [
-            "da Silva", "Souza", "Oliveira", "Lima", "Pereira", "Costa", "Rodrigues", "Almeida", "Nascimento",
-            "Araújo", "Ferreira", "Carvalho", "Gomes", "Martins", "Rocha", "Ribeiro", "Barbosa", "Cavalcanti",
-            "Dantas", "Esteves", "Figueiredo", "Guimarães", "Henriques", "Iglesias", "Junqueira", "Klein",
-            "Leão", "Moura", "Nunes", "Pinto", "Queiroz", "Ramires", "Santos", "Tavares", "Uchôa", "Vieira",
-            "Xavier", "Yamamoto", "Zambrano"
-        ],
-        "en": [
-            "Blackwood", "Stone", "Miller", "Smith", "Cooper", "Fletcher", "Thatcher", "Walker", "Hunter",
-            "Baker", "Carter", "Turner", "Porter", "Fisher", "Weaver", "Sawyer", "Tyler", "Archer",
-            "Gardener", "Shepherd", "Potter", "Mason", "Wright", "Taylor", "Clark", "Adams", "Bell",
-            "Cross", "Dean", "Ellis", "Ford", "Grant", "Hayes", "Innes", "Joyce", "Knox", "Lane",
-            "Moss", "North", "Oakes", "Pierce", "Quinn", "Reed", "Shaw", "Thorpe", "Vance", "Wade", "York", "Young"
-        ]
+    const HOMEBREW_NAME_TABLE_KEYS = {
+        "pt-BR": {
+            "Boitatãmi": "Boitatami", "Caramuru": "Caramuru", "Cueio": "Cueio", "Cuguja": "Cuguja", "Exum": "Exum",
+            "Gattito": "Gattito", "Gigas": "Gigas", "Jacae": "Jacae", "Jaguart": "Jaguart", "Jajaraca": "Jajaraca",
+            "Komodo": "Komodo", "Meio-Miranha": "Meio-Miranha", "Meio-Stigmu": "Meio-Stigmu", "Modrongo": "Modrongo",
+            "Obsidianum": "Obsidianum", "Piá-dô-Ka": "Pia-do-Ka", "Rabudo": "Rabudo", "Recortante": "Recortante",
+            "São": "Sao", "Thanobre": "Thanobre", "Tiuzinho": "Tiuzinho", "Troca-Pele": "Troca-Pele", "Vlummi": "Vlummi"
+        },
+        "en": {
+            "Boitatãmi": "Boitatami", "Caramuru": "Caramuru", "Cueio": "Cueio", "Cuguja": "Cuguja", "Exum": "Exum",
+            "Gattito": "Gattito", "Gigas": "Gigas", "Jacae": "Jacae", "Jaguart": "Jaguart", "Jajaraca": "Jajaraca",
+            "Komodo": "Komodo", "Half-Spider": "Meio-Miranha", "Half-Stigmu": "Meio-Stigmu", "Modrongo": "Modrongo",
+            "Obsidianum": "Obsidianum", "Piá-dô-Ka": "Pia-do-Ka", "Mongrel": "Rabudo", "Recortante": "Recortante",
+            "Saint": "Sao", "Thanobre": "Thanobre", "Tiuzinho": "Tiuzinho", "Skin-Changer": "Troca-Pele", "Vlummi": "Vlummi"
+        }
     };
 
     // Descrições do equipamento inicial, seguindo a seção Gear do livro.
@@ -361,6 +371,7 @@
                 { name: "Goblin", key: "Goblin", type: "original", description: "Povo pequeno e astuto, conhecido por sua esperteza e sentidos atentos.", languages: "Comum e Goblin", abilityName: "Sentidos Aguçados", ability: "Não pode ser surpreendido." },
                 { name: "Metadinha", key: "Halfling", type: "original", description: "Pequeno povo do campo, alegre e travesso, que aprecia os prazeres simples da vida.", languages: "Comum", abilityName: "Furtivo", ability: "Uma vez por dia, pode ficar invisível por 3 rodadas." },
                 { name: "Meio-Orc", key: "Half-Orc", type: "original", description: "Povo resistente e de pele grossa, acostumado a suportar grandes perigos.", languages: "Comum e Orc", abilityName: "Incansável", ability: "Ao chegar a 0 PV, pode fazer um teste de CON CD 15. Se passar, fica com 1 PV." },
+                { name: "Koboldo", key: "Kobold", type: "original", description: "Povo pequeno e engenhoso, capaz de encontrar saídas inesperadas mesmo em situações perigosas." },
                 { name: "Humano", key: "Human", type: "original", description: "Povo ousado, adaptável e diverso, capaz de aprender rápido e realizar grandes feitos.", languages: "Comum e um idioma comum adicional", abilityName: "Ambicioso", ability: "Recebe uma rolagem adicional de talento no 1º nível." }
             ],
             ancestriesHomebrew: [
@@ -374,7 +385,6 @@
                 { name: "Jacae", type: "homebrew" },
                 { name: "Jaguart", type: "homebrew" },
                 { name: "Jajaraca", type: "homebrew" },
-                { name: "Koboldo", type: "homebrew" },
                 { name: "Komodo", type: "homebrew" },
                 { name: "Meio-Miranha", type: "homebrew" },
                 { name: "Meio-Stigmu", type: "homebrew" },
@@ -407,7 +417,7 @@
             lblAncestry: "Ancestralidade",
             lblBackground: "Background",
             lblLang: "Idioma dos Resultados",
-            optAncestryOriginal: "Padrão do Sistema (d6)",
+            optAncestryOriginal: "Padrão do Sistema (d7)",
             optAncestryAll: "Expandido + Homebrew (d30)",
             ancestryInfoButton: "Ver lista",
             ancestryDialogTitle: "Ancestralidades cadastradas",
@@ -434,8 +444,7 @@
             colMod: "Mod / Detalhes",
             colResult: "Resultado Final",
             rerollBadge: "Re-rolagem",
-            nameTableLabel: "Tabela Oficial",
-            nameMixedLabel: "Mistura Expandida",
+            nameTableLabel: "Tabela de Nomes",
             generated: "Personagens gerados",
             exported: "Exportado com sucesso",
             noCharacters: "Nenhum personagem para exportar",
@@ -452,6 +461,7 @@
                 { name: "Goblin", key: "Goblin", type: "original", description: "Small, clever folk known for their quick wits and keen senses.", languages: "Common and Goblin", abilityName: "Keen Senses", ability: "You can't be surprised." },
                 { name: "Halfling", key: "Halfling", type: "original", description: "Small, cheerful country folk with a mischievous streak who enjoy life's simple pleasures.", languages: "Common", abilityName: "Stealthy", ability: "Once per day, you can become invisible for 3 rounds." },
                 { name: "Half-Orc", key: "Half-Orc", type: "original", description: "Thick-skinned, resilient people accustomed to enduring danger.", languages: "Common and Orcish", abilityName: "Relentless", ability: "When you fall to 0 HP, make a DC 15 CON check. On a success, you drop to 1 HP instead." },
+                { name: "Kobold", key: "Kobold", type: "original", description: "A small, resourceful people who find unexpected ways out of dangerous situations." },
                 { name: "Human", key: "Human", type: "original", description: "Bold, adaptable, and diverse people who learn quickly and accomplish mighty deeds.", languages: "Common and one additional common language", abilityName: "Ambitious", ability: "You gain one additional talent roll at 1st level." }
             ],
             ancestriesHomebrew: [
@@ -465,7 +475,6 @@
                 { name: "Jacae", type: "homebrew" },
                 { name: "Jaguart", type: "homebrew" },
                 { name: "Jajaraca", type: "homebrew" },
-                { name: "Kobold", type: "homebrew" },
                 { name: "Komodo", type: "homebrew" },
                 { name: "Half-Spider", type: "homebrew" },
                 { name: "Half-Stigmu", type: "homebrew" },
@@ -498,7 +507,7 @@
             lblAncestry: "Ancestry",
             lblBackground: "Background",
             lblLang: "Result Language",
-            optAncestryOriginal: "System Standard (d6)",
+            optAncestryOriginal: "System Standard (d7)",
             optAncestryAll: "Expanded + Homebrew (d30)",
             ancestryInfoButton: "View list",
             ancestryDialogTitle: "Registered ancestries",
@@ -525,8 +534,7 @@
             colMod: "Mod / Details",
             colResult: "Final Result",
             rerollBadge: "Reroll",
-            nameTableLabel: "Official Table",
-            nameMixedLabel: "Expanded Mix",
+            nameTableLabel: "Name Table",
             generated: "Characters generated",
             exported: "Exported successfully",
             noCharacters: "No characters to export",
@@ -535,6 +543,149 @@
             footerCredit2: 'Shadowdark RPG is property of <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. This is an unofficial fan project.'
         }
     };
+
+    // Habilidades das ancestralidades homebrew importadas dos itens e talentos do Foundry.
+    const HOMEBREW_ANCESTRY_DETAILS = {
+        "pt-BR": {
+            "Boitatãmi": ["Corno Incandescente", "+1 em testes contra quem xingar você. Uma vez por descanso, ignora um ataque de alguém afetado, que se confunde com seu fogo-fátuo."],
+            "Caramuru": ["Anfíbio", "Respira debaixo d'água e nada sem sofrer penalidades."],
+            "Cueio": ["Escolha 1 habilidade", "Garoto Brinca: +1 em testes contra pessoas atraídas pelo seu gênero. Pé da Sorti: pode repetir uma falha crítica uma vez por sessão."],
+            "Cuguja": ["Pássaro Noturno", "Pode voar se não estiver usando armadura e pode descansar enquanto mantém a vigia."],
+            "Exum": ["Baixar o Santo", "Conecta-se a uma entidade maligna e pode fazer um pedido por dia, ficando à mercê do destino para sua intervenção."],
+            "Gattito": ["Pata Mansa", "Não faz som ao andar e recebe +2 em testes de furtividade."],
+            "Gigas": ["Escolha 1 habilidade", "Burro de Carga: adiciona o modificador positivo de CON aos slots, cumulativamente. Corpos Avantajados: pode atacar alvos a distância próxima com armas de combate."],
+            "Jacae": ["Projeção Regenerativa", "Ao dormir, torna-se etéreo e recupera partes pequenas do corpo. Pode descansar sem comer se tiver se alimentado no descanso anterior."],
+            "Jaguart": ["Focar na Presa", "No início do combate, escolhe uma presa e recebe +1 em testes contra ela uma vez por encontro."],
+            "Jajaraca": ["Escolha 1 habilidade", "Peçonhento: um inimigo atingido sofre -1 em todos os testes. Pode ser usado uma vez por descanso. Pele de Cobra: +1 em testes que envolvam movimentação."],
+            "Komodo": ["Escolha 1 habilidade", "Legado Dracônico (Pele): reduz em 1 o dano de todas as origens. Legado Dracônico (Sopro): faz um ataque de CON para causar 1d6 de dano."],
+            "Meio-Miranha": ["Suporte Aracnídeo", "Pode andar em superfícies além do chão."],
+            "Meio-Stigmu": ["Carapaça", "+1 na Classe de Armadura."],
+            "Modrongo": ["Escolha 1 habilidade", "Potente (Ataque): +2 nas rolagens de ataque. Potente (Dano): +2 no dano físico."],
+            "Obsidianum": ["Magias Subversivas", "Uma vez por dia, pode usar Névoa, Dança das Sombras ou Encantar Pessoas."],
+            "Piá-dô-Ka": ["Rei do Camarote", "Recebe o dobro de experiência em festanças."],
+            "Rabudo": ["Quadrúpede", "É considerado uma montaria e viaja no ritmo normal de um cavalo."],
+            "Recortante": ["Transfusão", "Pode transformar-se integral ou parcialmente em qualquer animal que conheça."],
+            "São": ["Escolha 1 habilidade", "Angelical (Cura): pode usar Curar Ferimentos uma vez por dia. Angelical (Voo): pode usar Queda Lenta uma vez por dia, expandindo as asas."],
+            "Thanobre": ["Escolha 1 habilidade", "Glândula Pineal: sente a presença e a quantidade de corpos mortos em uma região próxima. Servo Macabro: pode invocar um escravo morto-vivo que funciona como mordomo."],
+            "Tiuzinho": ["Escolha 1 habilidade", "Florestal: pode falar com animais. Pedroso: sente a presença de minérios e metais próximos."],
+            "Troca-Pele": ["Imitador", "Pode mudar a aparência do corpo para imitar qualquer pessoa que já tenha visto, exceto a fisionomia."],
+            "Vlummi": ["Vagalume", "Pode voar, gastando uma ação para se mover. Ataques à distância contra você têm desvantagem."]
+        },
+        "en": {
+            "Boitatãmi": ["Incandescent Horn", "+1 to checks against anyone who insults you. Once per rest, ignore an attack from someone affected, who is confused by your will-o'-wisp."],
+            "Caramuru": ["Amphibious", "Can breathe underwater and swim without penalty."],
+            "Cueio": ["Choose 1 ability", "Playful Charm: +1 to checks against people attracted to your gender. Lucky Foot: reroll a critical failure once per session."],
+            "Cuguja": ["Night Bird", "Can fly while unarmored and can rest while keeping watch."],
+            "Exum": ["Bring Down the Saint", "You are connected to an evil entity and can make one request per day, leaving its intervention to fate."],
+            "Gattito": ["Soft Paw", "You make no sound when walking and gain +2 to stealth checks."],
+            "Gigas": ["Choose 1 ability", "Pack Mule: add your positive CON modifier to slots, cumulatively. Large Frame: can attack close targets with melee weapons."],
+            "Jacae": ["Regenerative Projection", "While sleeping, you become ethereal and recover small body parts. You can rest without food if you ate during your previous rest."],
+            "Jaguart": ["Focus on Prey", "At the start of combat, choose prey and gain +1 to checks against it once per encounter."],
+            "Jajaraca": ["Choose 1 ability", "Venomous: an enemy you hit takes -1 to all checks. Usable once per rest. Snake Skin: +1 to checks involving movement."],
+            "Komodo": ["Choose 1 ability", "Draconic Legacy (Hide): reduce damage from all sources by 1. Draconic Legacy (Breath): make a CON attack to deal 1d6 damage."],
+            "Half-Spider": ["Arachnid Support", "Can walk on surfaces other than the ground."],
+            "Half-Stigmu": ["Carapace", "+1 to Armor Class."],
+            "Mongrel": ["Choose 1 ability", "Powerful (Attack): +2 to attack rolls. Powerful (Damage): +2 to physical damage."],
+            "Obsidianum": ["Subversive Magic", "Once per day, can cast Fog, Shadow Dance, or Charm Person."],
+            "Piá-dô-Ka": ["Party King", "Gain double experience from carousing."],
+            "Rabudo": ["Quadruped", "You count as a mount and travel at a normal horse's pace."],
+            "Recortante": ["Transfusion", "Can transform wholly or partially into any animal you know."],
+            "Saint": ["Choose 1 ability", "Angelic (Healing): cast Cure Wounds once per day. Angelic (Flight): cast Feather Fall once per day by spreading your wings."],
+            "Thanobre": ["Choose 1 ability", "Pineal Gland: sense the presence and number of dead bodies nearby. Macabre Servant: can summon an undead servant who acts as your butler."],
+            "Tiuzinho": ["Choose 1 ability", "Woodland: can speak with animals. Stony: can sense nearby ores and metals."],
+            "Skin-Changer": ["Mimic", "Can change your body's appearance to imitate anyone you have seen, except for their face."],
+            "Vlummi": ["Firefly", "Can fly, spending an action to move. Ranged attacks against you have disadvantage."]
+        }
+    };
+
+    const HOMEBREW_ANCESTRY_DESCRIPTIONS = {
+        "pt-BR": {
+            "Boitatãmi": "Humanóides de chifres com uma presença imponente e temperamento intenso. Ofensas despertam sua irritação e fazem seu fogo-fátuo se manifestar de forma imprevisível.",
+            "Caramuru": "Seres feéricos dos rios e mares, à vontade nas profundezas e em meio às correntes. A água é seu ambiente natural, não uma barreira.",
+            "Cueio": "Povo de traços semelhantes aos de coelhos, conhecido pelo charme, pela rapidez e por uma sorte que às vezes desafia até os piores reveses.",
+            "Cuguja": "Povo de olhos atentos e feições de ave noturna. Observa o mundo do alto e consegue manter a vigilância mesmo durante o repouso.",
+            "Exum": "Sua linhagem carrega a marca de um antigo vínculo com uma entidade demoníaca. Essa ligação permite pedir sua intervenção, mas cada pedido entrega parte do controle ao destino.",
+            "Gattito": "Povo de movimentos leves e passos quase inaudíveis. Sua agilidade natural facilita atravessar lugares sem chamar atenção.",
+            "Gigas": "Humanoides de três a quatro metros, grandes e fortes sem alcançar proporções colossais. Seu porte permite carregar mais e lutar contra alvos próximos com armas de combate.",
+            "Jacae": "Povo de aparência reptiliana, ligado a ambientes alagados e a uma recuperação incomum. Durante o sono, o corpo se desprende parcialmente das limitações físicas comuns.",
+            "Jaguart": "Povo de traços vulpinos, atento e calculista. Em combate, escolhe um adversário para perseguir com foco especial.",
+            "Jajaraca": "Povo de feições serpentinas e movimentos precisos. Pode enfraquecer quem atinge ou usar sua mobilidade para superar obstáculos.",
+            "Komodo": "Povo de aparência dracônica, com pele resistente e um sopro capaz de ferir seus adversários. Sua herança manifesta-se no corpo ou em um ataque elemental.",
+            "Meio-Miranha": "Seres de aparência variável, entre formas mais humanas e mais aracnídeas. Adaptam-se a superfícies verticais e outros caminhos que não seguem pelo chão.",
+            "Meio-Stigmu": "Seres que combinam traços humanos e escorpiônicos em proporções variadas. Uma carapaça natural oferece proteção mesmo quando não usam armadura pesada.",
+            "Modrongo": "Povo troglodita de vida rude e costumes diretos. Sua força física pode favorecer golpes mais certeiros ou mais devastadores.",
+            "Obsidianum": "Povo de pele escura e vítrea, marcado por uma antiga maldição. Sua relação com forças arcanas permite produzir efeitos mágicos de maneira limitada.",
+            "Piá-dô-Ka": "Povo de aparência caprina, sociável e vaidoso, que transforma encontros festivos em ocasião para brilhar — e aprender com cada celebração.",
+            "Rabudo": "Povo de corpo quadrúpede e grande resistência para viagens. Seu porte permite transportar passageiros e percorrer longas distâncias no ritmo de uma montaria.",
+            "Recortante": "Seres capazes de remodelar o próprio corpo para assumir formas animais que conhecem, por inteiro ou apenas em parte.",
+            "São": "Seres tocados por uma força celestial ou infernal. Sua herança manifesta-se em poderes extraordinários, como restaurar ferimentos ou escapar de uma queda.",
+            "Thanobre": "Povo de pele pálida e origem distante, cuja percepção alcança sinais ligados à morte. Alguns também mantêm um servidor morto-vivo como auxiliar constante.",
+            "Tiuzinho": "Povo pequeno e bem-humorado, curioso sobre a vida selvagem e os segredos escondidos sob a terra. Alguns conversam com animais; outros percebem metais próximos.",
+            "Troca-Pele": "Seres capazes de reproduzir a aparência corporal de pessoas que observaram. A semelhança é convincente, mas não altera a fisionomia do rosto.",
+            "Vlummi": "Pequenos seres luminosos, com asas e brilho próprio. Voam com agilidade e são difíceis de atingir com ataques à distância."
+        },
+        "en": {
+            "Boitatãmi": "Horned humanoids with an imposing presence and an intense temperament. Insults stir their anger and make their will-o'-wisp flare unpredictably.",
+            "Caramuru": "Fey beings of rivers and seas, at ease in the depths and among the currents. Water is their natural home, never a barrier.",
+            "Cueio": "A people with rabbit-like features, known for their charm, quickness, and luck that can defy even the worst reversals.",
+            "Cuguja": "A people with watchful eyes and nocturnal birdlike features. They survey the world from above and can keep watch while resting.",
+            "Exum": "Their lineage bears the mark of an ancient bond with a demonic entity. They may ask for its intervention, but every request leaves part of the outcome to fate.",
+            "Gattito": "A people of light movements and nearly silent steps. Their natural agility helps them pass through places without drawing attention.",
+            "Gigas": "Humanoids three to four meters tall, large and strong without reaching colossal proportions. Their build lets them carry more and fight nearby foes with melee weapons.",
+            "Jacae": "A people with reptilian features, tied to wetlands and an unusual capacity for recovery. During sleep, their bodies partly slip free of ordinary physical limits.",
+            "Jaguart": "A people with foxlike features, alert and calculating. In battle, they select an opponent and pursue it with special focus.",
+            "Jajaraca": "A people with serpentine features and precise movements. They can weaken those they strike or use their mobility to overcome obstacles.",
+            "Komodo": "A people with draconic features, resilient skin, and a breath that can harm their foes. Their heritage appears either in their bodies or in an elemental attack.",
+            "Half-Spider": "Beings whose appearance ranges from mostly human to mostly arachnid. They adapt to vertical surfaces and paths that do not follow the ground.",
+            "Half-Stigmu": "Beings combining human and scorpionlike traits in varying proportions. A natural carapace protects them even without heavy armor.",
+            "Mongrel": "A troglodytic people with a rough life and direct customs. Their physical strength can make their blows more accurate or more devastating.",
+            "Obsidianum": "A people with dark, glassy skin, marked by an ancient curse. Their bond with arcane forces lets them produce limited magical effects.",
+            "Piá-dô-Ka": "A people with goatlike features, sociable and vain, who turn celebrations into chances to shine—and to learn from every revel.",
+            "Rabudo": "A people with quadruped bodies and great stamina for travel. Their build lets them carry passengers and cover long distances at a mount's pace.",
+            "Recortante": "Beings able to reshape their bodies into animals they know, either wholly or in part.",
+            "Saint": "Beings touched by a celestial or infernal force. Their heritage grants extraordinary gifts, such as healing wounds or escaping a fall.",
+            "Thanobre": "A pale-skinned people of distant origin whose senses reach toward signs of death. Some also keep an undead servant as a constant aide.",
+            "Tiuzinho": "A small, good-humored people, curious about wildlife and secrets hidden underground. Some speak with animals; others sense nearby metals.",
+            "Skin-Changer": "Beings able to reproduce the bodily appearance of people they have observed. The likeness is convincing, but does not change the face.",
+            "Vlummi": "Small luminous beings with wings and a glow of their own. They fly nimbly and are difficult to hit with ranged attacks."
+        }
+    };
+
+    const HOMEBREW_ANCESTRY_LANGUAGES = {
+        "pt-BR": {
+            "Exum": "Comum e um idioma adicional do cenário", "Gigas": "Comum e um idioma adicional do cenário",
+            "Jacae": "Comum e um idioma adicional do cenário", "Jaguart": "Comum e um idioma adicional do cenário",
+            "Jajaraca": "Comum e um idioma adicional do cenário", "Komodo": "Comum e um idioma adicional do cenário",
+            "Meio-Miranha": "Comum e um idioma adicional do cenário", "Meio-Stigmu": "Comum e um idioma adicional do cenário",
+            "Modrongo": "Comum e escolha 1 entre dois idiomas", "Obsidianum": "Comum, um idioma adicional e escolha 1 idioma",
+            "Rabudo": "Comum e um idioma adicional do cenário", "Recortante": "Comum e um idioma adicional do cenário",
+            "São": "Comum e um idioma adicional do cenário", "Tiuzinho": "Comum e escolha 1 idioma",
+            "Troca-Pele": "Comum e 1 idioma comum adicional", "Vlummi": "Comum e escolha 1 entre dois idiomas"
+        },
+        "en": {
+            "Exum": "Common and one additional setting language", "Gigas": "Common and one additional setting language",
+            "Jacae": "Common and one additional setting language", "Jaguart": "Common and one additional setting language",
+            "Jajaraca": "Common and one additional setting language", "Komodo": "Common and one additional setting language",
+            "Half-Spider": "Common and one additional setting language", "Half-Stigmu": "Common and one additional setting language",
+            "Mongrel": "Common and choose 1 of two languages", "Obsidianum": "Common, one additional language, and choose 1 language",
+            "Rabudo": "Common and one additional setting language", "Recortante": "Common and one additional setting language",
+            "Saint": "Common and one additional setting language", "Tiuzinho": "Common and choose 1 language",
+            "Skin-Changer": "Common and 1 additional common language", "Vlummi": "Common and choose 1 of two languages"
+        }
+    };
+
+    Object.entries(SHADOWDARK_DATA).forEach(([lang, data]) => {
+        data.ancestriesHomebrew.forEach((ancestry) => {
+            const details = HOMEBREW_ANCESTRY_DETAILS[lang][ancestry.name];
+            if (!details) return;
+            ancestry.abilityName = details[0];
+            ancestry.ability = details[1];
+            ancestry.description = HOMEBREW_ANCESTRY_DESCRIPTIONS[lang][ancestry.name];
+            ancestry.languages = HOMEBREW_ANCESTRY_LANGUAGES[lang][ancestry.name] ||
+                (lang === "pt-BR" ? "Comum" : "Common");
+        });
+    });
+
 
     // Utilidades Matemáticas e Rolagens
     function rollD6() { return Math.floor(Math.random() * 6) + 1; }
@@ -559,61 +710,28 @@
     function formatModifier(mod) {
         return mod >= 0 ? "+" + mod : String(mod);
     }
-    function pickRandom(array) {
-        return array[Math.floor(Math.random() * array.length)];
-    }
-
-    /**
-     * Geração de Nomes:
-     * - Ancestralidades padrão (Dwarf, Elf, Goblin, Halfling, Half-Orc, Human):
-     *   Sempre gera DOIS nomes rolando 2x d20 na coluna oficial correspondente.
-     *   Ex.: "Grimm Nix" (duas rolls distintas na mesma coluna da ancestralidade)
-     * - Ancestralidades Homebrew:
-     *   Sempre gera primeiro nome (pool combinado) + sobrenome (LEGACY_LAST_NAMES). 100% garantido.
-     */
-    function generateNameForCharacter(ancestryKey, isOriginal, lang) {
+    /** Cada ancestralidade usa uma tabela d20 própria e combina dois resultados distintos. */
+    function generateNameForCharacter(ancestryKey, ancestryName, lang) {
         const t = SHADOWDARK_DATA[lang];
-
-        if (isOriginal && ancestryKey && OFFICIAL_CHARACTER_NAMES[ancestryKey]) {
-            const table = OFFICIAL_CHARACTER_NAMES[ancestryKey];
-            // Roll 1
-            let roll1 = Math.floor(Math.random() * 20) + 1;
-            const name1 = table[roll1 - 1];
-            // Roll 2 (garantir índice diferente)
-            let roll2 = Math.floor(Math.random() * 20) + 1;
-            if (roll2 === roll1) {
-                roll2 = (roll1 % 20) + 1; // avança um índice ciclicamente
-            }
-            const name2 = table[roll2 - 1];
-            const fullName = `${name1} ${name2}`;
-
-            return {
-                name: fullName,
-                roll1,
-                roll2,
-                die: "d20",
-                source: `${t.nameTableLabel} (${ancestryKey}): d20=${roll1} → ${name1}, d20=${roll2} → ${name2}`
-            };
-        } else {
-            // Ancestralidade Homebrew: primeiro nome do pool combinado + sobrenome garantido
-            const allOfficial = Object.values(OFFICIAL_CHARACTER_NAMES).flat();
-            const legacyPool = LEGACY_FIRST_NAMES[lang] || LEGACY_FIRST_NAMES["en"];
-            const combinedPool = [...allOfficial, ...legacyPool];
-            const firstName = pickRandom(combinedPool);
-
-            // Sobrenome SEMPRE obrigatório para homebrew
-            const surnamePool = LEGACY_LAST_NAMES[lang] || LEGACY_LAST_NAMES["en"];
-            const lastName = pickRandom(surnamePool);
-            const fullName = `${firstName} ${lastName}`;
-
-            return {
-                name: fullName,
-                roll1: null,
-                roll2: null,
-                die: "mix",
-                source: t.nameMixedLabel
-            };
+        const customTableKey = HOMEBREW_NAME_TABLE_KEYS[lang][ancestryName];
+        const table = OFFICIAL_CHARACTER_NAMES[ancestryKey] ||
+            HOMEBREW_CHARACTER_NAMES[customTableKey || ancestryKey];
+        if (!table || table.length !== 20) {
+            return { name: ancestryName, roll1: null, roll2: null, die: "—", source: t.nameTableLabel };
         }
+
+        const roll1 = Math.floor(Math.random() * 20) + 1;
+        let roll2 = Math.floor(Math.random() * 20) + 1;
+        if (roll2 === roll1) roll2 = (roll1 % 20) + 1;
+        const name1 = table[roll1 - 1];
+        const name2 = table[roll2 - 1];
+        return {
+            name: `${name1} ${name2}`,
+            roll1,
+            roll2,
+            die: "d20",
+            source: `${t.nameTableLabel} (${ancestryName}): d20=${roll1} → ${name1}, d20=${roll2} → ${name2}`
+        };
     }
 
     // Classe Principal do Gerador
@@ -713,10 +831,9 @@
             const allAncestries = [...t.ancestriesOriginal, ...t.ancestriesHomebrew];
             document.getElementById("ancestry-dialog-summary").textContent =
                 t.ancestryDialogSummary.replace("{count}", String(allAncestries.length));
-            document.getElementById("ancestry-original-list").innerHTML = t.ancestriesOriginal
-                .map((ancestry) => `<li>${this.escapeHtml(ancestry.name)}</li>`).join("");
-            document.getElementById("ancestry-homebrew-list").innerHTML = t.ancestriesHomebrew
-                .map((ancestry) => `<li>${this.escapeHtml(ancestry.name)}</li>`).join("");
+            const renderAncestryListItem = (ancestry) => `<li><strong>${this.escapeHtml(ancestry.name)}</strong>${ancestry.ability ? `<p>${this.escapeHtml(ancestry.abilityName)}: ${this.escapeHtml(ancestry.ability)}</p>` : ""}</li>`;
+            document.getElementById("ancestry-original-list").innerHTML = t.ancestriesOriginal.map(renderAncestryListItem).join("");
+            document.getElementById("ancestry-homebrew-list").innerHTML = t.ancestriesHomebrew.map(renderAncestryListItem).join("");
 
             // Atualiza textos estáticos
             const pageTitle = document.getElementById("page-title");
@@ -884,13 +1001,11 @@
 
             // 2. Rolagem de Ancestralidade
             let ancestry;
-            let isOriginal = false;
             let ancestryKey = null;
 
             if (this.ancestryMode === "original") {
                 const roll = Math.floor(Math.random() * data.ancestriesOriginal.length) + 1;
                 ancestry = data.ancestriesOriginal[roll - 1];
-                isOriginal = true;
                 ancestryKey = ancestry.key;
 
                 this.rollLog.push({
@@ -905,7 +1020,6 @@
                 const allAncestries = [...data.ancestriesOriginal, ...data.ancestriesHomebrew];
                 const roll = Math.floor(Math.random() * allAncestries.length) + 1;
                 ancestry = allAncestries[roll - 1];
-                isOriginal = ancestry.type === "original";
                 ancestryKey = ancestry.key || null;
 
                 this.rollLog.push({
@@ -919,7 +1033,7 @@
             }
 
             // 3. Geração de Nome (conforme regras e tabelas de imagem 1)
-            const nameInfo = generateNameForCharacter(ancestryKey, isOriginal, this.lang);
+            const nameInfo = generateNameForCharacter(ancestryKey, ancestry.name, this.lang);
             this.rollLog.push({
                 character: index,
                 type: "name",
@@ -1055,9 +1169,8 @@
         renderCharacterCard(char) {
             const t = SHADOWDARK_DATA[this.lang];
             const isHomebrew = char.ancestryType === "homebrew";
-            const ancestryDetails = !isHomebrew
-                ? t.ancestriesOriginal.find(ancestry => ancestry.key === char.ancestryKey)
-                : null;
+            const ancestryDetails = [...t.ancestriesOriginal, ...t.ancestriesHomebrew]
+                .find(ancestry => ancestry.ability && ((ancestry.key && ancestry.key === char.ancestryKey) || ancestry.name === char.ancestry));
             const ancestryName = ancestryDetails ? ancestryDetails.name : char.ancestry;
             const badgeText = isHomebrew ? "Homebrew" : "Original";
             const badgeClass = isHomebrew ? "badge-homebrew" : "badge-original";
@@ -1311,9 +1424,8 @@
             output += (isPt ? "Total: " : "Total: ") + this.characters.length + (isPt ? " personagem(ns)\n\n" : " character(s)\n\n");
 
             this.characters.forEach((char, i) => {
-                const ancestryDetails = char.ancestryType === "original"
-                    ? SHADOWDARK_DATA[this.lang].ancestriesOriginal.find(ancestry => ancestry.key === char.ancestryKey)
-                    : null;
+                const ancestryDetails = [...SHADOWDARK_DATA[this.lang].ancestriesOriginal, ...SHADOWDARK_DATA[this.lang].ancestriesHomebrew]
+                    .find(ancestry => ancestry.ability && ((ancestry.key && ancestry.key === char.ancestryKey) || ancestry.name === char.ancestry));
                 const ancestryName = ancestryDetails ? ancestryDetails.name : char.ancestry;
                 output += (isPt ? "--- PERSONAGEM " : "--- CHARACTER ") + (i + 1) + " ---\n";
                 output += (isPt ? "Nome: " : "Name: ") + char.name + "\n";
