@@ -1,6 +1,7 @@
 (function () {
     "use strict";
     window.SETTLEMENT_DATA = {
+        names: [["Bruga's Hold","Fairhollow","Doraine"],["Lastwatch","Ivan's Keep","Meridia"],["Darkwater","Galina","King's Gate"],["Ostlin","Brightlantern","Myrkhos"],["Treefall","Corvin's Crest","Rularn"],["Vorn","Ironbridge","Ordos"],["Hillshire","Skalvin","Thane"],["Nighthaven","Toresk","Rahgbat"]],
         types: [["Village","Vila",3,4],["Town","Cidade pequena",4,4],["City","Cidade",6,6],["Metropolis","Metrópole",8,8]],
         districts: [["Slums","Bairros pobres"],["Low district","Distrito baixo"],["Artisan district","Distrito dos artesãos"],["Market","Mercado"],["High district","Distrito nobre"],["Temple district","Distrito dos templos"],["University district","Distrito universitário"],["Castle district","Distrito do castelo"]],
         alignment: [["Lawful","Ordeira"],["Neutral","Neutra"],["Chaotic","Caótica"]],

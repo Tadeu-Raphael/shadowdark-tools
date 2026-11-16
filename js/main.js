@@ -85,6 +85,32 @@
             href: "generators/settlement-generator/index.html",
             badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
             available: true
+        },
+        {
+            id: "overland-hex-generator",
+            category: { "pt-BR": "TERRENOS", en: "TERRAIN" },
+            title: { "pt-BR": "Gerador de Terrenos", en: "Overland Terrain Generator" },
+            description: {
+                "pt-BR": "Crie mapas hexagonais com terrenos, níveis de perigo, cataclismos e pontos de interesse.",
+                en: "Create hex maps with terrain, danger levels, cataclysms, and points of interest."
+            },
+            icon: "map.svg",
+            href: "generators/overland-hex-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
+        },
+        {
+            id: "dungeon-map-generator",
+            category: { "pt-BR": "MASMORRAS", en: "DUNGEONS" },
+            title: { "pt-BR": "Gerador de Mapas de Masmorras", en: "Dungeon Map Generator" },
+            description: {
+                "pt-BR": "Crie mapas esquemáticos com salas, objetivo, tesouros, monstros e perigos.",
+                en: "Create schematic maps with rooms, objectives, treasure, monsters, and hazards."
+            },
+            icon: "map.svg",
+            href: "generators/dungeon-map-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         }
     ];
 
