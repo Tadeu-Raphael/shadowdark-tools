@@ -7,7 +7,7 @@
 
 ## Geradores
 
-O catálogo oferece nove geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
+O catálogo oferece dez geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
 
 | Gerador | Recursos |
 | --- | --- |
@@ -20,6 +20,7 @@ O catálogo oferece nove geradores. A interface pode ser usada em português (Br
 | **Cidades e Assentamentos** | Cria assentamentos por tipo e distritos, pontos de interesse, tavernas, comidas, bebidas e lojas. |
 | **Mapas de Masmorras** | Gera mapas esquemáticos com salas conectadas, perigo, conteúdo, objetivo e tabelas de referência. |
 | **Terrenos Hexagonais** | Gera mapas de viagem pelo ermo com terreno, nível de perigo, pontos de interesse e cataclismos. A tabela de nomes de assentamentos está integrada ao gerador de assentamentos. |
+| **Tesouros** | Gera tesouro por nível, itens mundanos e gemas, itens luxuosos, dádivas (juramentos, segredos e bênçãos) e itens mágicos com atributos por tipo. Inclui as tabelas de referência de tesouro, gemas, itens luxuosos, bênçãos e propriedades de armaduras, poções, pergaminhos, varinhas, utilitários e armas. |
 
 Os resultados dos geradores podem ser copiados ou baixados como TXT quando essa opção está disponível. As tabelas de referência ficam acessíveis na própria ferramenta.
 
@@ -61,7 +62,8 @@ shadowdark-tools/
 │   ├── monster-generator/
 │   ├── npc-generator/
 │   ├── overland-hex-generator/
-│   └── settlement-generator/
+│   ├── settlement-generator/
+│   └── treasure-generator/
 ├── licenses/
 ├── .github/workflows/deploy.yml
 ├── LICENSE

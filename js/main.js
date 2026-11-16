@@ -113,6 +113,19 @@
             available: true
         },
         {
+            id: "treasure-generator",
+            category: { "pt-BR": "TESOUROS", en: "TREASURE" },
+            title: { "pt-BR": "Gerador de Tesouros", en: "Treasure Generator" },
+            description: {
+                "pt-BR": "Role tesouros d100 por nível e verifique a chance de monstros errantes carregarem saque.",
+                en: "Roll level-based d100 treasure and check whether wandering monsters carry loot."
+            },
+            icon: "gem.svg",
+            href: "generators/treasure-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
+        },
+        {
             id: "dungeon-map-generator",
             category: { "pt-BR": "MASMORRAS", en: "DUNGEONS" },
             title: { "pt-BR": "Gerador de Mapas de Masmorras", en: "Dungeon Map Generator" },
