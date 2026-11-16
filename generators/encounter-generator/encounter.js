@@ -17,11 +17,16 @@
             empty: "Escolha um ambiente e role para gerar um encontro.",
             reroll: "Rolar novamente", resultTitle: "Encontro", combined: "Resultados combinados",
             resultDetails: "Detalhes do encontro", rerollDetails: "Rolar detalhes novamente",
-            rerolls: "Rolagens 98–99 repetidas", sourceCredit: "Tabelas de encontros do Livro de Regras fornecido, páginas 142–185; regras de encontros, armadilhas e hazards, páginas 112–115.",
+            rerolls: "Rolagens 98–99 repetidas", sourceCredit: "Tabelas de encontros do Livro de Regras fornecido, páginas 118–121 e 142–185; regras de encontros, armadilhas e hazards, páginas 112–115.",
             footerCaption: "Shadowdark Tools · Gerador de Encontros",
             error: "Não foi possível carregar as tabelas de encontros. Recarregue a página e tente novamente.",
             all: "Tudo",
             guideEyebrow: "REGRAS RÁPIDAS", guideHeading: "Como usar encontros aleatórios",
+            otherTablesEyebrow: "OUTRAS ROLAGENS", otherTablesHeading: "Acontecimentos e rumores",
+            otherTablesDescription: "Role estas tabelas d100 separadamente dos encontros por ambiente.",
+            somethingTitle: "Algo Acontece!", somethingCopy: "Uma ocorrência inesperada para mudar o rumo da cena.",
+            rumorsTitle: "Rumores", rumorsCopy: "Boatos que podem apontar para perigos, lugares ou oportunidades nas redondezas.",
+            somethingReference: "Consultar tabela", rumorsReference: "Consultar tabela", detailColumn: "Detalhe",
             purposeTitle: "Propósito", purposeCopy: "Encontros aleatórios mantêm a pressão do tempo. Se o grupo demorar demais, aumenta o risco de novos encontros.",
             frequencyTitle: "Frequência", frequencyCopy: "O Mestre verifica encontros durante rodadas de exploração, conforme o perigo do ambiente:",
             unsafeFrequency: "<strong>Inseguro:</strong> a cada 3 rodadas.", riskyFrequency: "<strong>Arriscado:</strong> a cada 2 rodadas.", deadlyFrequency: "<strong>Letal:</strong> a cada rodada.",
@@ -60,11 +65,16 @@
             empty: "Choose an environment and roll to generate an encounter.",
             reroll: "Roll again", resultTitle: "Encounter", combined: "Combined results",
             resultDetails: "Encounter details", rerollDetails: "Reroll details",
-            rerolls: "Repeated 98–99 rolls", sourceCredit: "Encounter tables from the supplied rulebook, pages 142–185; encounter, trap, and hazard rules, pages 112–115.",
+            rerolls: "Repeated 98–99 rolls", sourceCredit: "Encounter tables from the supplied rulebook, pages 118–121 and 142–185; encounter, trap, and hazard rules, pages 112–115.",
             footerCaption: "Shadowdark Tools · Encounter Generator",
             error: "Could not load the encounter tables. Reload the page and try again.",
             all: "All",
             guideEyebrow: "QUICK RULES", guideHeading: "Using random encounters",
+            otherTablesEyebrow: "OTHER ROLLS", otherTablesHeading: "Something happens and rumors",
+            otherTablesDescription: "Roll these d100 tables separately from the environment encounter tables.",
+            somethingTitle: "Something Happens!", somethingCopy: "An unexpected occurrence to change the course of the scene.",
+            rumorsTitle: "Rumors", rumorsCopy: "Rumors can point to dangers, places, or opportunities nearby.",
+            somethingReference: "View table", rumorsReference: "View table", detailColumn: "Details",
             purposeTitle: "Purpose", purposeCopy: "Random encounters keep time pressure up. If the party lingers too long, the risk of another encounter rises.",
             frequencyTitle: "How often?", frequencyCopy: "The GM checks for encounters during crawling rounds based on the environment's danger level:",
             unsafeFrequency: "<strong>Unsafe:</strong> check every 3 rounds.", riskyFrequency: "<strong>Risky:</strong> check every 2 rounds.", deadlyFrequency: "<strong>Deadly:</strong> check every round.",
@@ -171,6 +181,7 @@
     let tables = [];
     let results = [];
     let supportRolls = { check: null, distance: null, activity: null, reaction: null, treasure: null, trap: null, hazard: null };
+    let extraRolls = { something: null, rumors: null };
 
     function titleFor(table) {
         const pair = TITLES[table.id];
@@ -204,6 +215,11 @@
             "check-guide-title": t.checkGuideTitle, "check-guide-copy": t.checkGuideCopy,
             "travel-guide-title": t.travelGuideTitle, "travel-guide-copy": t.travelGuideCopy,
             "support-eyebrow": t.supportEyebrow, "support-heading": t.supportHeading, "support-description": t.supportDescription,
+            "other-tables-eyebrow": t.otherTablesEyebrow, "other-tables-heading": t.otherTablesHeading, "other-tables-description": t.otherTablesDescription,
+            "something-title": t.somethingTitle, "something-copy": t.somethingCopy, "something-button": t.rollD100,
+            "something-reference": t.somethingReference, "something-column": t.detailColumn,
+            "rumors-title": t.rumorsTitle, "rumors-copy": t.rumorsCopy, "rumors-button": t.rollD100,
+            "rumors-reference": t.rumorsReference, "rumors-column": t.detailColumn,
             "check-card-title": t.checkCardTitle, "check-card-copy": t.checkCardCopy, "danger-level-label": t.dangerLevel,
             "check-encounter-button": t.checkEncounter,
             "distance-title": t.distanceTitle, "distance-copy": t.distanceCopy, "distance-button": t.rollD6,
@@ -234,6 +250,8 @@
             button.setAttribute("aria-pressed", button.dataset.lang === language ? "true" : "false");
         });
         const selectedTable = getSelectedTable();
+        renderExtraTables();
+        renderExtraResults();
         renderSupplementalTables();
         renderSupplementalResults();
         if (selectedTable) {
@@ -250,6 +268,38 @@
 
     function rollDie(sides) {
         return Math.floor(Math.random() * sides) + 1;
+    }
+
+    function renderExtraTables() {
+        ["something", "rumors"].forEach((type) => {
+            const body = $(`${type}-table-body`);
+            body.innerHTML = "";
+            window.ENCOUNTER_EXTRA_TABLES[type].entries.forEach((entry) => {
+                const row = document.createElement("tr");
+                const roll = document.createElement("td");
+                roll.textContent = entry.roll;
+                const detail = document.createElement("td");
+                detail.textContent = entryText(entry);
+                row.append(roll, detail);
+                body.appendChild(row);
+            });
+        });
+    }
+
+    function renderExtraResults() {
+        ["something", "rumors"].forEach((type) => {
+            const result = extraRolls[type];
+            const output = $(`${type}-result`);
+            output.textContent = result ? `d100 ${formatRoll(result.roll)} · ${entryText(result.entry)}` : "";
+        });
+    }
+
+    function rollExtraTable(type) {
+        const table = window.ENCOUNTER_EXTRA_TABLES[type];
+        const roll = rollD100();
+        const entry = getEntry(table, roll);
+        extraRolls[type] = { roll, entry };
+        renderExtraResults();
     }
 
     function renderSupplementalTables() {
@@ -602,6 +652,9 @@
         $("check-encounter-button").addEventListener("click", checkForEncounter);
         document.querySelectorAll("[data-roll]").forEach((button) => {
             button.addEventListener("click", () => rollSupplemental(button.dataset.roll));
+        });
+        document.querySelectorAll("[data-extra-roll]").forEach((button) => {
+            button.addEventListener("click", () => rollExtraTable(button.dataset.extraRoll));
         });
         $("encounter-charisma-modifier").addEventListener("input", () => { $("charisma-modifier").value = $("encounter-charisma-modifier").value; });
         $("charisma-modifier").addEventListener("input", () => { $("encounter-charisma-modifier").value = $("charisma-modifier").value; });

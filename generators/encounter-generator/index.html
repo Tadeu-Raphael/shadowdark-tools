@@ -68,6 +68,8 @@
                         </div>
                     </section>
 
+                    <hr class="encounter-divider" aria-hidden="true">
+
                     <section class="encounter-controls card" aria-label="Configurações do encontro">
                         <div class="encounter-control">
                             <label for="environment-select" id="environment-label">Ambiente</label>
@@ -123,7 +125,41 @@
                         </div>
                     </details>
 
+                    <hr class="encounter-divider" aria-hidden="true">
+
+                    <section class="encounter-other-tables" aria-labelledby="other-tables-heading">
+                        <header class="encounter-support__heading">
+                            <p class="eyebrow" id="other-tables-eyebrow">OUTRAS ROLAGENS</p>
+                            <h2 id="other-tables-heading">Acontecimentos e rumores</h2>
+                            <p id="other-tables-description">Role estas tabelas d100 separadamente dos encontros por ambiente.</p>
+                        </header>
+                        <div class="encounter-other-tables__grid">
+                            <article class="encounter-other-card">
+                                <h3 id="something-title">Algo Acontece!</h3>
+                                <p id="something-copy">Uma ocorrência inesperada para mudar o rumo da cena.</p>
+                                <button type="button" class="encounter-button" data-extra-roll="something" id="something-button">Rolar d100</button>
+                                <p class="encounter-other-card__result" id="something-result" aria-live="polite"></p>
+                                <details class="encounter-other-card__reference">
+                                    <summary id="something-reference">Consultar tabela</summary>
+                                    <div class="table-responsive"><table><thead><tr><th>d100</th><th id="something-column">Detalhe</th></tr></thead><tbody id="something-table-body"></tbody></table></div>
+                                </details>
+                            </article>
+                            <article class="encounter-other-card">
+                                <h3 id="rumors-title">Rumores</h3>
+                                <p id="rumors-copy">Boatos que podem apontar para perigos, lugares ou oportunidades nas redondezas.</p>
+                                <button type="button" class="encounter-button" data-extra-roll="rumors" id="rumors-button">Rolar d100</button>
+                                <p class="encounter-other-card__result" id="rumors-result" aria-live="polite"></p>
+                                <details class="encounter-other-card__reference">
+                                    <summary id="rumors-reference">Consultar tabela</summary>
+                                    <div class="table-responsive"><table><thead><tr><th>d100</th><th id="rumors-column">Detalhe</th></tr></thead><tbody id="rumors-table-body"></tbody></table></div>
+                                </details>
+                            </article>
+                        </div>
+                    </section>
+
                     <p class="encounter-source" id="source-credit">Tabelas extraídas do Livro de Regras fornecido, páginas 142–185.</p>
+
+                    <hr class="encounter-divider" aria-hidden="true">
 
                     <section class="encounter-support" aria-labelledby="support-heading">
                         <header class="encounter-support__heading">
@@ -173,6 +209,8 @@
                         </div>
                     </section>
 
+                    <hr class="encounter-divider" aria-hidden="true">
+
                     <section class="encounter-special-tables" aria-labelledby="special-tables-heading">
                         <header class="encounter-support__heading">
                             <p class="eyebrow" id="special-eyebrow">PERIGOS</p>
@@ -218,6 +256,7 @@
         </div>
     </div>
     <script src="../../js/ui-icons.js"></script>
+    <script src="extra-tables.js"></script>
     <script src="encounter.js"></script>
 </body>
 </html>
