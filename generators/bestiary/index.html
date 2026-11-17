@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-shadowdark="parchment">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Bestiário completo de Shadowdark RPG com 238 monstros, glossário e busca">
+<title>Bestiário — Shadowdark Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Pirata+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/shadowdark-ui.css">
+<link rel="stylesheet" href="bestiary.css">
+<link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
+</head>
+<body>
+<div class="site-shell">
+    <div id="site-header">
+        <header class="site-header" role="banner">
+            <div class="header-inner container-fluid">
+                <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início">
+                    <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
+                    <span>Shadowdark Tools</span>
+                </a>
+                <nav class="site-navigation" aria-label="Navegação principal">
+                    <a href="../../index.html" id="nav-home">Início</a>
+                    <a href="../../index.html#geradores" id="nav-generators">Geradores</a>
+                    <a href="#sobre" id="nav-about">Sobre</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <main class="site-main">
+        <section class="bestiary-page">
+            <div class="container-fluid">
+                <header class="bestiary-heading">
+                    <p class="eyebrow" id="eyebrow">REFERÊNCIA</p>
+                    <h1 id="title">Bestiário</h1>
+                    <p id="intro">238 monstros do Livro de Regras de Shadowdark RPG. Busque, filtre e consulte.</p>
+                </header>
+
+                <!-- Search and Filters -->
+                <section class="bestiary-controls card">
+                    <div class="bestiary-search">
+                        <label for="search-input" id="search-label">Buscar monstro</label>
+                        <div class="bestiary-search__wrapper">
+                            <img src="../../assets/icons/lucide/target.svg" alt="" class="bestiary-search__icon" id="search-icon" aria-hidden="true">
+                            <input type="text" id="search-input" class="form-input" placeholder="Nome do monstro..." autocomplete="off" aria-label="Buscar monstro">
+                        </div>
+                    </div>
+                    <div class="bestiary-filters">
+                        <div class="bestiary-filter">
+                            <label for="filter-level" id="level-filter-label">Nível</label>
+                            <select class="form-select" id="filter-level">
+                                <option value="all" id="level-all">Todos os níveis</option>
+                                <option value="0-2" id="level-0-2">Nível 0–2</option>
+                                <option value="3-5" id="level-3-5">Nível 3–5</option>
+                                <option value="6-8" id="level-6-8">Nível 6–8</option>
+                                <option value="9-11" id="level-9-11">Nível 9–11</option>
+                                <option value="12-15" id="level-12-15">Nível 12–15</option>
+                                <option value="16+" id="level-16">Nível 16+</option>
+                            </select>
+                        </div>
+                        <div class="bestiary-filter">
+                            <label for="filter-alignment" id="alignment-filter-label">Alinhamento</label>
+                            <select class="form-select" id="filter-alignment">
+                                <option value="all" id="alignment-all">Todos</option>
+                                <option value="L" id="alignment-lawful">Leal</option>
+                                <option value="N" id="alignment-neutral">Neutro</option>
+                                <option value="C" id="alignment-chaotic">Caótico</option>
+                            </select>
+                        </div>
+                        <div class="bestiary-filter">
+                            <label for="filter-type" id="type-filter-label">Tipo</label>
+                            <select class="form-select" id="filter-type">
+                                <option value="all" id="type-all">Todos os tipos</option>
+                                <option value="humanoid" id="type-humanoid">Humanoide</option>
+                                <option value="beast" id="type-beast">Fera</option>
+                                <option value="monster" id="type-monster">Monstro</option>
+                                <option value="undead" id="type-undead">Morto-vivo</option>
+                                <option value="demon" id="type-demon">Demônio</option>
+                                <option value="devil" id="type-devil">Diabo</option>
+                                <option value="dragon" id="type-dragon">Dragão</option>
+                                <option value="giant" id="type-giant">Gigante</option>
+                                <option value="elemental" id="type-elemental">Elemental</option>
+                                <option value="construct" id="type-construct">Constructo</option>
+                                <option value="plant" id="type-plant">Planta</option>
+                                <option value="ooze" id="type-ooze">Gosma</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results -->
+                <section class="bestiary-results" aria-live="polite">
+                    <div class="bestiary-results__head">
+                        <h2 id="results-title">Monstros</h2>
+                        <span class="bestiary-count" id="monster-count">238 monstros</span>
+                    </div>
+                    <div id="monsters-grid" class="bestiary-grid"></div>
+                    <div class="bestiary-empty" id="empty-state" hidden>
+                        <p id="empty-message">Nenhum monstro encontrado.</p>
+                    </div>
+                </section>
+
+                <!-- Glossary -->
+                <details class="bestiary-glossary card">
+                    <summary id="glossary-title">Glossário de Termos</summary>
+                    <div class="bestiary-glossary__content" id="glossary-content">
+                        <div class="bestiary-glossary__grid">
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-attack">ATK (Ataque)</h3>
+                                <p id="glos-attack-desc">O bônus de ataque do monstro, adicionado à rolagem de d20 para acertar.</p>
+                            </div>
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-ac">AC (Classe de Armadura)</h3>
+                                <p id="glos-ac-desc">A dificuldade para acertar o monstro. Menor é mais fácil de acertar.</p>
+                            </div>
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-hp">HP (Pontos de Vida)</h3>
+                                <p id="glos-hp-desc">A quantidade de dano que o monstro pode receber antes de morrer.</p>
+                            </div>
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-mv">MV (Movimento)</h3>
+                                <p id="glos-mv-desc">A distância que o monstro pode se mover por turno.</p>
+                            </div>
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-stats">Atributos (S/D/C/I/W/Ch)</h3>
+                                <p id="glos-stats-desc">Força, Destreza, Constituição, Inteligência, Sabedoria e Carisma.</p>
+                            </div>
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-al">AL (Alinhamento)</h3>
+                                <p id="glos-al-desc">Leal (L), Neutro (N) ou Caótico (C). Define a moral e comportamento do monstro.</p>
+                            </div>
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-lv">LV (Nível)</h3>
+                                <p id="glos-lv-desc">O nível de desafio do monstro. Monstros de nível maior são mais perigosos.</p>
+                            </div>
+                            <div class="bestiary-glossary__item">
+                                <h3 id="glos-abilities">Habilidades Especiais</h3>
+                                <p id="glos-abilities-desc">Poderes únicos que o monstro pode usar em combate ou exploração.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <p class="bestiary-source" id="source">Dados extraídos do Livro de Regras de Shadowdark RPG (v4.6), páginas 191–270. The Arcane Library.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer">
+        <footer class="site-footer" id="sobre" role="contentinfo">
+            <div class="container-fluid">
+                <p class="footer-caption" id="footer-caption">Shadowdark Tools · Bestiário</p>
+                <p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p>
+                <p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p>
+                <div class="bestiary-language-switch" role="group" aria-label="Idioma">
+                    <button data-lang="pt-BR" aria-pressed="true">PT</button>
+                    <button data-lang="en" aria-pressed="false">EN</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="../../js/ui-icons.js"></script>
+<script src="bestiary-data.js"></script>
+<script src="bestiary.js"></script>
+</body>
+</html>

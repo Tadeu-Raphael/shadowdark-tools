@@ -147,6 +147,20 @@
             href: "generators/dungeon-map-generator/index.html",
             badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
             available: true
+        },
+        {
+            id: "bestiary",
+            audience: "gms",
+            category: { "pt-BR": "REFERÊNCIA", en: "REFERENCE" },
+            title: { "pt-BR": "Bestiário", en: "Bestiary" },
+            description: {
+                "pt-BR": "238 monstros do Livro de Regras com busca, filtros e glossário de termos.",
+                en: "238 monsters from the Rulebook with search, filters, and glossary of terms."
+            },
+            icon: "skull.svg",
+            href: "generators/bestiary/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         }
     ];
 

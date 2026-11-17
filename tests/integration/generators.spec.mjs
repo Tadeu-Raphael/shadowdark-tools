@@ -27,10 +27,10 @@ for (const generator of generators) {
   });
 }
 
-test('home page links to all ten generator pages', async ({ page }) => {
+test('home page links to all eleven generator pages', async ({ page }) => {
   await page.goto('/');
   const links = page.locator('.generator-grid a.tool-card[href]');
-  await expect(links).toHaveCount(10);
+  await expect(links).toHaveCount(11);
   for (const link of await links.all()) {
     const href = await link.getAttribute('href');
     const response = await page.request.get(new URL(href, page.url()).toString());
@@ -47,7 +47,7 @@ test('home page separates player and GM generators in both languages', async ({ 
   await expect(page.locator('#players-heading')).toHaveText('Para jogadores');
   await expect(page.locator('#gms-heading')).toHaveText('Para mestres');
   await expect(players).toHaveCount(2);
-  await expect(gms).toHaveCount(8);
+  await expect(gms).toHaveCount(9);
   const twoCardAlignment = await page.locator('#player-generator-grid').evaluate(grid => {
     const cards = [...grid.querySelectorAll('.tool-card')].map(card => card.getBoundingClientRect());
     const gridRect = grid.getBoundingClientRect();
@@ -68,4 +68,45 @@ test('home page separates player and GM generators in both languages', async ({ 
     return Math.abs((card.left + card.right) / 2 - (gridRect.left + gridRect.right) / 2);
   });
   expect(oneCardAlignment).toBeLessThan(2);
+});
+
+test('bestiary renders localized monsters and switches language', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  await page.goto('/generators/bestiary/');
+  await page.evaluate(() => localStorage.setItem('shadowdark-tools-lang', 'pt-BR'));
+  await page.reload();
+
+  const cards = page.locator('#monsters-grid .monster-card');
+  await expect(cards.first()).toBeVisible();
+  await expect(page.locator('#monster-count')).toContainText('238');
+
+  // pt-BR content is rendered by default.
+  const firstCard = cards.first();
+  await expect(firstCard.locator('.monster-card__description')).not.toBeEmpty();
+  await expect(firstCard.locator('.monster-card__attack-desc')).not.toBeEmpty();
+  const ptDescription = await firstCard.locator('.monster-card__description').innerText();
+  const ptAbilities = await firstCard.locator('.monster-card__ability').allInnerTexts();
+
+  // Switching to EN must change the rendered prose.
+  await page.locator('.bestiary-language-switch [data-lang="en"]').click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  const enDescription = await firstCard.locator('.monster-card__description').innerText();
+  const enAbilities = await firstCard.locator('.monster-card__ability').allInnerTexts();
+  expect(enDescription).not.toEqual(ptDescription);
+  expect(enAbilities).not.toEqual(ptAbilities);
+
+  // Ability names stay bold in both languages.
+  await expect(firstCard.locator('.monster-card__ability strong').first()).toBeVisible();
+
+  // Language preference persists across reloads.
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+  // Search finds monsters by localized content.
+  await page.locator('#search-input').fill('aboleth');
+  await expect(cards).toHaveCount(1);
+  await expect(cards.first()).toContainText('ABOLETH');
+
+  expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
 });

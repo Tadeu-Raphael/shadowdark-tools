@@ -18,6 +18,7 @@ As funções de regras dos geradores ainda ficam dentro de IIFEs e não são dir
 - **Masmorras:** tipo e tamanho do local, número de salas, conexões, nível do grupo, conteúdo de sala, perfil de monstro derivado dos dados do gerador de monstros, tesouro d100 pelo nível do grupo e armadilhas/hazards compartilhados com o gerador de encontros. Cobrir todas essas categorias, limites de nível e troca de idioma no resultado.
 - **Terrenos hexagonais:** sequência circular de terreno, regras de novo hex, perigo, POIs e cataclismo; verificar limites e distribuição por faixa.
 - **Monstros:** modificador de combate aplicado ao nível médio do grupo, faixa de dano/ataques e quantidade permitida de mutações.
+- **Bestiário:** os 238 monstros possuem `description_pt`, `atk_pt`, `mv_pt` e pares `{en, pt}` em todas as habilidades; o texto pt-BR não vaza prosa em inglês e preserva o jargão de regras (DC, CON, STR, DEX, WIS, CHA, INT, HP, AC, LV, ADV, DISADV) e os termos de alcance/movimento (`near`, `far`, `close`, `double`, `swim`, `fly`, `climb`, `burrow`, `teleport`), mantidos em inglês por design. Os monstros lendários (Ten-Eyed Oracle, Tarrasque, Wandering Merchant) têm blocos de estatísticas verificados contra o PDF oficial.
 - **Tesouros:** faixa d100 por nível, chance de 50% para monstros errantes, gemas e multiplicador de gema gigante, subrolagens de item luxuoso, tipos de dádiva, qualidade, personalidade, tipo de item mágico e atributos específicos de armaduras, poções, pergaminhos, utilitários, varinhas e armas.
 - **Personagem nível 0:** rolagens de atributos e tabelas de ancestralidade, background, alinhamento e equipamento, respeitando os dados e limites apresentados pela ferramenta.
 
@@ -25,14 +26,15 @@ As funções de regras dos geradores ainda ficam dentro de IIFEs e não são dir
 
 Executar as páginas servidas por HTTP, tanto na raiz local quanto em caminho equivalente a subdiretório de publicação. Em cada teste, capturar erros de console e respostas de recursos locais com falha.
 
-1. **Catálogo:** abrir a página principal, confirmar os dez cartões ativos agrupados entre jogadores (personagem nível 0 e festanças) e mestres (oito ferramentas), confirmar que grades com um ou dois cartões ficam centralizadas, alternar os títulos de grupo PT/EN, validar navegação e ausência de links quebrados.
+1. **Catálogo:** abrir a página principal, confirmar os onze cartões ativos agrupados entre jogadores (personagem nível 0 e festanças) e mestres (nove ferramentas), confirmar que grades com um ou dois cartões ficam centralizadas, alternar os títulos de grupo PT/EN, validar navegação e ausência de links quebrados.
 2. **Inicialização das páginas:** abrir cada gerador diretamente, confirmar que dados e lógica foram carregados na ordem certa e que as tabelas de referência aparecem.
 3. **Geração ponta a ponta:** usar valores fixos nos controles e uma fonte aleatória controlada para gerar resultados reproduzíveis e verificar texto, estrutura e controles habilitados.
-4. **Troca de idioma:** trocar PT/EN antes e depois de gerar; validar rótulos, opções, referências, resultados, idioma do documento e persistência após recarregar.
-5. **Controles condicionais:** conferir campos que aparecem ou somem conforme modo, seleção, quantidade ou opção de geração, sem perder o valor relevante.
-6. **Exportação:** validar copiar para área de transferência, ícones dos botões e downloads TXT/PDF após gerar; verificar nome, MIME type e conteúdo atual nos dez geradores. No nível 0, verificar PDF com uma ficha por página, título, cartões de personagem formatados e nome em destaque e ausência de impressão da página.
-7. **Fluxos entre geradores:** no assentamento, escolher resultados de taverna/loja e confirmar geração detalhada coerente; no terreno, verificar nomes direcionados ao gerador de assentamentos e referências cruzadas.
-8. **Responsividade e acessibilidade básica:** verificar layouts móvel/desktop, associação de labels, ordem de tabulação, foco visível, botões desabilitados sem resultados e anúncio da região de resultados.
+4. **Bestiário:** abrir a página, confirmar os 238 cartões e o contador, validar que o conteúdo pt-BR aparece por padrão, trocar para EN e conferir que descrição e habilidades mudam, que os nomes de habilidades continuam em negrito, que a preferência persiste após recarregar e que a busca encontra monstros pelo conteúdo localizado.
+5. **Troca de idioma:** trocar PT/EN antes e depois de gerar; validar rótulos, opções, referências, resultados, idioma do documento e persistência após recarregar.
+6. **Controles condicionais:** conferir campos que aparecem ou somem conforme modo, seleção, quantidade ou opção de geração, sem perder o valor relevante.
+7. **Exportação:** validar copiar para área de transferência, ícones dos botões e downloads TXT/PDF após gerar; verificar nome, MIME type e conteúdo atual nos onze geradores. No nível 0, verificar PDF com uma ficha por página, título, cartões de personagem formatados e nome em destaque e ausência de impressão da página.
+8. **Fluxos entre geradores:** no assentamento, escolher resultados de taverna/loja e confirmar geração detalhada coerente; no terreno, verificar nomes direcionados ao gerador de assentamentos e referências cruzadas.
+9. **Responsividade e acessibilidade básica:** verificar layouts móvel/desktop, associação de labels, ordem de tabulação, foco visível, botões desabilitados sem resultados e anúncio da região de resultados.
 
 ## Casos de regressão prioritários
 
@@ -41,6 +43,7 @@ Executar as páginas servidas por HTTP, tanto na raiz local quanto em caminho eq
 - Troca de idioma não mistura idiomas em resultados e tabelas já renderizados.
 - O botão de geração continua acessível em telas estreitas e controles condicionais não colapsam o layout.
 - Todos os caminhos de CSS, JavaScript, ícones e links funcionam quando servidos de um subdiretório.
+- Monstros lendários do bestiário (Ten-Eyed Oracle, Tarrasque, Wandering Merchant) mantêm os blocos de estatísticas corretos após correções de dados.
 
 ## Critério de conclusão da suíte
 

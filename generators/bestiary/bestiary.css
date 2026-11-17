@@ -1,0 +1,545 @@
+/* Bestiary Styles - Shadowdark Tools */
+/* Estilos específicos do bestiário */
+
+.bestiary-page {
+    width: min(100% - 2rem, 1200px);
+    margin: 0 auto;
+    padding: 2.5rem 0 4rem;
+}
+
+.bestiary-heading {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.bestiary-heading .eyebrow {
+    color: var(--blood);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.bestiary-heading h1 {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+}
+
+.bestiary-heading p {
+    color: var(--ink-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+/* Controls */
+.bestiary-controls {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+}
+
+.bestiary-search {
+    margin-bottom: 1.25rem;
+}
+
+.bestiary-search label {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.bestiary-search__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.bestiary-search__icon {
+    position: absolute;
+    left: 0.875rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.bestiary-search input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-md);
+    background: var(--parchment-raised);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.bestiary-search input:focus {
+    outline: none;
+    border-color: var(--blood);
+    box-shadow: 0 0 0 3px rgba(123, 31, 31, 0.1);
+}
+
+.bestiary-search input::placeholder {
+    color: var(--ink-faint);
+}
+
+.bestiary-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: 1rem;
+}
+
+.bestiary-filter label {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.bestiary-filter select {
+    width: 100%;
+    padding: 0.65rem 0.875rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-md);
+    background: var(--parchment-raised);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 180ms ease;
+}
+
+.bestiary-filter select:focus {
+    outline: none;
+    border-color: var(--blood);
+}
+
+/* Results */
+.bestiary-results {
+    margin-bottom: 2.5rem;
+}
+
+.bestiary-results__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--rule);
+}
+
+.bestiary-results__head h2 {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.bestiary-count {
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Monster Grid */
+.bestiary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 1.25rem;
+}
+
+/* Monster Card */
+.monster-card {
+    background: var(--parchment-raised);
+    border: 1px solid var(--edge);
+    border-left: 4px solid var(--blood);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.monster-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--rule);
+    border-left-color: var(--gold);
+    box-shadow: var(--shadow-deep);
+}
+
+.monster-card__header {
+    padding: 1.25rem 1.25rem 0.875rem;
+    border-bottom: 1px solid var(--edge);
+}
+
+.monster-card__name {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+}
+
+.monster-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.monster-card__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.monster-card__badge--level {
+    background: var(--blood);
+    color: var(--parchment-raised);
+}
+
+.monster-card__badge--alignment {
+    background: var(--parchment-sunk);
+    color: var(--ink);
+    border: 1px solid var(--edge);
+}
+
+.monster-card__badge--alignment[data-alignment="L"] {
+    background: #e8f0e8;
+    color: #2d5a37;
+    border-color: #2d5a37;
+}
+
+.monster-card__badge--alignment[data-alignment="N"] {
+    background: #f0f0e8;
+    color: #4a453d;
+    border-color: #4a453d;
+}
+
+.monster-card__badge--alignment[data-alignment="C"] {
+    background: #f0e8e8;
+    color: #7b1f1f;
+    border-color: #7b1f1f;
+}
+
+.monster-card__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    background: var(--parchment-sunk);
+    border-bottom: 1px solid var(--edge);
+}
+
+.monster-card__stat {
+    text-align: center;
+}
+
+.monster-card__stat-label {
+    display: block;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+}
+
+.monster-card__stat-value {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.monster-card__attributes {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.25rem;
+    padding: 0.625rem 1.25rem;
+    background: var(--parchment-sunk);
+    border-bottom: 1px solid var(--edge);
+}
+
+.monster-card__attribute {
+    text-align: center;
+}
+
+.monster-card__attribute-label {
+    display: block;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    margin-bottom: 0.1rem;
+}
+
+.monster-card__attribute-value {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.monster-card__attack {
+    margin-bottom: 0.875rem;
+    padding: 0.625rem 0.875rem;
+    background: var(--parchment-sunk);
+    border-left: 3px solid var(--blood);
+    border-radius: var(--radius-sm);
+}
+
+.monster-card__attack-title {
+    color: var(--blood);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+}
+
+.monster-card__attack-desc {
+    color: var(--ink);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 500;
+}
+
+.monster-card__body {
+    padding: 1rem 1.25rem;
+}
+
+.monster-card__description {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0 0 0.875rem;
+}
+
+.monster-card__abilities {
+    margin-top: 0.875rem;
+}
+
+.monster-card__abilities-title {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+}
+
+.monster-card__ability {
+    color: var(--ink-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0 0 0.4rem;
+    padding-left: 0.875rem;
+    position: relative;
+}
+
+.monster-card__ability::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--blood);
+    font-weight: 700;
+}
+
+.monster-card__ability strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.monster-card__ability:last-child {
+    margin-bottom: 0;
+}
+
+/* Empty State */
+.bestiary-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--ink-muted);
+}
+
+.bestiary-empty p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Glossary */
+.bestiary-glossary {
+    margin-bottom: 2rem;
+}
+
+.bestiary-glossary summary {
+    padding: 1rem 1.25rem;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bestiary-glossary summary::-webkit-details-marker {
+    display: none;
+}
+
+.bestiary-glossary summary::after {
+    content: "+";
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    color: var(--blood);
+    transition: transform 180ms ease;
+}
+
+.bestiary-glossary[open] summary::after {
+    content: "−";
+}
+
+.bestiary-glossary__content {
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--edge);
+}
+
+.bestiary-glossary__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.25rem;
+    padding-top: 1.25rem;
+}
+
+.bestiary-glossary__item h3 {
+    color: var(--blood);
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+}
+
+.bestiary-glossary__item p {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Source */
+.bestiary-source {
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    text-align: center;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--edge);
+}
+
+/* Language Switch */
+.bestiary-language-switch {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.bestiary-language-switch button {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-sm);
+    background: var(--parchment-raised);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 180ms ease;
+}
+
+.bestiary-language-switch button[aria-pressed="true"] {
+    background: var(--blood);
+    color: var(--parchment-raised);
+    border-color: var(--blood);
+}
+
+.bestiary-language-switch button:hover {
+    border-color: var(--blood);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bestiary-page {
+        padding: 1.5rem 0 3rem;
+    }
+
+    .bestiary-heading h1 {
+        font-size: 2rem;
+    }
+
+    .bestiary-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .bestiary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .monster-card__stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .monster-card__attributes {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .bestiary-glossary__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .bestiary-results__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .monster-card__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .monster-card__attributes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

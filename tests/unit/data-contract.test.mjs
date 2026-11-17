@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const dataFiles = [
   ['generators/adventure-generator/adventure-data.js', 'ADVENTURE_DATA'],
+  ['generators/bestiary/bestiary-data.js', 'BESTIARY_DATA'],
   ['generators/carousing-generator/carousing-data.js', 'CAROUSING_DATA'],
   ['generators/dungeon-map-generator/dungeon-data.js', 'DUNGEON_DATA'],
   ['generators/encounter-generator/extra-tables.js', 'ENCOUNTER_EXTRA_TABLES'],
@@ -30,7 +31,10 @@ async function loadData(relativePath, globalName) {
 
 function inspectData(value, location = 'data') {
   if (Array.isArray(value)) {
-    assert.ok(value.length > 0, `${location} should not be an empty table`);
+    // `abilities` is legitimately empty for creatures with no special powers.
+    if (!location.endsWith('.abilities')) {
+      assert.ok(value.length > 0, `${location} should not be an empty table`);
+    }
     value.forEach((entry, index) => inspectData(entry, `${location}[${index}]`));
   } else if (value && typeof value === 'object') {
     Object.entries(value).forEach(([key, entry]) => inspectData(entry, `${location}.${key}`));
@@ -92,4 +96,56 @@ test('magic item tables have matching dimensions for their dice', async () => {
   assert.equal(data.weaponTypes.length, 20);
   assert.equal(data.weaponBenefit.length, 12);
   assert.equal(data.weaponCurse.length, 12);
+});
+
+test('bestiary monsters carry complete pt-BR translations', async () => {
+  const data = await loadData('generators/bestiary/bestiary-data.js', 'BESTIARY_DATA');
+  assert.equal(data.monsters.length, 238);
+
+  for (const monster of data.monsters) {
+    const where = monster.name;
+    assert.ok(monster.description_pt, `${where} needs description_pt`);
+    assert.ok(monster.atk_pt, `${where} needs atk_pt`);
+    assert.ok(monster.mv_pt, `${where} needs mv_pt`);
+    assert.ok(Array.isArray(monster.abilities), `${where} needs an abilities array`);
+
+    for (const ability of monster.abilities) {
+      assert.equal(typeof ability, 'object', `${where} abilities must be en/pt pairs`);
+      assert.ok(ability.en, `${where} ability needs en`);
+      assert.ok(ability.pt, `${where} ability needs pt`);
+      assert.notEqual(ability.en, ability.pt, `${where} ability en and pt must differ`);
+    }
+  }
+});
+
+test('bestiary pt-BR text keeps game jargon and leaks no English prose', async () => {
+  const data = await loadData('generators/bestiary/bestiary-data.js', 'BESTIARY_DATA');
+  const englishProse = /\b(the|and|with|from|target|within|creature|rounds|damage|attack|immune)\b/i;
+
+  for (const monster of data.monsters) {
+    const ptText = [monster.description_pt, monster.atk_pt, monster.mv_pt,
+      ...monster.abilities.map((a) => a.pt)].join(' ');
+    // Range/pace tokens are intentionally kept in English by design.
+    const scrubbed = ptText.replace(/\b(near|far|close|double|swim|fly|climb|burrow|teleport)\b/g, '');
+    assert.ok(!englishProse.test(scrubbed),
+      `${monster.name} pt-BR text still contains English prose`);
+  }
+});
+
+test('bestiary legendary monsters have correct stat blocks (regression)', async () => {
+  const data = await loadData('generators/bestiary/bestiary-data.js', 'BESTIARY_DATA');
+  const byName = Object.fromEntries(data.monsters.map((m) => [m.name, m]));
+
+  // These three were previously shifted due to a PDF layout quirk.
+  assert.equal(byName['THE TEN-EYED ORACLE'].lv, 18, 'Ten-Eyed Oracle LV');
+  assert.equal(byName['THE TEN-EYED ORACLE'].ac, '17', 'Ten-Eyed Oracle AC');
+  assert.equal(byName['THE TEN-EYED ORACLE'].hp, 85, 'Ten-Eyed Oracle HP');
+
+  assert.equal(byName['THE TARRASQUE'].lv, 30, 'Tarrasque LV');
+  assert.equal(byName['THE TARRASQUE'].ac, '22', 'Tarrasque AC');
+  assert.equal(byName['THE TARRASQUE'].hp, 140, 'Tarrasque HP');
+
+  assert.equal(byName['THE WANDERING MERCHANT'].lv, 15, 'Wandering Merchant LV');
+  assert.equal(byName['THE WANDERING MERCHANT'].ac, '16 (mithral chainmail)', 'Wandering Merchant AC');
+  assert.equal(byName['THE WANDERING MERCHANT'].hp, 71, 'Wandering Merchant HP');
 });
