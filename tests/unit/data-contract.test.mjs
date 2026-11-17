@@ -149,3 +149,37 @@ test('bestiary legendary monsters have correct stat blocks (regression)', async 
   assert.equal(byName['THE WANDERING MERCHANT'].ac, '16 (mithral chainmail)', 'Wandering Merchant AC');
   assert.equal(byName['THE WANDERING MERCHANT'].hp, 71, 'Wandering Merchant HP');
 });
+
+test('magic data carries complete bilingual spells and mishap tables', async () => {
+  const data = await loadData('generators/magic/magic-data.js', 'MAGIC_DATA');
+  assert.equal(data.spells.length, 85);
+  assert.equal(data.scrollFeatures.length, 8);
+  assert.equal(data.wandFeatures.length, 8);
+  assert.deepEqual(Object.keys(data.mishaps), ['1', '2', '3']);
+
+  const seen = new Set();
+  for (const spell of data.spells) {
+    assert.ok(spell.name, 'spell needs a name');
+    assert.ok(!seen.has(spell.name), `${spell.name} must be unique`);
+    seen.add(spell.name);
+    assert.ok(spell.tier >= 1 && spell.tier <= 5, `${spell.name} tier must be 1-5`);
+    assert.ok(spell.classes.length > 0, `${spell.name} needs at least one class`);
+    assert.ok(spell.classes.every((entry) => ['wizard', 'priest'].includes(entry)),
+      `${spell.name} has an unknown class`);
+    assert.ok(spell.duration, `${spell.name} needs a duration`);
+    assert.ok(spell.range, `${spell.name} needs a range`);
+    assert.ok(spell.description, `${spell.name} needs description`);
+    assert.ok(spell.description_pt, `${spell.name} needs description_pt`);
+    assert.notEqual(spell.description, spell.description_pt,
+      `${spell.name} description and description_pt must differ`);
+  }
+
+  for (const [tier, effects] of Object.entries(data.mishaps)) {
+    assert.equal(effects.length, 12, `mishap tier ${tier} must have 12 rows`);
+    for (const effect of effects) {
+      assert.ok(effect.name, `mishap tier ${tier} needs a name`);
+      assert.ok(effect.name_pt, `mishap tier ${tier} needs name_pt`);
+      assert.ok(effect.description, `mishap tier ${tier} needs a description`);
+    }
+  }
+});

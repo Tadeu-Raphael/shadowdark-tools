@@ -161,6 +161,20 @@
             href: "generators/bestiary/index.html",
             badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
             available: true
+        },
+        {
+            id: "magic",
+            audience: "gms",
+            category: { "pt-BR": "MAGIA", en: "MAGIC" },
+            title: { "pt-BR": "Magia", en: "Magic" },
+            description: {
+                "pt-BR": "85 magias do Livro de Regras com busca, filtros, gerador de pergaminhos, varinhas e rolagens de mishap.",
+                en: "85 spells from the Rulebook with search, filters, scroll and wand generators, and mishap rolls."
+            },
+            icon: "wand-2.svg",
+            href: "generators/magic/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         }
     ];
 

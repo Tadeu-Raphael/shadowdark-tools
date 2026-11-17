@@ -24,13 +24,15 @@ A maioria dos geradores mantém estado e funções dentro de uma IIFE, sem módu
 
 ## Geradores atuais
 
-O catálogo contém onze ferramentas: personagem nível 0, festanças, encontros, aventuras, monstros, NPCs, assentamentos, terrenos hexagonais, tesouros, mapas de masmorras e bestiário. A tabela de recursos e a estrutura de pastas correspondem ao README.
+O catálogo contém doze ferramentas: personagem nível 0, festanças, encontros, aventuras, monstros, NPCs, assentamentos, terrenos hexagonais, tesouros, mapas de masmorras, bestiário e magia. A tabela de recursos e a estrutura de pastas correspondem ao README.
 
 ## Idioma e conteúdo
 
 As interfaces oferecem português brasileiro e inglês. Os geradores mantêm traduções e tabelas no próprio código ou em arquivos de dados associados. Algumas ferramentas atualizam texto da interface, referências e resultados já gerados ao trocar o idioma; essa expectativa deve ser coberta pelos testes de cada página.
 
 O bestiário segue um contrato de dados bilíngue próprio: `generators/bestiary/bestiary-data.js` mantém os campos canônicos em inglês (`description`, `atk`, `mv`) e espelha cada um em `*_pt`, enquanto `abilities` é uma lista de pares `{ en, pt }`. O script do bestiário escolhe o campo conforme o idioma ativo e mantém termos de alcance e movimento (`near`, `far`, `close`, `double`, `swim`, `fly`, `climb`, `burrow`, `teleport`) e o jargão de regras em inglês por design. A preferência de idioma usa a chave compartilhada `shadowdark-tools-lang`. Os 238 blocos de estatísticas foram validados contra o PDF oficial (v4.6) e um teste de regressão protege os monstros lendários contra deslocamentos de dados.
+
+A ferramenta de magia segue o mesmo padrão: `generators/magic/magic-data.js` publica `window.MAGIC_DATA` com as 85 magias (`name`, `tier`, `classes`, `duration`, `range`, `description`, `description_pt`), as três tabelas de mishap por tier e as tabelas de aparência de pergaminho e varinha. Nomes de magias, tiers, durações e alcances permanecem em inglês nos dois idiomas; apenas a prosa é traduzida.
 
 ## Limites arquiteturais atuais
 

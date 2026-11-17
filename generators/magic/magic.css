@@ -1,0 +1,570 @@
+/* Magic Styles - Shadowdark Tools */
+/* Estilos específicos do gerador de magia */
+
+.magic-page {
+    width: min(100% - 2rem, 1200px);
+    margin: 0 auto;
+    padding: 2.5rem 0 4rem;
+}
+
+.magic-heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.magic-heading .eyebrow {
+    color: var(--blood);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.magic-heading h1 {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+}
+
+.magic-heading p {
+    color: var(--ink-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+/* Controls */
+.magic-controls {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+}
+
+.magic-search {
+    margin-bottom: 1.25rem;
+}
+
+.magic-search label {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.magic-search__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.magic-search__icon {
+    position: absolute;
+    left: 0.875rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.magic-search input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-md);
+    background: var(--parchment-raised);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.magic-search input:focus {
+    outline: none;
+    border-color: var(--blood);
+    box-shadow: 0 0 0 3px rgba(123, 31, 31, 0.1);
+}
+
+.magic-search input::placeholder {
+    color: var(--ink-faint);
+}
+
+.magic-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    gap: 1rem;
+}
+
+.magic-filter label {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.magic-filter select {
+    width: 100%;
+    padding: 0.65rem 0.875rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-md);
+    background: var(--parchment-raised);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: border-color 180ms ease;
+}
+
+.magic-filter select:focus {
+    outline: none;
+    border-color: var(--blood);
+}
+
+/* Results */
+.magic-results {
+    margin-bottom: 2.5rem;
+}
+
+.magic-results__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--rule);
+}
+
+.magic-results__head h2 {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.magic-count {
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Spell Grid */
+.magic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 1.25rem;
+}
+
+/* Spell Card */
+.spell-card {
+    background: var(--parchment-raised);
+    border: 1px solid var(--edge);
+    border-left: 4px solid var(--blood);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.spell-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--rule);
+    border-left-color: var(--gold);
+    box-shadow: var(--shadow-deep);
+}
+
+.spell-card__header {
+    padding: 1.25rem 1.25rem 0.875rem;
+    border-bottom: 1px solid var(--edge);
+}
+
+.spell-card__name {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+}
+
+.spell-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.spell-card__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.spell-card__badge--tier {
+    background: var(--blood);
+    color: var(--parchment-raised);
+}
+
+.spell-card__badge--class {
+    background: var(--parchment-sunk);
+    color: var(--ink);
+    border: 1px solid var(--edge);
+}
+
+.spell-card__badge--class[data-class="wizard"] {
+    background: #e8e8f0;
+    color: #2d3a5a;
+    border-color: #2d3a5a;
+}
+
+.spell-card__badge--class[data-class="priest"] {
+    background: #f0f0e8;
+    color: #4a453d;
+    border-color: #4a453d;
+}
+
+.spell-card__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    background: var(--parchment-sunk);
+    border-bottom: 1px solid var(--edge);
+}
+
+.spell-card__stat {
+    text-align: center;
+}
+
+.spell-card__stat-label {
+    display: block;
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+}
+
+.spell-card__stat-value {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.spell-card__body {
+    padding: 1rem 1.25rem;
+}
+
+.spell-card__description {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Generators */
+.magic-generators {
+    margin-bottom: 2.5rem;
+}
+
+.magic-generators__head {
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--rule);
+}
+
+.magic-generators__head h2 {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.magic-generators__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.25rem;
+}
+
+.magic-generator {
+    padding: 1.5rem;
+}
+
+.magic-generator h3 {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+}
+
+.magic-generator p {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 1rem;
+}
+
+.magic-generator__controls {
+    margin-bottom: 1rem;
+}
+
+.magic-generator__controls label {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.magic-generator__controls select {
+    width: 100%;
+    padding: 0.65rem 0.875rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-md);
+    background: var(--parchment-raised);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.magic-generator__result {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--parchment-sunk);
+    border-left: 3px solid var(--blood);
+    border-radius: var(--radius-sm);
+}
+
+.magic-generator__result h4 {
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+}
+
+.magic-generator__result p {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.magic-generator__result .result-label {
+    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+}
+
+/* Buttons */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--blood);
+    border-radius: var(--radius-md);
+    background: var(--blood);
+    color: var(--parchment-raised);
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 180ms ease;
+}
+
+.btn-primary:hover {
+    background: var(--blood-dark);
+    border-color: var(--blood-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Glossary */
+.magic-glossary {
+    margin-bottom: 2rem;
+}
+
+.magic-glossary summary {
+    padding: 1rem 1.25rem;
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.magic-glossary summary::-webkit-details-marker {
+    display: none;
+}
+
+.magic-glossary summary::after {
+    content: "+";
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    color: var(--blood);
+    transition: transform 180ms ease;
+}
+
+.magic-glossary[open] summary::after {
+    content: "−";
+}
+
+.magic-glossary__content {
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--edge);
+}
+
+.magic-glossary__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.25rem;
+    padding-top: 1.25rem;
+}
+
+.magic-glossary__item h3 {
+    color: var(--blood);
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+}
+
+.magic-glossary__item p {
+    color: var(--ink-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Source */
+.magic-source {
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    text-align: center;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--edge);
+}
+
+/* Language Switch */
+.magic-language-switch {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.magic-language-switch button {
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-sm);
+    background: var(--parchment-raised);
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 180ms ease;
+}
+
+.magic-language-switch button[aria-pressed="true"] {
+    background: var(--blood);
+    color: var(--parchment-raised);
+    border-color: var(--blood);
+}
+
+.magic-language-switch button:hover {
+    border-color: var(--blood);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .magic-page {
+        padding: 1.5rem 0 3rem;
+    }
+
+    .magic-heading h1 {
+        font-size: 2rem;
+    }
+
+    .magic-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .magic-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spell-card__stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .magic-generators__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .magic-glossary__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .magic-results__head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .spell-card__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+/* Empty State */
+.magic-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--ink-muted);
+}
+
+.magic-empty p {
+    font-size: 1.1rem;
+    margin: 0;
+}

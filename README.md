@@ -7,7 +7,7 @@
 
 ## Geradores
 
-A homepage separa as ferramentas para jogadores (Personagem Nível 0 e Festanças) das ferramentas para mestres (as outras nove). O catálogo oferece onze geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
+A homepage separa as ferramentas para jogadores (Personagem Nível 0 e Festanças) das ferramentas para mestres (as outras dez). O catálogo oferece doze geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
 
 | Gerador | Recursos |
 | --- | --- |
@@ -22,6 +22,7 @@ A homepage separa as ferramentas para jogadores (Personagem Nível 0 e Festança
 | **Terrenos Hexagonais** | Gera mapas de viagem pelo ermo com terreno, nível de perigo, pontos de interesse e cataclismos. A tabela de nomes de assentamentos está integrada ao gerador de assentamentos. |
 | **Tesouros** | Gera tesouro por nível, itens mundanos e gemas, itens luxuosos, dádivas (juramentos, segredos e bênçãos) e itens mágicos com atributos por tipo. Inclui as tabelas de referência de tesouro, gemas, itens luxuosos, bênçãos e propriedades de armaduras, poções, pergaminhos, varinhas, utilitários e armas. |
 | **Bestiário** | Referência com os 238 monstros do Livro de Regras, incluindo descrição, CA, PV, ataque, movimento, atributos e habilidades especiais. Oferece busca, filtros por nível, alinhamento e tipo, glossário de termos e conteúdo completo em português e inglês. Os dados foram validados contra o PDF oficial (v4.6). |
+| **Magia** | Referência com as 85 magias do Livro de Regras, com busca e filtros por tier, classe e alcance. Inclui geradores de pergaminhos e varinhas (magia + aparência aleatórias) e rolagem de mishaps por tier, além de glossário e conteúdo bilíngue. |
 
 Os resultados dos geradores podem ser copiados e baixados como TXT ou PDF. As tabelas de referência ficam acessíveis na própria ferramenta.
 
@@ -77,6 +78,7 @@ shadowdark-tools/
 │   ├── dungeon-map-generator/
 │   ├── encounter-generator/
 │   ├── level-zero-character/
+│   ├── magic/
 │   ├── monster-generator/
 │   ├── npc-generator/
 │   ├── overland-hex-generator/

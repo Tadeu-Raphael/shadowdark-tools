@@ -27,10 +27,10 @@ for (const generator of generators) {
   });
 }
 
-test('home page links to all eleven generator pages', async ({ page }) => {
+test('home page links to all twelve generator pages', async ({ page }) => {
   await page.goto('/');
   const links = page.locator('.generator-grid a.tool-card[href]');
-  await expect(links).toHaveCount(11);
+  await expect(links).toHaveCount(12);
   for (const link of await links.all()) {
     const href = await link.getAttribute('href');
     const response = await page.request.get(new URL(href, page.url()).toString());
@@ -47,7 +47,7 @@ test('home page separates player and GM generators in both languages', async ({ 
   await expect(page.locator('#players-heading')).toHaveText('Para jogadores');
   await expect(page.locator('#gms-heading')).toHaveText('Para mestres');
   await expect(players).toHaveCount(2);
-  await expect(gms).toHaveCount(9);
+  await expect(gms).toHaveCount(10);
   const twoCardAlignment = await page.locator('#player-generator-grid').evaluate(grid => {
     const cards = [...grid.querySelectorAll('.tool-card')].map(card => card.getBoundingClientRect());
     const gridRect = grid.getBoundingClientRect();
@@ -61,6 +61,7 @@ test('home page separates player and GM generators in both languages', async ({ 
   await expect(page.locator('#gms-heading')).toHaveText('For GMs');
   await expect(players.nth(0)).toContainText('Level 0 Character Generator');
   await expect(gms.nth(7)).toContainText('Dungeon Map Generator');
+  await expect(gms.nth(9)).toContainText('Magic');
   await page.locator('#player-generator-grid .tool-card').last().evaluate(card => card.remove());
   const oneCardAlignment = await page.locator('#player-generator-grid').evaluate(grid => {
     const card = grid.querySelector('.tool-card').getBoundingClientRect();
@@ -107,6 +108,53 @@ test('bestiary renders localized monsters and switches language', async ({ page 
   await page.locator('#search-input').fill('aboleth');
   await expect(cards).toHaveCount(1);
   await expect(cards.first()).toContainText('ABOLETH');
+
+  expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
+});
+
+test('magic page renders localized spells and generates items', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  await page.addInitScript(() => { Math.random = () => 0.42; });
+  await page.goto('/generators/magic/');
+  await page.evaluate(() => localStorage.setItem('shadowdark-tools-lang', 'pt-BR'));
+  await page.reload();
+
+  const cards = page.locator('#spells-grid .spell-card');
+  await expect(cards.first()).toBeVisible();
+  await expect(page.locator('#spell-count')).toContainText('85');
+
+  // pt-BR descriptions render by default.
+  const firstCard = cards.first();
+  await expect(firstCard.locator('.spell-card__description')).not.toBeEmpty();
+  const ptDescription = await firstCard.locator('.spell-card__description').innerText();
+
+  // Switching to EN must change the rendered prose.
+  await page.locator('.magic-language-switch [data-lang="en"]').click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await page.locator('#search-input').fill('alarm');
+  await expect(page.locator('#spells-grid .spell-card')).toHaveCount(1);
+  const enDescription = await page.locator('#spells-grid .spell-card .spell-card__description').innerText();
+  expect(enDescription).not.toEqual(ptDescription);
+  await page.locator('#search-input').fill('');
+
+  // Language preference persists across reloads.
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+  // Tier filter narrows the list.
+  await page.locator('#filter-tier').selectOption('5');
+  const tierBadges = await cards.locator('.spell-card__badge--tier').allInnerTexts();
+  expect(tierBadges.length).toBeGreaterThan(0);
+  expect(tierBadges.every((text) => text.includes('5'))).toBeTruthy();
+
+  // Generators produce visible results.
+  await page.locator('#generate-scroll').click();
+  await expect(page.locator('#scroll-result')).toBeVisible();
+  await page.locator('#generate-wand').click();
+  await expect(page.locator('#wand-result')).toBeVisible();
+  await page.locator('#generate-mishap').click();
+  await expect(page.locator('#mishap-result')).toBeVisible();
 
   expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
 });

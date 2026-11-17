@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-shadowdark="parchment">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Magic reference and generator for Shadowdark RPG with spells, mishaps, scrolls, and wands">
+<title>Magic — Shadowdark Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Pirata+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/shadowdark-ui.css">
+<link rel="stylesheet" href="magic.css">
+<link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
+</head>
+<body>
+<div class="site-shell">
+    <div id="site-header">
+        <header class="site-header" role="banner">
+            <div class="header-inner container-fluid">
+                <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início">
+                    <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
+                    <span>Shadowdark Tools</span>
+                </a>
+                <nav class="site-navigation" aria-label="Navegação principal">
+                    <a href="../../index.html" id="nav-home">Início</a>
+                    <a href="../../index.html#geradores" id="nav-generators">Geradores</a>
+                    <a href="#sobre" id="nav-about">Sobre</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <main class="site-main">
+        <section class="magic-page">
+            <div class="container-fluid">
+                <header class="magic-heading">
+                    <p class="eyebrow" id="eyebrow">REFERÊNCIA</p>
+                    <h1 id="title">Magia</h1>
+                    <p id="intro">85 magias do Livro de Regras de Shadowdark RPG. Busque, filtre e consulte.</p>
+                </header>
+
+                <!-- Generators -->
+                <section class="magic-generators">
+                    <div class="magic-generators__head">
+                        <h2 id="generators-title">Geradores</h2>
+                    </div>
+                    <div class="magic-generators__grid">
+                        <!-- Scroll Generator -->
+                        <div class="magic-generator card">
+                            <h3 id="scroll-title">Pergaminho</h3>
+                            <p id="scroll-desc">Gere um pergaminho aleatório com magia e aparência.</p>
+                            <button id="generate-scroll" class="btn-primary">Gerar Pergaminho</button>
+                            <div id="scroll-result" class="magic-generator__result" hidden></div>
+                        </div>
+
+                        <!-- Wand Generator -->
+                        <div class="magic-generator card">
+                            <h3 id="wand-title">Varinha</h3>
+                            <p id="wand-desc">Gere uma varinha aleatória com magia e aparência.</p>
+                            <button id="generate-wand" class="btn-primary">Gerar Varinha</button>
+                            <div id="wand-result" class="magic-generator__result" hidden></div>
+                        </div>
+
+                        <!-- Mishap Generator -->
+                        <div class="magic-generator card">
+                            <h3 id="mishap-title">Mishap</h3>
+                            <p id="mishap-desc">Role um mishap de magia baseado no tier da magia.</p>
+                            <div class="magic-generator__controls">
+                                <label for="mishap-tier" id="mishap-tier-label">Tier da Magia:</label>
+                                <select id="mishap-tier" class="form-select">
+                                    <option value="1">Tier 1-2</option>
+                                    <option value="2">Tier 3-4</option>
+                                    <option value="3">Tier 5</option>
+                                </select>
+                            </div>
+                            <button id="generate-mishap" class="btn-primary">Rolar Mishap</button>
+                            <div id="mishap-result" class="magic-generator__result" hidden></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search and Filters -->
+                <section class="magic-controls card">
+                    <div class="magic-search">
+                        <label for="search-input" id="search-label">Buscar magia</label>
+                        <div class="magic-search__wrapper">
+                            <img src="../../assets/icons/lucide/target.svg" alt="" class="magic-search__icon" id="search-icon" aria-hidden="true">
+                            <input type="text" id="search-input" class="form-input" placeholder="Nome da magia..." autocomplete="off" aria-label="Buscar magia">
+                        </div>
+                    </div>
+                    <div class="magic-filters">
+                        <div class="magic-filter">
+                            <label for="filter-tier" id="tier-filter-label">Tier</label>
+                            <select class="form-select" id="filter-tier">
+                                <option value="all" id="tier-all">Todos os tiers</option>
+                                <option value="1" id="tier-1">Tier 1</option>
+                                <option value="2" id="tier-2">Tier 2</option>
+                                <option value="3" id="tier-3">Tier 3</option>
+                                <option value="4" id="tier-4">Tier 4</option>
+                                <option value="5" id="tier-5">Tier 5</option>
+                            </select>
+                        </div>
+                        <div class="magic-filter">
+                            <label for="filter-class" id="class-filter-label">Classe</label>
+                            <select class="form-select" id="filter-class">
+                                <option value="all" id="class-all">Todas as classes</option>
+                                <option value="wizard" id="class-wizard">Wizard</option>
+                                <option value="priest" id="class-priest">Priest</option>
+                            </select>
+                        </div>
+                        <div class="magic-filter">
+                            <label for="filter-range" id="range-filter-label">Alcance</label>
+                            <select class="form-select" id="filter-range">
+                                <option value="all" id="range-all">Todos os alcances</option>
+                                <option value="Close" id="range-close">Close</option>
+                                <option value="Near" id="range-near">Near</option>
+                                <option value="Far" id="range-far">Far</option>
+                                <option value="Self" id="range-self">Self</option>
+                                <option value="Unlimited" id="range-unlimited">Unlimited</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results -->
+                <section class="magic-results" aria-live="polite">
+                    <div class="magic-results__head">
+                        <h2 id="results-title">Magias</h2>
+                        <span class="magic-count" id="spell-count">85 magias</span>
+                    </div>
+                    <div id="spells-grid" class="magic-grid"></div>
+                    <div class="magic-empty" id="empty-state" hidden>
+                        <p id="empty-message">Nenhuma magia encontrada.</p>
+                    </div>
+                </section>
+
+                <!-- Glossary -->
+                <details class="magic-glossary card">
+                    <summary id="glossary-title">Glossário de Termos</summary>
+                    <div class="magic-glossary__content" id="glossary-content">
+                        <div class="magic-glossary__grid">
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-tier">Tier</h3>
+                                <p id="glos-tier-desc">O nível de poder da magia. Vai de 1 (mais fraca) a 5 (mais poderosa).</p>
+                            </div>
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-duration">Duração</h3>
+                                <p id="glos-duration-desc">Quanto tempo a magia dura. Pode ser Instant, Focus, ou um número de rodadas/minutos/horas.</p>
+                            </div>
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-range">Alcance</h3>
+                                <p id="glos-range-desc">A que distância a magia pode ser conjurada. Close (5 pés), Near (30 pés), Far (à vista), Self (você mesmo), Unlimited (ilimitado).</p>
+                            </div>
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-focus">Focus</h3>
+                                <p id="glos-focus-desc">Magias com duração Focus exigem que você faça uma rolagem de conjuração no início do seu turno para mantê-las. Se falhar, a magia termina.</p>
+                            </div>
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-mishap">Mishap</h3>
+                                <p id="glos-mishap-desc">Falha crítica em uma rolagem de conjuração. O conjurador deve rolar na tabela de mishap apropriada ao tier da magia.</p>
+                            </div>
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-scroll">Pergaminho</h3>
+                                <p id="glos-scroll-desc">Item consumível que contém uma magia. Após o uso, o pergaminho desaparece. Usuários devem ser conjuradores.</p>
+                            </div>
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-wand">Varinha</h3>
+                                <p id="glos-wand-desc">Item mágico que contém uma magia. Pode ser usada múltiplas vezes, mas falha críticamente quebra a varinha.</p>
+                            </div>
+                            <div class="magic-glossary__item">
+                                <h3 id="glos-dc">DC (Dificuldade de Classe)</h3>
+                                <p id="glos-dc-desc">A dificuldade para resistir ou detectar a magia. Maior é mais difícil de resistir.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <p class="magic-source" id="source">Dados extraídos do Livro de Regras de Shadowdark RPG (v4.6), páginas 43–74. The Arcane Library.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer">
+        <footer class="site-footer" id="sobre" role="contentinfo">
+            <div class="container-fluid">
+                <p class="footer-caption" id="footer-caption">Shadowdark Tools · Magic</p>
+                <p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p>
+                <p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p>
+                <div class="magic-language-switch" role="group" aria-label="Idioma">
+                    <button data-lang="pt-BR" aria-pressed="true">PT</button>
+                    <button data-lang="en" aria-pressed="false">EN</button>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="../../js/ui-icons.js"></script>
+<script src="magic-data.js"></script>
+<script src="magic.js"></script>
+</body>
+</html>
