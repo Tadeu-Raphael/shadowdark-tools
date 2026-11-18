@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-shadowdark="parchment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Construtor de personagens Shadowdark RPG passo a passo, com escolhas, rolagens e ficha exportável.">
+    <title>Construtor de Personagem — Shadowdark Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Pirata+One&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/shadowdark-ui.css">
+    <link rel="stylesheet" href="../character-generator/character.css">
+    <link rel="stylesheet" href="builder.css">
+    <link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
+    <link rel="stylesheet" href="../../css/export-actions.css">
+</head>
+<body>
+<div class="site-shell" id="top">
+    <header class="site-header">
+        <div class="header-inner container-fluid">
+            <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools">
+                <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
+                <span>Shadowdark Tools</span>
+            </a>
+            <nav class="site-navigation" id="main-navigation" aria-label="Navegação principal">
+                <a href="../../index.html" class="home-link" id="nav-back">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="header-nav-icon" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
+                    <span id="nav-back-text" data-text="home">Início</span>
+                </a>
+                <a href="../../index.html#geradores" id="nav-generators" data-text="generators">Geradores</a>
+                <a href="#sobre" id="nav-about" data-text="about">Sobre</a>
+            </nav>
+        </div>
+    </header>
+    <main class="site-main">
+        <section class="character-page builder-page">
+            <header class="character-heading">
+                <p class="eyebrow" data-text="eyebrow">PASSO A PASSO</p>
+                <h1 data-text="title">Construtor de Personagem</h1>
+                <p data-text="intro">Construa um personagem de nível 1: escolha, role os dados e revise sua ficha.</p>
+            </header>
+            <p class="character-note" data-text="scope">Suas escolhas ficam nesta página enquanto ela estiver aberta. Exporte a ficha antes de sair.</p>
+            <nav id="builder-progress" class="builder-progress" aria-label="Etapas de criação"></nav>
+            <p id="step-status" role="status" aria-live="polite"></p>
+            <section id="builder-panel" class="builder-panel card" aria-labelledby="step-title">
+                <h2 id="step-title" tabindex="-1"></h2>
+                <div id="step-content"></div>
+                <p id="builder-error" class="builder-error" role="alert" hidden></p>
+                <div class="builder-actions">
+                    <button type="button" class="character-button" id="previous" data-text="previous">Anterior</button>
+                    <button type="button" class="character-button character-button--primary" id="next" data-text="next">Próximo</button>
+                    <button type="button" class="character-button" id="restart" data-text="restart">Recomeçar</button>
+                </div>
+            </section>
+            <section id="builder-exports" class="builder-exports" aria-label="Exportar ficha" hidden>
+                <button type="button" class="character-button" id="copy" data-export-action="copy" disabled>
+                    <img src="../../assets/icons/lucide/clipboard-list.svg" alt="" class="ui-icon">
+                    <span data-text="copy">Copiar</span>
+                </button>
+                <button type="button" class="character-button" id="download" data-export-action="txt" disabled>
+                    <img src="../../assets/icons/lucide/file-text.svg" alt="" class="ui-icon">
+                    <span data-text="txt">Baixar TXT</span>
+                </button>
+                <button type="button" class="character-button" id="export-pdf" data-export-action="pdf" disabled>
+                    <img src="../../assets/icons/lucide/file-pdf.svg" alt="" class="ui-icon">
+                    <span data-text="pdf">Exportar PDF</span>
+                </button>
+            </section>
+        </section>
+    </main>
+    <footer class="site-footer" id="sobre">
+        <div class="container-fluid">
+            <p class="footer-caption" data-text="title">Construtor de Personagem</p>
+            <p class="footer-credit" id="footer-credit"></p>
+            <p class="footer-subcredit" id="footer-subcredit"></p>
+            <div class="builder-language-switch" id="language-switch" role="group" aria-label="Idioma">
+                <button class="flag-button" type="button" data-lang="pt-BR" aria-pressed="true" aria-label="Português (Brasil)" title="Português (Brasil)">
+                    <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="Brasil">
+                        <rect width="60" height="42" fill="#009b3a"/>
+                        <polygon points="30,5 56,21 30,37 4,21" fill="#fedf00"/>
+                        <circle cx="30" cy="21" r="9" fill="#002776"/>
+                        <path d="M21.5 19.2 Q30 16.5 38.5 23" stroke="#fff" stroke-width="1.6" fill="none"/>
+                    </svg>
+                </button>
+                <button class="flag-button" type="button" data-lang="en" aria-pressed="false" aria-label="English" title="English">
+                    <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="UK / USA">
+                        <defs><clipPath id="flag-left"><rect width="30" height="42"/></clipPath><clipPath id="flag-right"><rect x="30" width="30" height="42"/></clipPath></defs>
+                        <g clip-path="url(#flag-left)">
+                            <rect width="60" height="42" fill="#012169"/>
+                            <path d="M0 0L60 42M60 0L0 42" stroke="#fff" stroke-width="7"/>
+                            <path d="M0 0L60 42M60 0L0 42" stroke="#c8102e" stroke-width="3"/>
+                            <path d="M30 0V42M0 21H60" stroke="#fff" stroke-width="11"/>
+                            <path d="M30 0V42M0 21H60" stroke="#c8102e" stroke-width="6"/>
+                        </g>
+                        <g clip-path="url(#flag-right)">
+                            <rect x="30" width="30" height="42" fill="#fff"/>
+                            <g fill="#b22234">
+                                <rect x="30" y="0" width="30" height="3.2"/><rect x="30" y="6.5" width="30" height="3.2"/>
+                                <rect x="30" y="13" width="30" height="3.2"/><rect x="30" y="19.5" width="30" height="3.2"/>
+                                <rect x="30" y="26" width="30" height="3.2"/><rect x="30" y="32.5" width="30" height="3.2"/>
+                                <rect x="30" y="38.8" width="30" height="3.2"/>
+                            </g>
+                            <rect x="30" width="14" height="22.5" fill="#3c3b6e"/>
+                        </g>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </footer>
+</div>
+<script src="../../js/character-names.js"></script>
+<script src="../character-generator/character-data.js"></script>
+<script src="../character-generator/character-rules.js"></script>
+<script src="builder-rules.js"></script>
+<script src="../../js/export-actions.js"></script>
+<script src="builder.js"></script>
+</body>
+</html>

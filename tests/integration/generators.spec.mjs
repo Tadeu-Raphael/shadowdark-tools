@@ -6,6 +6,7 @@ const generators = [
   { name: 'Encontros', path: '/generators/encounter-generator/', button: '#generate-button', result: '#result-list .encounter-result-card' },
   { name: 'Mapas de masmorras', path: '/generators/dungeon-map-generator/', button: '#generate', result: '#results .dungeon-result' },
   { name: 'Personagem nível 0', path: '/generators/level-zero-character/', button: '#generate-btn', result: '#generation-content .character-card' },
+  { name: 'Personagens nível 1-10', path: '/generators/character-generator/', button: '#generate', result: '#results .character-card' },
   { name: 'Monstros', path: '/generators/monster-generator/', button: '#generate', result: '#results .monster-result' },
   { name: 'NPCs', path: '/generators/npc-generator/', button: '#generate', result: '#results .npc-result' },
   { name: 'Terrenos hexagonais', path: '/generators/overland-hex-generator/', button: '#generate', result: '#results .overland-result' },
@@ -27,10 +28,10 @@ for (const generator of generators) {
   });
 }
 
-test('home page links to all thirteen generator pages', async ({ page }) => {
+test('home page links to all fifteen tool pages', async ({ page }) => {
   await page.goto('/');
   const links = page.locator('.generator-grid a.tool-card[href]');
-  await expect(links).toHaveCount(13);
+  await expect(links).toHaveCount(15);
   for (const link of await links.all()) {
     const href = await link.getAttribute('href');
     const response = await page.request.get(new URL(href, page.url()).toString());
@@ -46,30 +47,35 @@ test('home page separates player and GM generators in both languages', async ({ 
   const gms = page.locator('#gm-generator-grid a.tool-card[href]');
   await expect(page.locator('#players-heading')).toHaveText('Para jogadores');
   await expect(page.locator('#gms-heading')).toHaveText('Para mestres');
-  await expect(players).toHaveCount(2);
+  await expect(players).toHaveCount(4);
   await expect(gms).toHaveCount(11);
-  const twoCardAlignment = await page.locator('#player-generator-grid').evaluate(grid => {
+
+  // Player cards must lay out in a 3-column grid on desktop.
+  const columns = await page.locator('#player-generator-grid').evaluate(grid => {
     const cards = [...grid.querySelectorAll('.tool-card')].map(card => card.getBoundingClientRect());
-    const gridRect = grid.getBoundingClientRect();
-    return Math.abs((cards[0].left + cards[1].right) / 2 - (gridRect.left + gridRect.right) / 2);
+    const tops = cards.map(card => Math.round(card.top));
+    const firstRowCount = cards.filter(card => Math.round(card.top) === tops[0]).length;
+    return { firstRowCount, tops };
   });
-  expect(twoCardAlignment).toBeLessThan(2);
+  expect(columns.firstRowCount).toBe(3);
+
   await expect(players.nth(0)).toContainText('Gerador de Personagem Nível 0');
-  await expect(players.nth(1)).toContainText('Gerador de Festanças');
+  await expect(players.nth(1)).toContainText('Gerador de Personagens');
+  await expect(players.nth(2)).toContainText('Construtor de Personagem');
+  await expect(players.nth(2)).toHaveAccessibleName('Construir personagem: Construtor de Personagem');
+  await expect(players.nth(2).locator('img').first()).toHaveAttribute('src', 'assets/icons/lucide/clipboard-list.svg');
+  await expect(players.nth(3)).toContainText('Gerador de Festanças');
   await page.locator('[data-lang="en"]').click();
   await expect(page.locator('#players-heading')).toHaveText('For players');
   await expect(page.locator('#gms-heading')).toHaveText('For GMs');
   await expect(players.nth(0)).toContainText('Level 0 Character Generator');
+  await expect(players.nth(1)).toContainText('Character Generator');
+  await expect(players.nth(2)).toContainText('Character Builder');
+  await expect(players.nth(2)).toHaveAccessibleName('Build character: Character Builder');
+  await expect(players.nth(3)).toContainText('Carousing Generator');
   await expect(gms.nth(7)).toContainText('Dungeon Map Generator');
   await expect(gms.nth(9)).toContainText('Magic');
   await expect(gms.nth(10)).toContainText('Magic Items');
-  await page.locator('#player-generator-grid .tool-card').last().evaluate(card => card.remove());
-  const oneCardAlignment = await page.locator('#player-generator-grid').evaluate(grid => {
-    const card = grid.querySelector('.tool-card').getBoundingClientRect();
-    const gridRect = grid.getBoundingClientRect();
-    return Math.abs((card.left + card.right) / 2 - (gridRect.left + gridRect.right) / 2);
-  });
-  expect(oneCardAlignment).toBeLessThan(2);
 });
 
 test('bestiary renders localized monsters and switches language', async ({ page }) => {
@@ -200,6 +206,127 @@ test('magic items catalog renders items and generates scroll, wand, and magic it
   await expect(page.locator('#wand-result')).toBeVisible();
   await page.locator('#generate-magic-item').click();
   await expect(page.locator('#magic-item-result')).toBeVisible();
+
+  expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
+});
+
+test('character generator builds level 1-10 characters and switches language', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  await page.addInitScript(() => { Math.random = () => 0.42; });
+  await page.goto('/generators/character-generator/');
+  await page.evaluate(() => localStorage.setItem('shadowdark-tools-lang', 'pt-BR'));
+  await page.reload();
+
+  // Empty state before generating.
+  await expect(page.locator('#empty')).toBeVisible();
+  await expect(page.locator('#copy')).toBeDisabled();
+
+  // Generate a single level 1 fighter.
+  await page.locator('#level').selectOption('1');
+  await page.locator('#class-select').selectOption('fighter');
+  await page.locator('#generate').click();
+
+  const card = page.locator('#results .character-card').first();
+  await expect(card).toBeVisible();
+  await expect(card.locator('.character-card__name')).not.toBeEmpty();
+  await expect(card.locator('.character-card__level')).toContainText('1');
+  await expect(card.locator('.character-card__stat')).toHaveCount(6);
+  await expect(page.locator('#copy')).toBeEnabled();
+  await expect(page.locator('#download')).toBeEnabled();
+
+  // Level 10 wizard should show spells and a title.
+  await page.locator('#level').selectOption('10');
+  await page.locator('#class-select').selectOption('wizard');
+  await page.locator('#generate').click();
+  const highCard = page.locator('#results .character-card').first();
+  await expect(highCard.locator('.character-card__level')).toContainText('10');
+  await expect(highCard.locator('.character-card__spells')).toBeVisible();
+
+  // Switching to EN re-localizes the rendered card.
+  const ptTitle = await highCard.locator('.character-card__title').innerText();
+  await page.locator('.character-language-switch [data-lang="en"]').click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  const enTitle = await highCard.locator('.character-card__title').innerText();
+  expect(enTitle).not.toEqual(ptTitle);
+  await expect(page.locator('#nav-back-text')).toHaveText('Home');
+
+  // Quantity control produces multiple cards.
+  await page.locator('#count').fill('3');
+  await page.locator('#generate').click();
+  await expect(page.locator('#results .character-card')).toHaveCount(3);
+
+  expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
+});
+
+test('character generator exports an elegant cards PDF', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  await page.addInitScript(() => { Math.random = () => 0.42; });
+  await page.goto('/generators/character-generator/');
+  await page.evaluate(() => localStorage.setItem('shadowdark-tools-lang', 'pt-BR'));
+  await page.reload();
+
+  await page.locator('#generate').click();
+  await expect(page.locator('#results .character-card').first()).toBeVisible();
+  await expect(page.locator('#export-pdf')).toBeEnabled();
+
+  // The export must build a styled cards PDF rather than a plain text dump.
+  const built = await page.evaluate(() => {
+    const cards = [{ title: 'Mira', badge: 'Mago 5', eyebrow: 'PERSONAGEM 1', stats: ['FOR 10 (+0)'], sections: [{ heading: 'PERFIL', lines: ['linha'] }] }];
+    const blob = window.ShadowdarkExport.createCardsPdf({
+      title: 'PERSONAGENS',
+      subtitle: '1 personagem gerado',
+      cards,
+      footerLabel: 'SHADOWDARK TOOLS  -  PERSONAGENS',
+    });
+    return { size: blob.size, type: blob.type };
+  });
+  expect(built.type).toBe('application/pdf');
+  expect(built.size).toBeGreaterThan(500);
+
+  expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
+});
+
+test('action button icons stay dark on light backgrounds across generators', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  await page.addInitScript(() => { Math.random = () => 0.42; });
+
+  const cases = [
+    { path: '/generators/character-generator/', generate: '#generate' },
+    { path: '/generators/carousing-generator/', generate: '#roll-button' },
+    { path: '/generators/encounter-generator/', generate: '#generate-button' },
+    { path: '/generators/level-zero-character/', generate: '#generate-btn' },
+  ];
+
+  for (const item of cases) {
+    await page.goto(item.path);
+    await page.evaluate((sel) => document.querySelector(sel).click(), item.generate);
+    await page.waitForTimeout(500);
+
+    const filters = await page.evaluate(() => {
+      const result = { primary: null, actions: [] };
+      const primary = document.querySelector('button[class*="primary"]');
+      if (primary) {
+        const icon = primary.querySelector('img, .ui-icon');
+        if (icon) result.primary = getComputedStyle(icon).filter;
+      }
+      document.querySelectorAll('button').forEach((button) => {
+        if (button.className.includes('primary') || button.disabled) return;
+        const icon = button.querySelector('img, .ui-icon');
+        if (icon) result.actions.push(getComputedStyle(icon).filter);
+      });
+      return result;
+    });
+
+    if (filters.primary) {
+      expect(filters.primary, `${item.path} primary icon should be inverted white`).toContain('invert(1)');
+    }
+    for (const filter of filters.actions) {
+      expect(filter, `${item.path} action icon should stay dark`).not.toContain('invert(1)');
+    }
+  }
 
   expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
 });

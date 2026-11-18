@@ -216,3 +216,97 @@ test('magic item catalog carries complete bilingual items', async () => {
     }
   }
 });
+
+test('character generator data covers levels 1-10 with bilingual fields', async () => {
+  const data = await loadData('generators/character-generator/character-data.js', 'CHARACTER_DATA');
+
+  assert.equal(data.CLASSES.length, 4);
+  assert.equal(data.ANCESTRIES.length, 6);
+  assert.equal(data.BACKGROUNDS.length, 20);
+  assert.equal(data.STATS.length, 6);
+  assert.equal(data.WEAPONS.length, 15);
+  assert.equal(data.ARMORS.length, 4);
+
+  const classKeys = data.CLASSES.map((c) => c.key);
+  assert.deepEqual([...classKeys], ['fighter', 'priest', 'thief', 'wizard']);
+
+  for (const classData of data.CLASSES) {
+    const where = classData.key;
+    assert.ok(classData.pt && classData.en, `${where} needs pt/en names`);
+    assert.ok(classData.hpDie && /^1d[468]$/.test(classData.hpDie), `${where} needs a valid hit die`);
+    assert.ok(classData.hpLabel.pt && classData.hpLabel.en, `${where} needs bilingual hpLabel`);
+    assert.ok(classData.weapons.pt && classData.weapons.en, `${where} needs bilingual weapons`);
+    assert.ok(classData.armor.pt && classData.armor.en, `${where} needs bilingual armor`);
+    assert.ok(Array.isArray(classData.talents) && classData.talents.length > 0, `${where} needs talents`);
+    assert.ok(Array.isArray(classData.talentTable) && classData.talentTable.length > 0, `${where} needs a talent table`);
+
+    for (const talent of classData.talents) {
+      assert.ok(talent.pt && talent.en, `${where} talent needs pt/en`);
+      assert.notEqual(talent.pt, talent.en, `${where} talent pt/en must differ`);
+    }
+
+    for (const row of classData.talentTable) {
+      assert.ok(row.range, `${where} talent table row needs a range`);
+      assert.ok(row.pt && row.en, `${where} talent table row needs pt/en`);
+    }
+
+    for (const alignment of ['lawful', 'neutral', 'chaotic']) {
+      const titles = classData.titles[alignment];
+      assert.ok(titles, `${where} needs ${alignment} titles`);
+      assert.equal(titles.pt.length, 10, `${where} ${alignment} titles need 10 pt entries`);
+      assert.equal(titles.en.length, 10, `${where} ${alignment} titles need 10 en entries`);
+    }
+
+    if (classData.spellsKnown) {
+      for (let level = 1; level <= 10; level++) {
+        const row = classData.spellsKnown[String(level)];
+        assert.ok(Array.isArray(row), `${where} needs spellsKnown for level ${level}`);
+        assert.equal(row.length, 5, `${where} level ${level} needs 5 spell tiers`);
+        assert.ok(row.every((count) => Number.isInteger(count) && count >= 0), `${where} level ${level} spell counts must be non-negative integers`);
+      }
+    }
+  }
+
+  for (const ancestry of data.ANCESTRIES) {
+    assert.ok(ancestry.key && ancestry.pt && ancestry.en, 'ancestry needs key/pt/en');
+    assert.ok(ancestry.languages.pt && ancestry.languages.en, `${ancestry.key} needs bilingual languages`);
+    assert.ok(ancestry.perkName.pt && ancestry.perkName.en, `${ancestry.key} needs bilingual perkName`);
+    assert.ok(ancestry.perk.pt && ancestry.perk.en, `${ancestry.key} needs bilingual perk`);
+  }
+
+  for (const background of data.BACKGROUNDS) {
+    assert.ok(background.pt && background.en, 'background needs pt/en');
+    assert.ok(background.desc.pt && background.desc.en, `${background.en} needs bilingual desc`);
+  }
+
+  for (const stat of data.STATS) {
+    assert.ok(stat.key && stat.abbr, 'stat needs key/abbr');
+    assert.ok(stat.pt && stat.en, `${stat.key} needs bilingual names`);
+  }
+
+  assert.equal(data.STAT_MODIFIERS.length, 9);
+  assert.equal(data.STAT_MODIFIERS[0].mod, -4);
+  assert.equal(data.STAT_MODIFIERS.at(-1).mod, 4);
+
+  for (const weapon of data.WEAPONS) {
+    assert.ok(weapon.key && weapon.pt && weapon.en, 'weapon needs key/pt/en');
+    assert.ok(weapon.dmg, `${weapon.en} needs damage`);
+  }
+
+  for (const armor of data.ARMORS) {
+    assert.ok(armor.key && armor.pt && armor.en, 'armor needs key/pt/en');
+    assert.ok(armor.ac, `${armor.en} needs AC`);
+  }
+
+  for (const deity of data.DEITIES) {
+    assert.ok(deity.key && deity.pt && deity.en, 'deity needs key/pt/en');
+    assert.ok(['lawful', 'neutral', 'chaotic'].includes(deity.alignment), `${deity.en} needs a valid alignment`);
+  }
+
+  for (const [key, table] of Object.entries(data.NAMES)) {
+    assert.ok(Array.isArray(table.pt) && table.pt.length === 20, `${key} names need 20 pt entries`);
+    assert.ok(Array.isArray(table.en) && table.en.length === 20, `${key} names need 20 en entries`);
+  }
+
+  assert.deepEqual([...data.XP_THRESHOLDS], [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]);
+});

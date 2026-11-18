@@ -88,7 +88,7 @@
         return lines.length ? lines : [""];
     }
 
-    function createCardsPdf({ title, subtitle = "", cards = [] }) {
+    function createCardsPdf({ title, subtitle = "", cards = [], footerLabel = "SHADOWDARK TOOLS" }) {
         const streams = cards.map((card, index) => {
             const commands = [];
             const text = (font, size, x, y, value, color = "0 0 0 rg") => {
@@ -147,7 +147,7 @@
             });
 
             rect("0.72 0.08 0.12", 48, 30, 516, 2);
-            text("F1", 8, 48, 16, "SHADOWDARK TOOLS  -  PERSONAGEM NÍVEL 0", "0.42 0.40 0.37 rg");
+            text("F1", 8, 48, 16, footerLabel, "0.42 0.40 0.37 rg");
             return commands.join("\n");
         });
 

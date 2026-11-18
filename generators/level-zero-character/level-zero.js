@@ -720,9 +720,7 @@
             return { name: ancestryName, roll1: null, roll2: null, die: "—", source: t.nameTableLabel };
         }
 
-        const roll1 = Math.floor(Math.random() * 20) + 1;
-        let roll2 = Math.floor(Math.random() * 20) + 1;
-        if (roll2 === roll1) roll2 = (roll1 % 20) + 1;
+        const { roll1, roll2 } = window.ShadowdarkCharacterNames.rollName(table);
         const name1 = table[roll1 - 1];
         const name2 = table[roll2 - 1];
         return {
@@ -1552,7 +1550,8 @@
             const english = this.lang === "en";
             const title = english ? "LEVEL 0 CHARACTERS" : "PERSONAGENS NÍVEL 0";
             const subtitle = english ? `${cards.length} generated character${cards.length === 1 ? "" : "s"}` : `${cards.length} personagem(ns) gerado(s)`;
-            window.ShadowdarkExport.downloadCardsPdf({ title, subtitle, cards }, "shadowdark-level-zero-characters.pdf");
+            const footerLabel = english ? "SHADOWDARK TOOLS  -  LEVEL 0 CHARACTERS" : "SHADOWDARK TOOLS  -  PERSONAGENS NÍVEL 0";
+            window.ShadowdarkExport.downloadCardsPdf({ title, subtitle, cards, footerLabel }, "shadowdark-level-zero-characters.pdf");
         }
 
         showToast(message, type) {

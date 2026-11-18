@@ -7,11 +7,13 @@
 
 ## Geradores
 
-A homepage separa as ferramentas para jogadores (Personagem Nível 0 e Festanças) das ferramentas para mestres (as outras onze). O catálogo oferece treze geradores. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
+A homepage separa as ferramentas para jogadores (Personagem Nível 0, Personagens Nível 1–10, Construtor de Personagem e Festanças) das ferramentas para mestres (as outras onze). O catálogo oferece quinze ferramentas, incluindo um construtor guiado, distinto dos geradores aleatórios. Os cartões de jogadores mantêm três colunas no desktop. A interface pode ser usada em português (Brasil) ou inglês; as páginas lembram o idioma escolhido no navegador.
 
 | Gerador | Recursos |
 | --- | --- |
 | **Personagem Nível 0** | Cria personagens de funil com atributos, ancestralidade, background, alinhamento e equipamento inicial. |
+| **Personagens Nível 1–10** | Cria personagens de 1º a 10º nível com nomes duplos da ancestralidade (como no nível 0), atributos em 3d6, ancestralidade, classe, alinhamento, background, divindade, PV por nível, CA, arma, armadura, idiomas, talentos por nível, magias conhecidas e título conforme a faixa de nível. |
+| **Construtor de Personagem** | Guia a criação de um personagem de nível 1 em sete etapas: identidade, atributos, classe, PV/talentos, magias/idiomas, equipamento e revisão. Permite escolhas manuais e rolagens auditáveis, aplica bônus de atributos e CA dos talentos, valida orçamento e espaços e exporta a ficha em TXT/PDF. Preserva as escolhas ao voltar etapas ou trocar PT/EN, sem gravar a ficha no navegador. |
 | **Festanças** | Gera resultados padrão ou expandidos, com gasto, consequência, acontecimentos e recompensas. |
 | **Encontros** | Rola encontros por ambiente, inclui detalhes do encontro e oferece tabelas independentes de acontecimentos, rumores, armadilhas e perigos. |
 | **Aventuras** | Combina as tabelas d20 de objetivo, complicação e nome de local. |
@@ -26,6 +28,8 @@ A homepage separa as ferramentas para jogadores (Personagem Nível 0 e Festança
 | **Itens Mágicos** | Catálogo com os 91 itens mágicos nomeados do Livro de Regras, com busca e filtros por tipo, bônus e maldição. Inclui geradores de pergaminhos, varinhas e itens mágicos aleatórios com tipo, qualidade, personalidade, bênçãos e maldições. |
 
 Os resultados dos geradores podem ser copiados e baixados como TXT ou PDF. As tabelas de referência ficam acessíveis na própria ferramenta.
+
+O construtor começa no nível 1 e mantém a ficha somente enquanto a página está aberta. Bônus de ataque e habilidades condicionais são listados como regras na ficha; o talento de item mágico do mago direciona ao catálogo para resolver o item com o mestre, sem adicioná-lo automaticamente ao inventário.
 
 ## Testes automatizados
 
@@ -69,6 +73,7 @@ shadowdark-tools/
 │   └── landing.css
 ├── js/
 │   ├── export-actions.js
+│   ├── character-names.js
 │   ├── main.js
 │   └── ui-icons.js
 ├── assets/icons/lucide/
@@ -76,6 +81,8 @@ shadowdark-tools/
 │   ├── adventure-generator/
 │   ├── bestiary/
 │   ├── carousing-generator/
+│   ├── character-builder/
+│   ├── character-generator/
 │   ├── dungeon-map-generator/
 │   ├── encounter-generator/
 │   ├── level-zero-character/

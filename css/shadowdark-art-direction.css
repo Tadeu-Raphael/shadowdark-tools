@@ -224,6 +224,17 @@ body {
 .site-main button[class*="primary"] img,
 .site-main .btn-primary img,
 .site-main .generation-button--primary img { filter: brightness(0) invert(1); }
+
+/* Action button icons must stay dark on the light parchment background.
+   Only primary (black) buttons get inverted white icons. */
+.site-main button:not([class*="primary"]):not(.btn-primary):not(.generation-button--primary) img,
+.site-main button:not([class*="primary"]):not(.btn-primary):not(.generation-button--primary) .ui-icon,
+.site-main .btn:not(.btn-primary):not([class*="primary"]) img,
+.site-main .btn:not(.btn-primary):not([class*="primary"]) .ui-icon,
+.site-main [class*="-button"]:not([class*="primary"]):not(.btn-primary) img,
+.site-main [class*="-button"]:not([class*="primary"]):not(.btn-primary) .ui-icon {
+    filter: none !important;
+}
 .site-main select,
 .site-main input,
 .site-main textarea,

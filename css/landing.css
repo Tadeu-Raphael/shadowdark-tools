@@ -51,7 +51,8 @@
 }
 
 .generator-grid--players {
-    max-width: 48rem;
+    max-width: 68rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 /* Card de Ferramenta */
@@ -217,5 +218,9 @@
 
     .generator-group__heading {
         font-size: 1.15rem;
+    }
+
+    .generator-grid--players {
+        grid-template-columns: 1fr;
     }
 }

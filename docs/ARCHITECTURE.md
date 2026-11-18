@@ -24,7 +24,15 @@ A maioria dos geradores mantém estado e funções dentro de uma IIFE, sem módu
 
 ## Geradores atuais
 
-O catálogo contém treze ferramentas: personagem nível 0, festanças, encontros, aventuras, monstros, NPCs, assentamentos, terrenos hexagonais, tesouros, mapas de masmorras, bestiário, magia e itens mágicos. A tabela de recursos e a estrutura de pastas correspondem ao README.
+O catálogo contém quinze ferramentas: personagem nível 0, personagens nível 1–10, construtor de personagem, festanças, encontros, aventuras, monstros, NPCs, assentamentos, terrenos hexagonais, tesouros, mapas de masmorras, bestiário, magia e itens mágicos. A tabela de recursos e a estrutura de pastas correspondem ao README.
+
+## Criação guiada de personagens
+
+`generators/character-builder/` contém uma página independente com sete etapas de criação de personagem de nível 1. `builder-rules.js` publica `window.ShadowdarkBuilderRules`, com regras testáveis sem DOM e aleatoriedade injetável; `builder.js` controla o rascunho em memória, a navegação, validação, localização e exportação. Não há persistência da ficha nem comunicação com serviços.
+
+O construtor e o gerador nível 1–10 carregam `generators/character-generator/character-data.js` antes de `character-rules.js` (`window.ShadowdarkCharacterRules`), que compartilha modificadores, PV com auditoria da vantagem dos anões e permissões de equipamento. Ambos e o nível 0 carregam `js/character-names.js` (`window.ShadowdarkCharacterNames`), que combina dois resultados distintos da tabela local de nomes da ancestralidade. As páginas devem carregar esses scripts antes de seus consumidores.
+
+Voltar etapas e trocar idioma preserva as escolhas e rolagens. Trocar ancestralidade ou classe invalida PV/talentos e escolhas dependentes; editar atributos recalcula os bônus sem rolar PV novamente. O construtor aplica escolhas de talentos que alteram atributos, magias conhecidas ou CA; bônus de ataque e habilidades condicionais permanecem descritos na ficha. O talento de item mágico oferece acesso ao catálogo para resolução com o mestre, sem item automático no inventário. Copiar, TXT e PDF usam a mesma representação da ficha revisada e incluem o registro de rolagens; o PDF usa `downloadCardsPdf` com rodapé próprio.
 
 ## Idioma e conteúdo
 
@@ -37,7 +45,7 @@ A ferramenta de magia segue o mesmo padrão: `generators/magic/magic-data.js` pu
 ## Limites arquiteturais atuais
 
 - Há lógica, DOM, localização e aleatoriedade frequentemente acoplados em scripts de página. Funções de rolagem não são uniformemente exportadas ou isoladas, o que dificulta testes unitários diretos.
-- A infraestrutura de testes atual usa `node:test` e Playwright; funções de regras ainda acopladas a IIFEs limitam testes unitários a contratos de dados até que sejam extraídas para funções puras.
+- A infraestrutura de testes atual usa `node:test` e Playwright; muitas funções ainda acopladas a IIFEs limitam testes unitários a contratos de dados. As regras e os nomes compartilhados do construtor já possuem testes diretos com aleatoriedade controlada.
 - Os dados globais exigem nomes únicos e ordem de carregamento coerente.
 - O site precisa funcionar em caminhos relativos sob subdiretórios, como no GitHub Pages, além de servir na raiz local.
 

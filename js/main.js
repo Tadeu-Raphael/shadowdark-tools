@@ -23,6 +23,35 @@
             available: true
         },
         {
+            id: "character-generator",
+            audience: "players",
+            category: { "pt-BR": "PERSONAGEM", en: "CHARACTER" },
+            title: { "pt-BR": "Gerador de Personagens", en: "Character Generator" },
+            description: {
+                "pt-BR": "Crie personagens de nível 1 a 10 com atributos, classe, talentos, magias, equipamento e título.",
+                en: "Create 1st to 10th level characters with attributes, class, talents, spells, gear, and title."
+            },
+            icon: "user.svg",
+            href: "generators/character-generator/index.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
+        },
+        {
+            id: "character-builder",
+            audience: "players",
+            category: { "pt-BR": "CONSTRUTOR", en: "BUILDER" },
+            title: { "pt-BR": "Construtor de Personagem", en: "Character Builder" },
+            description: {
+                "pt-BR": "Monte um personagem de nível 1 passo a passo, escolhendo ancestralidade, classe, talentos, magias e equipamento.",
+                en: "Build a 1st-level character step by step, choosing ancestry, class, talents, spells, and equipment."
+            },
+            icon: "clipboard-list.svg",
+            href: "generators/character-builder/index.html",
+            action: { "pt-BR": "Construir personagem", en: "Build character" },
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
+        },
+        {
             id: "carousing-generator",
             audience: "players",
             category: { "pt-BR": "FESTANÇAS", en: "CAROUSING" },
@@ -259,12 +288,13 @@
             const category = gen.category[currentLang];
             const description = gen.description[currentLang];
             const badge = typeof gen.badge === "object" ? gen.badge[currentLang] : gen.badge;
+            const action = gen.action ? gen.action[currentLang] : t.openGenerator;
 
             const card = document.createElement("a");
             card.className = "tool-card" + (gen.available ? "" : " tool-card--disabled");
             if (gen.available) {
                 card.href = gen.href;
-                card.setAttribute("aria-label", `${t.openGenerator}: ${title}`);
+                card.setAttribute("aria-label", `${action}: ${title}`);
             } else {
                 card.href = "#";
                 card.setAttribute("aria-disabled", "true");
@@ -282,7 +312,7 @@
                 <h2 class="tool-card__title">${title}</h2>
                 <p class="tool-card__description">${description}</p>
                 <span class="tool-card__action">
-                    <span>${gen.available ? t.openGenerator : t.comingSoon}</span>
+                    <span>${gen.available ? action : t.comingSoon}</span>
                     <img src="assets/icons/lucide/arrow-right.svg" alt="" aria-hidden="true">
                 </span>
             `;
