@@ -9,6 +9,7 @@
     // i18n texts
     const i18n = {
         "pt-BR": {
+            navHome: "Início", navGenerators: "Geradores", navAbout: "Sobre",
             eyebrow: "REFERÊNCIA",
             title: "Bestiário",
             intro: "238 monstros do Livro de Regras de Shadowdark RPG. Busque, filtre e consulte.",
@@ -72,6 +73,7 @@
             levelPrefix: "Nível"
         },
         "en": {
+            navHome: "Home", navGenerators: "Generators", navAbout: "About",
             eyebrow: "REFERENCE",
             title: "Bestiary",
             intro: "238 monsters from the Shadowdark RPG Rulebook. Search, filter, and reference.",
@@ -175,6 +177,9 @@
     function updateLanguage() {
         const t = i18n[currentLang];
 
+        document.getElementById("nav-back-text").textContent = t.navHome;
+        document.getElementById("nav-generators").textContent = t.navGenerators;
+        document.getElementById("nav-about").textContent = t.navAbout;
         document.getElementById("eyebrow").textContent = t.eyebrow;
         document.getElementById("title").textContent = t.title;
         document.getElementById("intro").textContent = t.intro;

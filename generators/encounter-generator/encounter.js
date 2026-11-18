@@ -19,6 +19,8 @@
             resultDetails: "Detalhes do encontro", rerollDetails: "Rolar detalhes novamente",
             rerolls: "Rolagens 98–99 repetidas", sourceCredit: "Tabelas de encontros do Livro de Regras fornecido, páginas 118–121 e 142–185; regras de encontros, armadilhas e hazards, páginas 112–115.",
             footerCaption: "Shadowdark Tools · Gerador de Encontros",
+            footerCredit: 'Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>',
+            footerSubcredit: 'Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.',
             error: "Não foi possível carregar as tabelas de encontros. Recarregue a página e tente novamente.",
             all: "Tudo",
             guideEyebrow: "REGRAS RÁPIDAS", guideHeading: "Como usar encontros aleatórios",
@@ -67,6 +69,8 @@
             resultDetails: "Encounter details", rerollDetails: "Reroll details",
             rerolls: "Repeated 98–99 rolls", sourceCredit: "Encounter tables from the supplied rulebook, pages 118–121 and 142–185; encounter, trap, and hazard rules, pages 112–115.",
             footerCaption: "Shadowdark Tools · Encounter Generator",
+            footerCredit: 'Made by <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Code on <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>',
+            footerSubcredit: 'Shadowdark RPG is property of <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. This is an unofficial fan project.',
             error: "Could not load the encounter tables. Reload the page and try again.",
             all: "All",
             guideEyebrow: "QUICK RULES", guideHeading: "Using random encounters",
@@ -173,7 +177,7 @@
         document.documentElement.lang = language;
         const t = TEXT[language];
         const textMap = {
-            "nav-home": t.navHome, "nav-generators": t.navGenerators, "nav-about": t.navAbout,
+            "nav-back-text": t.navHome, "nav-generators": t.navGenerators, "nav-about": t.navAbout,
             "page-eyebrow": t.eyebrow, "page-title": t.title, "page-description": t.description,
             "environment-label": t.environment, "count-label": t.count, "generate-label": t.generate,
             "encounter-charisma-label": t.encounterCharismaLabel,
@@ -183,6 +187,8 @@
             "table-description": t.tableDescription, "roll-column": t.rollColumn,
             "entry-column": t.entryColumn, "source-credit": t.sourceCredit,
             "footer-caption": t.footerCaption,
+            "footer-credit-author": t.footerCredit,
+            "footer-subcredit": t.footerSubcredit,
             "guide-eyebrow": t.guideEyebrow, "guide-heading": t.guideHeading,
             "purpose-title": t.purposeTitle, "purpose-copy": t.purposeCopy,
             "frequency-title": t.frequencyTitle, "frequency-copy": t.frequencyCopy,
@@ -209,7 +215,7 @@
         Object.entries(textMap).forEach(([id, value]) => {
             const el = $(id);
             if (el) {
-                if (["unsafe-frequency", "risky-frequency", "deadly-frequency"].includes(id)) el.innerHTML = value;
+                if (["unsafe-frequency", "risky-frequency", "deadly-frequency", "footer-credit-author", "footer-subcredit"].includes(id)) el.innerHTML = value;
                 else el.textContent = value;
             }
         });

@@ -13,7 +13,7 @@
     function setText(id, value) { const el = $(id); if (el) el.textContent = value; }
     function localize() {
         const t = ui[language];
-        ["nav-home", "nav-generators", "nav-about"].forEach((id, i) => setText(id, [t.navHome,t.navGenerators,t.navAbout][i]));
+        ["nav-back-text", "nav-generators", "nav-about"].forEach((id, i) => setText(id, [t.navHome,t.navGenerators,t.navAbout][i]));
         setText("eyebrow", t.eyebrow); setText("title", t.title); setText("intro", t.intro); setText("results-title", t.results); setText("generate-label", t.generate); setText("empty", t.empty); setText("source", t.source); setText("footer-caption", t.footer);
         setText("count-label", t.count); setText("copy", t.copy); setText("download", t.download); setText("adventure-table-title", t.adventureTable); setText("adventure-help", t.help); setText("site-table-title", t.siteTable);
         setText("col-one", t.one); setText("col-two", t.two); setText("col-three", t.three); setText("name-one", t.name1); setText("name-two", t.name2); setText("name-three", t.name3);

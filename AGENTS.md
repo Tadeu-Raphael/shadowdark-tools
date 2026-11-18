@@ -15,6 +15,10 @@ Este repositório é um site estático de ferramentas para Shadowdark RPG. Leia 
 - Evite dependências, processo de build ou serviços externos novos sem necessidade. Não inclua segredos nem conteúdo de usuário nos arquivos.
 - Ao adicionar uma ferramenta, atualize `js/main.js`, `README.md` e a documentação de arquitetura se a estrutura ou os fluxos mudarem.
 - Ao alterar tabelas ou regras, confira a integridade dos dados, os limites das rolagens e as referências de origem. Não invente resultados ausentes.
+- **Rodapé**: todas as páginas devem usar botões de bandeira (`.flag-button` com SVG) para alternância de idioma, seguindo o padrão de `generators/level-zero-character/index.html`. Não use botões de texto "PT/EN".
+- **Rodapé — HTML**: linhas de crédito (`footer-credit`, `footer-subcredit`) contêm links e devem ser atualizadas com `innerHTML`, nunca `textContent`, para evitar que as tags `<a>` sejam escapadas e exibidas como texto crú.
+- **Cabeçalho — botão voltar**: todas as páginas devem ter botão de voltar no header com ícone SVG de seta + classe `home-link` + `id="nav-back"` + `<span id="nav-back-text">`, seguindo o padrão de `generators/level-zero-character/index.html`. O JS deve atualizar `#nav-back-text`, `#nav-generators` e `#nav-about` no `updateLanguage`/`localize`.
+- **Evitar loops infinitos**: se uma verificação no navegador não mostrar o resultado esperado após 2 tentativas, pare de repetir a mesma verificação. Diagnostique a causa raiz (cache do navegador, ID duplicado, chave i18n ausente, seletor errado) e use `curl` para comparar o arquivo servido com o arquivo em disco antes de tentar novamente.
 
 ## Testes e validação
 

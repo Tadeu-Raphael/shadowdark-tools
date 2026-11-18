@@ -568,3 +568,9 @@
     font-size: 1.1rem;
     margin: 0;
 }
+
+/* Link para o catálogo de itens mágicos */
+.magic-items-link {
+    text-align: center;
+    margin: 1.5rem 0 0;
+}

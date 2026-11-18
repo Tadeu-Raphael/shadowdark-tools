@@ -71,6 +71,7 @@
             footerCaption: "Shadowdark Tools · Magic",
             footerCredit: 'Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>',
             footerSubcredit: 'Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.',
+            itemsCatalogLink: "Catálogo de Itens Mágicos",
             scrollFeature: "Aparência do Pergaminho",
             wandFeature: "Aparência da Varinha",
             mishapResult: "Resultado do Mishap",
@@ -78,6 +79,8 @@
             mishapDesc: "Descrição"
         },
         "en": {
+            navHome: "Início", navGenerators: "Geradores", navAbout: "Sobre",
+            navHome: "Home", navGenerators: "Generators", navAbout: "About",
             eyebrow: "REFERENCE",
             title: "Magic",
             intro: "85 spells from the Shadowdark RPG Rulebook. Search, filter, and reference.",
@@ -140,6 +143,7 @@
             footerCaption: "Shadowdark Tools · Magic",
             footerCredit: 'Made by <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Code on <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>',
             footerSubcredit: 'Shadowdark RPG is property of <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. This is an unofficial fan project.',
+            itemsCatalogLink: "Magic Items Catalog",
             scrollFeature: "Scroll Appearance",
             wandFeature: "Wand Appearance",
             mishapResult: "Mishap Result",
@@ -199,6 +203,14 @@
             if (el) el.textContent = value;
         };
 
+        const setHTML = (id, value) => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = value;
+        };
+
+        setText("nav-back-text", t.navHome);
+        setText("nav-generators", t.navGenerators);
+        setText("nav-about", t.navAbout);
         setText("eyebrow", t.eyebrow);
         setText("title", t.title);
         setText("intro", t.intro);
@@ -253,8 +265,9 @@
         setText("glos-dc-desc", t.glosDCDesc);
         setText("source", t.source);
         setText("footer-caption", t.footerCaption);
-        setText("footer-credit", t.footerCredit);
-        setText("footer-subcredit", t.footerSubcredit);
+        setHTML("footer-credit", t.footerCredit);
+        setHTML("footer-subcredit", t.footerSubcredit);
+        setText("items-catalog-link", t.itemsCatalogLink);
 
         // Update language buttons
         langButtons.forEach(btn => {

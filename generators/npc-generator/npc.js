@@ -13,7 +13,7 @@
     function set(id, value) { const e=$(id); if(e)e.textContent=value; }
     function localize() {
         const x=tr();
-        ["nav-home","nav-generators","nav-about"].forEach((id,i)=>set(id,[x.home,x.generators,x.about][i]));
+        ["nav-back-text","nav-generators","nav-about"].forEach((id,i)=>set(id,[x.home,x.generators,x.about][i]));
         set("eyebrow",x.eyebrow);set("title",x.title);set("intro",x.intro);set("mode-label",x.mode);set("count-label",x.count);set("name-style-label",x.nameStyle);set("rival-type-label",x.format);set("results-title",x.results);set("copy",x.copy);set("download",x.download);set("reference-title",x.reference);set("source",x.source);set("footer-caption",x.footer);
         const mode=$("mode"), rt=$("rival-type"), ns=$("name-style"); mode.options[0].text=x.npc;mode.options[1].text=x.rival;rt.options[0].text=x.single;rt.options[1].text=x.party;ns.options[0].text=x.ancestryNames;ns.options[1].text=x.syllableNames;
         $("footer-credit").innerHTML=lang==="en"?'Made by <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Code on <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>':'Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>';

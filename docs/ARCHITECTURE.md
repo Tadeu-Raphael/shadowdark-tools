@@ -24,7 +24,7 @@ A maioria dos geradores mantém estado e funções dentro de uma IIFE, sem módu
 
 ## Geradores atuais
 
-O catálogo contém doze ferramentas: personagem nível 0, festanças, encontros, aventuras, monstros, NPCs, assentamentos, terrenos hexagonais, tesouros, mapas de masmorras, bestiário e magia. A tabela de recursos e a estrutura de pastas correspondem ao README.
+O catálogo contém treze ferramentas: personagem nível 0, festanças, encontros, aventuras, monstros, NPCs, assentamentos, terrenos hexagonais, tesouros, mapas de masmorras, bestiário, magia e itens mágicos. A tabela de recursos e a estrutura de pastas correspondem ao README.
 
 ## Idioma e conteúdo
 

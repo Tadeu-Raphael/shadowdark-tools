@@ -14,6 +14,17 @@
 - Desabilite exportações antes de haver resultados. As exportações devem representar os resultados atuais, não as tabelas de referência da página.
 - Em telas estreitas, permita que grupos de ações quebrem linha sem cortar rótulos ou reduzir a área acionável.
 
+## Cabeçalho e navegação
+
+- Todas as páginas devem ter botão de voltar no header com ícone SVG de seta + classe `home-link` + `id="nav-back"` + `<span id="nav-back-text">`, seguindo o padrão de `generators/level-zero-character/index.html`.
+- O JS deve atualizar `#nav-back-text`, `#nav-generators` e `#nav-about` no `updateLanguage`/`localize` para que os textos de navegação acompanhem a troca de idioma.
+
+## Rodapé e alternância de idioma
+
+- Todas as páginas devem usar botões de bandeira (`.flag-button` com SVG inline) para alternância de idioma, seguindo o padrão de `generators/level-zero-character/index.html`. Não use botões de texto "PT/EN".
+- As linhas de crédito do rodapé (`#footer-credit`, `#footer-subcredit`, `#footer-credit-author`) contêm links `<a>` e devem ser atualizadas com `innerHTML`, nunca `textContent`.
+- O seletor CSS `[class$="-language-switch"] .flag-button` em `css/shadowdark-ui.css` sobrescreve estilos por gerador para garantir que os botões de bandeira tenham aparência consistente.
+
 ## Conteúdo e acessibilidade
 
 - Preserve português brasileiro e inglês em páginas com alternância de idioma.

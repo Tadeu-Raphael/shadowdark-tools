@@ -183,3 +183,36 @@ test('magic data carries complete bilingual spells and mishap tables', async () 
     }
   }
 });
+
+test('magic item catalog carries complete bilingual items', async () => {
+  const data = await loadData('generators/magic/magic-item-catalog.js', 'MAGIC_ITEM_CATALOG');
+  assert.equal(data.items.length, 91);
+  assert.deepEqual(Object.keys(data.types), ['armor', 'weapon', 'potion', 'wand', 'staff', 'ring', 'wondrous']);
+
+  const seen = new Set();
+  for (const item of data.items) {
+    assert.ok(item.name, 'item needs a name');
+    assert.ok(!seen.has(item.name), `${item.name} must be unique`);
+    seen.add(item.name);
+    assert.ok(data.types[item.type], `${item.name} has an unknown type`);
+    assert.ok(item.description, `${item.name} needs description`);
+    assert.ok(item.description_pt, `${item.name} needs description_pt`);
+    assert.notEqual(item.description, item.description_pt,
+      `${item.name} description and description_pt must differ`);
+    assert.ok(Array.isArray(item.benefits), `${item.name} needs a benefits array`);
+    assert.ok(Array.isArray(item.curses), `${item.name} needs a curses array`);
+    assert.equal(item.benefits.length, item.benefits_pt.length,
+      `${item.name} benefits and benefits_pt must match in length`);
+    assert.equal(item.curses.length, item.curses_pt.length,
+      `${item.name} curses and curses_pt must match in length`);
+    if (item.bonus) {
+      assert.ok(item.bonus_pt, `${item.name} needs bonus_pt when it has a bonus`);
+    }
+    if (item.alignment) {
+      assert.ok(item.alignment_pt, `${item.name} needs alignment_pt when it has an alignment`);
+    }
+    if (item.personality) {
+      assert.ok(item.personality_pt, `${item.name} needs personality_pt when it has a personality`);
+    }
+  }
+});

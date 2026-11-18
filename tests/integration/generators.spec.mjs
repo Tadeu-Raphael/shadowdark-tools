@@ -27,10 +27,10 @@ for (const generator of generators) {
   });
 }
 
-test('home page links to all twelve generator pages', async ({ page }) => {
+test('home page links to all thirteen generator pages', async ({ page }) => {
   await page.goto('/');
   const links = page.locator('.generator-grid a.tool-card[href]');
-  await expect(links).toHaveCount(12);
+  await expect(links).toHaveCount(13);
   for (const link of await links.all()) {
     const href = await link.getAttribute('href');
     const response = await page.request.get(new URL(href, page.url()).toString());
@@ -47,7 +47,7 @@ test('home page separates player and GM generators in both languages', async ({ 
   await expect(page.locator('#players-heading')).toHaveText('Para jogadores');
   await expect(page.locator('#gms-heading')).toHaveText('Para mestres');
   await expect(players).toHaveCount(2);
-  await expect(gms).toHaveCount(10);
+  await expect(gms).toHaveCount(11);
   const twoCardAlignment = await page.locator('#player-generator-grid').evaluate(grid => {
     const cards = [...grid.querySelectorAll('.tool-card')].map(card => card.getBoundingClientRect());
     const gridRect = grid.getBoundingClientRect();
@@ -62,6 +62,7 @@ test('home page separates player and GM generators in both languages', async ({ 
   await expect(players.nth(0)).toContainText('Level 0 Character Generator');
   await expect(gms.nth(7)).toContainText('Dungeon Map Generator');
   await expect(gms.nth(9)).toContainText('Magic');
+  await expect(gms.nth(10)).toContainText('Magic Items');
   await page.locator('#player-generator-grid .tool-card').last().evaluate(card => card.remove());
   const oneCardAlignment = await page.locator('#player-generator-grid').evaluate(grid => {
     const card = grid.querySelector('.tool-card').getBoundingClientRect();
@@ -155,6 +156,50 @@ test('magic page renders localized spells and generates items', async ({ page })
   await expect(page.locator('#wand-result')).toBeVisible();
   await page.locator('#generate-mishap').click();
   await expect(page.locator('#mishap-result')).toBeVisible();
+
+  expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
+});
+
+test('magic items catalog renders items and generates scroll, wand, and magic item', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  await page.addInitScript(() => { Math.random = () => 0.42; });
+  await page.goto('/generators/magic/magic-items.html');
+  await page.evaluate(() => localStorage.setItem('shadowdark-tools-lang', 'pt-BR'));
+  await page.reload();
+
+  const cards = page.locator('#items-grid .item-card');
+  await expect(cards.first()).toBeVisible();
+  await expect(page.locator('#item-count')).toContainText('91');
+
+  // pt-BR content renders by default.
+  const firstName = await cards.first().locator('.item-card__name').innerText();
+  const firstDescription = await cards.first().locator('.item-card__description').innerText();
+  expect(firstDescription.length).toBeGreaterThan(0);
+
+  // Switching to EN must change the rendered prose.
+  await page.locator('.magic-items-language-switch [data-lang="en"]').click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  const enName = await cards.first().locator('.item-card__name').innerText();
+  expect(enName).not.toEqual(firstName);
+
+  // Language preference persists across reloads.
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+  // Type filter narrows the list.
+  await page.locator('#filter-type').selectOption('potion');
+  const typeBadges = await cards.locator('.item-card__badge--type').allInnerTexts();
+  expect(typeBadges.length).toBeGreaterThan(0);
+  expect(typeBadges.every((text) => text.toLowerCase().includes('potion'))).toBeTruthy();
+
+  // Generators produce visible results.
+  await page.locator('#generate-scroll').click();
+  await expect(page.locator('#scroll-result')).toBeVisible();
+  await page.locator('#generate-wand').click();
+  await expect(page.locator('#wand-result')).toBeVisible();
+  await page.locator('#generate-magic-item').click();
+  await expect(page.locator('#magic-item-result')).toBeVisible();
 
   expect(pageErrors, 'browser should not report uncaught page errors').toEqual([]);
 });

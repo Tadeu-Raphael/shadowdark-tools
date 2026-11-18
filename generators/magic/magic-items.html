@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-shadowdark="parchment">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Catálogo de itens mágicos de Shadowdark RPG com gerador de varinhas e pergaminhos">
+<title>Itens Mágicos — Shadowdark Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Pirata+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/shadowdark-ui.css">
+<link rel="stylesheet" href="magic-items.css">
+<link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
+</head>
+<body>
+<div class="site-shell">
+    <div id="site-header">
+        <header class="site-header" role="banner">
+            <div class="header-inner container-fluid">
+                <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início">
+                    <img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24">
+                    <span>Shadowdark Tools</span>
+                </a>
+                <nav class="site-navigation" aria-label="Navegação principal">
+                    <a href="../../index.html" class="home-link" id="nav-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header-nav-icon" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            <span id="nav-back-text">Início</span>
+                        </a>
+                    <a href="../../index.html#geradores" id="nav-generators">Geradores</a>
+                    <a href="#sobre" id="nav-about">Sobre</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+
+    <main class="site-main">
+        <section class="magic-items-page">
+            <div class="container-fluid">
+                <header class="magic-items-heading">
+                    <p class="eyebrow" id="eyebrow">REFERÊNCIA</p>
+                    <h1 id="title">Itens Mágicos</h1>
+                    <p id="intro">91 itens mágicos do Livro de Regras de Shadowdark RPG. Busque, filtre e consulte.</p>
+                </header>
+
+                <!-- Generators -->
+                <section class="magic-items-generators">
+                    <div class="magic-items-generators__head">
+                        <h2 id="generators-title">Geradores</h2>
+                    </div>
+                    <div class="magic-items-generators__grid">
+                        <!-- Scroll Generator -->
+                        <div class="magic-items-generator card">
+                            <h3 id="scroll-title">Pergaminho</h3>
+                            <p id="scroll-desc">Gere um pergaminho aleatório com magia e aparência.</p>
+                            <button id="generate-scroll" class="btn-primary">Gerar Pergaminho</button>
+                            <div id="scroll-result" class="magic-items-generator__result" hidden></div>
+                        </div>
+
+                        <!-- Wand Generator -->
+                        <div class="magic-items-generator card">
+                            <h3 id="wand-title">Varinha</h3>
+                            <p id="wand-desc">Gere uma varinha aleatória com magia e aparência.</p>
+                            <button id="generate-wand" class="btn-primary">Gerar Varinha</button>
+                            <div id="wand-result" class="magic-items-generator__result" hidden></div>
+                        </div>
+
+                        <!-- Magic Item Generator -->
+                        <div class="magic-items-generator card">
+                            <h3 id="magic-item-title">Item Mágico</h3>
+                            <p id="magic-item-desc">Gere um item mágico aleatório com tipo, bônus, benefícios e maldições.</p>
+                            <button id="generate-magic-item" class="btn-primary">Gerar Item Mágico</button>
+                            <div id="magic-item-result" class="magic-items-generator__result" hidden></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Search and Filters -->
+                <section class="magic-items-controls card">
+                    <div class="magic-items-search">
+                        <label for="search-input" id="search-label">Buscar item</label>
+                        <div class="magic-items-search__wrapper">
+                            <img src="../../assets/icons/lucide/target.svg" alt="" class="magic-items-search__icon" id="search-icon" aria-hidden="true">
+                            <input type="text" id="search-input" class="form-input" placeholder="Nome do item..." autocomplete="off" aria-label="Buscar item">
+                        </div>
+                    </div>
+                    <div class="magic-items-filters">
+                        <div class="magic-items-filter">
+                            <label for="filter-type" id="type-filter-label">Tipo</label>
+                            <select class="form-select" id="filter-type">
+                                <option value="all" id="type-all">Todos os tipos</option>
+                                <option value="armor" id="type-armor">Armadura</option>
+                                <option value="weapon" id="type-weapon">Arma</option>
+                                <option value="potion" id="type-potion">Poção</option>
+                                <option value="wand" id="type-wand">Varinha</option>
+                                <option value="staff" id="type-staff">Cajado</option>
+                                <option value="ring" id="type-ring">Anel/Amulet</option>
+                                <option value="wondrous" id="type-wondrous">Maravilhoso</option>
+                            </select>
+                        </div>
+                        <div class="magic-items-filter">
+                            <label for="filter-bonus" id="bonus-filter-label">Bônus</label>
+                            <select class="form-select" id="filter-bonus">
+                                <option value="all" id="bonus-all">Todos</option>
+                                <option value="with" id="bonus-with">Com bônus</option>
+                                <option value="without" id="bonus-without">Sem bônus</option>
+                            </select>
+                        </div>
+                        <div class="magic-items-filter">
+                            <label for="filter-curse" id="curse-filter-label">Maldição</label>
+                            <select class="form-select" id="filter-curse">
+                                <option value="all" id="curse-all">Todos</option>
+                                <option value="cursed" id="curse-cursed">Amaldiçoados</option>
+                                <option value="clean" id="curse-clean">Sem maldição</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results -->
+                <section class="magic-items-results" aria-live="polite">
+                    <div class="magic-items-results__head">
+                        <h2 id="results-title">Itens</h2>
+                        <span class="magic-items-count" id="item-count">91 itens</span>
+                    </div>
+                    <div id="items-grid" class="magic-items-grid"></div>
+                    <div class="magic-items-empty" id="empty-state" hidden>
+                        <p id="empty-message">Nenhum item encontrado.</p>
+                    </div>
+                </section>
+
+                <p class="magic-source" id="source">Dados extraídos do Livro de Regras de Shadowdark RPG (v4.6), páginas 282–319. The Arcane Library.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="site-footer">
+        <footer class="site-footer" id="sobre" role="contentinfo">
+            <div class="container-fluid">
+                <p class="footer-caption" id="footer-caption">Shadowdark Tools · Itens Mágicos</p>
+                <p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p>
+                <p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p>
+                <div class="magic-items-language-switch" role="group" aria-label="Idioma">
+                    <button class="flag-button" type="button" aria-pressed="true" aria-label="Português (Brasil)" data-lang="pt-BR" data-lang-switch="pt" title="Português (Brasil)">
+                        <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="Brasil">
+                            <rect width="60" height="42" fill="#009b3a"/>
+                            <polygon points="30,5 56,21 30,37 4,21" fill="#fedf00"/>
+                            <circle cx="30" cy="21" r="9" fill="#002776"/>
+                            <path d="M21.5 19.2 Q30 16.5 38.5 23" stroke="#fff" stroke-width="1.6" fill="none"/>
+                        </svg>
+                    </button>
+                    <button class="flag-button" type="button" aria-pressed="false" aria-label="English" data-lang="en" data-lang-switch="en" title="English">
+                        <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="UK / USA">
+                            <defs>
+                                <clipPath id="flag-left"><rect width="30" height="42"/></clipPath>
+                                <clipPath id="flag-right"><rect x="30" width="30" height="42"/></clipPath>
+                            </defs>
+                            <g clip-path="url(#flag-left)">
+                                <rect width="60" height="42" fill="#012169"/>
+                                <path d="M0 0L60 42M60 0L0 42" stroke="#fff" stroke-width="7"/>
+                                <path d="M0 0L60 42M60 0L0 42" stroke="#c8102e" stroke-width="3"/>
+                                <path d="M30 0V42M0 21H60" stroke="#fff" stroke-width="11"/>
+                                <path d="M30 0V42M0 21H60" stroke="#c8102e" stroke-width="6"/>
+                            </g>
+                            <g clip-path="url(#flag-right)">
+                                <rect x="30" width="30" height="42" fill="#fff"/>
+                                <g fill="#b22234">
+                                    <rect x="30" y="0" width="30" height="3.2"/><rect x="30" y="6.5" width="30" height="3.2"/>
+                                    <rect x="30" y="13" width="30" height="3.2"/><rect x="30" y="19.5" width="30" height="3.2"/>
+                                    <rect x="30" y="26" width="30" height="3.2"/><rect x="30" y="32.5" width="30" height="3.2"/>
+                                    <rect x="30" y="38.8" width="30" height="3.2"/>
+                                </g>
+                                <rect x="30" y="0" width="14" height="22.5" fill="#3c3b6e"/>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="../../js/ui-icons.js"></script>
+<script src="magic-items-data.js"></script>
+<script src="magic-items-extra-data.js"></script>
+<script src="magic-item-catalog.js"></script>
+<script src="magic-items.js"></script>
+</body>
+</html>

@@ -12,7 +12,9 @@
             download: "Baixar TXT", event: "Festança", bonus: "Bônus", reference: "Consultar custos e bônus",
             empty: "Escolha o gasto e role para descobrir o resultado da festança.",
             costHint: "Bônus aplicado à rolagem de 1d8.", rollWord: "Rolagem", detailRoll: "Acontecimento expandido · d6",
-            result: "Resultado", source: "Tabela padrão de festanças adaptada do Livro de Regras de Shadowdark, páginas 92–93. Os acontecimentos expandidos são baseados no material fornecido."
+            result: "Resultado", source: "Tabela padrão de festanças adaptada do Livro de Regras de Shadowdark, páginas 92–93. Os acontecimentos expandidos são baseados no material fornecido.",
+            footerCredit: 'Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>',
+            footerSubcredit: 'Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.'
         },
         en: {
             navHome: "Home", navGenerators: "Generators", navAbout: "About",
@@ -24,7 +26,9 @@
             download: "Download TXT", event: "Carousing", bonus: "Bonus", reference: "View costs and bonuses",
             empty: "Choose a cost and roll to find out what happened during the carousing.",
             costHint: "Bonus added to the 1d8 roll.", rollWord: "Roll", detailRoll: "Expanded event · d6",
-            result: "Result", source: "Standard carousing table adapted from the Shadowdark Rulebook, pages 92–93. Expanded events are based on the supplied material."
+            result: "Result", source: "Standard carousing table adapted from the Shadowdark Rulebook, pages 92–93. Expanded events are based on the supplied material.",
+            footerCredit: 'Made by <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Code on <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a>',
+            footerSubcredit: 'Shadowdark RPG is property of <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. This is an unofficial fan project.'
         }
     };
 
@@ -209,7 +213,7 @@
         document.documentElement.lang = language;
         const t = TEXT[language];
         const textMap = {
-            "nav-home": t.navHome, "nav-generators": t.navGenerators, "nav-about": t.navAbout,
+            "nav-back-text": t.navHome, "nav-generators": t.navGenerators, "nav-about": t.navAbout,
             "page-eyebrow": t.eyebrow, "page-title": t.title, "page-description": t.description,
             "cost-label": t.cost, "mode-label": t.mode, "count-label": t.count,
             "roll-label": t.roll, "rule-note": t.rule, "results-heading": t.results,
@@ -217,9 +221,16 @@
             "reference-title": t.reference, "reference-cost": t.cost,
             "reference-event": t.event, "reference-bonus": t.bonus,
             "source-note": t.source,
-            "footer-caption": `Shadowdark Tools · ${t.title}`
+            "footer-caption": `Shadowdark Tools · ${t.title}`,
+            "footer-credit-author": t.footerCredit,
+            "footer-subcredit": t.footerSubcredit
         };
-        Object.entries(textMap).forEach(([id, value]) => { const el = $(id); if (el) el.textContent = value; });
+        Object.entries(textMap).forEach(([id, value]) => {
+            const el = $(id);
+            if (!el) return;
+            if (id === "footer-credit-author" || id === "footer-subcredit") el.innerHTML = value;
+            else el.textContent = value;
+        });
         modeSelect.options[0].textContent = t.standard;
         modeSelect.options[1].textContent = t.expanded;
         document.querySelectorAll(".carousing-language-switch button").forEach((button) => {

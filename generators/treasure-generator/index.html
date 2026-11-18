@@ -5,12 +5,47 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Pirata+One&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../css/shadowdark-ui.css"><link rel="stylesheet" href="treasure.css"><link rel="stylesheet" href="../../css/shadowdark-art-direction.css">
     <link rel="stylesheet" href="../../css/export-actions.css">
 </head>
-<body><div class="site-shell"><div id="site-header"><header class="site-header" role="banner"><div class="header-inner container-fluid"><a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início"><img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24"><span>Shadowdark Tools</span></a><nav class="site-navigation" aria-label="Navegação principal"><a href="../../index.html" id="nav-home">Início</a><a href="../../index.html#geradores" id="nav-generators">Geradores</a><a href="#sobre" id="nav-about">Sobre</a></nav></div></header></div>
+<body><div class="site-shell"><div id="site-header"><header class="site-header" role="banner"><div class="header-inner container-fluid"><a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Início"><img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24"><span>Shadowdark Tools</span></a><nav class="site-navigation" aria-label="Navegação principal"><a href="../../index.html" class="home-link" id="nav-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header-nav-icon" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            <span id="nav-back-text">Início</span>
+                        </a><a href="../../index.html#geradores" id="nav-generators">Geradores</a><a href="#sobre" id="nav-about">Sobre</a></nav></div></header></div>
 <main class="site-main"><section class="treasure-page"><div class="container-fluid"><header class="treasure-heading"><p class="eyebrow" id="eyebrow">MESTRE</p><h1 id="title">Gerador de Tesouros</h1><p id="intro">Role itens valiosos conforme o nível e descubra o que monstros ou baús escondem.</p></header>
 <section class="treasure-overview" id="overview"></section>
 <div id="guide" class="treasure-guide card"></div>
 <section class="treasure-controls card" id="controls"><div><label for="generation-mode" id="generation-mode-label">O que gerar?</label><select id="generation-mode" class="form-select"><option value="treasure">Tesouro por nível</option><option value="mundane">Item mundano</option><option value="luxury">Item luxuoso</option><option value="boon">Dádiva</option><option value="magic">Item mágico</option></select></div><div id="source-wrap"><label for="source-mode" id="mode-label">Origem do tesouro</label><select id="source-mode" class="form-select"><option value="unguarded">Tesouro desprotegido</option><option value="wandering">Monstro errante · chance de 50%</option></select></div><div id="tier-wrap"><label for="tier" id="tier-label">Nível do tesouro</label><select id="tier" class="form-select"></select></div><div><label for="result-count" id="count-label">Quantidade</label><input id="result-count" class="form-select" type="number" min="1" max="10" value="1"></div><button type="button" id="generate" class="treasure-button treasure-button--primary"><img src="../../assets/icons/lucide/dice-5.svg" alt=""><span id="generate-label">Gerar tesouro</span></button></section>
 <section class="treasure-results" aria-live="polite"><div class="treasure-results__head"><h2 id="results-title">Resultados</h2><div><button type="button" class="treasure-button" id="copy" disabled data-export-action="copy">Copiar</button> <button type="button" class="treasure-button" id="download" disabled data-export-action="txt">Baixar TXT</button> <button type="button" class="treasure-button" data-export-pdf data-export-content="results" data-filename="shadowdark-treasure.pdf" data-export-action="pdf" disabled>Exportar PDF</button></div></div><div id="results"><div class="treasure-empty" id="empty">Escolha as opções e role na tabela de tesouros.</div></div></section>
 <details class="treasure-reference card"><summary id="reference-title">Consultar tabelas d100</summary><div class="treasure-reference__grid" id="reference-grid"></div></details><p class="treasure-source" id="source">Tabelas e orientações adaptadas do Livro de Regras de Shadowdark, páginas 269–276.</p></div></section></main>
-<div id="site-footer"><footer class="site-footer" id="sobre" role="contentinfo"><div class="container-fluid"><p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Tesouros</p><p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p><p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p><div class="treasure-language-switch" role="group" aria-label="Idioma"><button data-lang="pt-BR" aria-pressed="true">PT</button><button data-lang="en" aria-pressed="false">EN</button></div></div></footer></div></div>
+<div id="site-footer"><footer class="site-footer" id="sobre" role="contentinfo"><div class="container-fluid"><p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Tesouros</p><p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p><p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p><div class="treasure-language-switch" role="group" aria-label="Idioma"><button class="flag-button" type="button" aria-pressed="true" aria-label="Português (Brasil)" data-lang="pt-BR" data-lang-switch="pt" title="Português (Brasil)">
+                        <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="Brasil">
+                            <rect width="60" height="42" fill="#009b3a"/>
+                            <polygon points="30,5 56,21 30,37 4,21" fill="#fedf00"/>
+                            <circle cx="30" cy="21" r="9" fill="#002776"/>
+                            <path d="M21.5 19.2 Q30 16.5 38.5 23" stroke="#fff" stroke-width="1.6" fill="none"/>
+                        </svg>
+                    </button>
+                    <button class="flag-button" type="button" aria-pressed="false" aria-label="English" data-lang="en" data-lang-switch="en" title="English">
+                        <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="UK / USA">
+                            <defs>
+                                <clipPath id="flag-left"><rect width="30" height="42"/></clipPath>
+                                <clipPath id="flag-right"><rect x="30" width="30" height="42"/></clipPath>
+                            </defs>
+                            <g clip-path="url(#flag-left)">
+                                <rect width="60" height="42" fill="#012169"/>
+                                <path d="M0 0L60 42M60 0L0 42" stroke="#fff" stroke-width="7"/>
+                                <path d="M0 0L60 42M60 0L0 42" stroke="#c8102e" stroke-width="3"/>
+                                <path d="M30 0V42M0 21H60" stroke="#fff" stroke-width="11"/>
+                                <path d="M30 0V42M0 21H60" stroke="#c8102e" stroke-width="6"/>
+                            </g>
+                            <g clip-path="url(#flag-right)">
+                                <rect x="30" width="30" height="42" fill="#fff"/>
+                                <g fill="#b22234">
+                                    <rect x="30" y="0" width="30" height="3.2"/><rect x="30" y="6.5" width="30" height="3.2"/>
+                                    <rect x="30" y="13" width="30" height="3.2"/><rect x="30" y="19.5" width="30" height="3.2"/>
+                                    <rect x="30" y="26" width="30" height="3.2"/><rect x="30" y="32.5" width="30" height="3.2"/>
+                                    <rect x="30" y="38.8" width="30" height="3.2"/>
+                                </g>
+                                <rect x="30" y="0" width="14" height="22.5" fill="#3c3b6e"/>
+                            </g>
+                        </svg>
+                    </button></div></div></footer></div></div>
 <script src="../../js/ui-icons.js"></script><script src="treasure-data.js"></script><script src="treasure-extra-data.js"></script><script src="treasure-magic-data.js"></script><script src="../../js/export-actions.js"></script><script src="treasure.js"></script></body></html>

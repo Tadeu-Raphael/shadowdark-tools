@@ -175,6 +175,20 @@
             href: "generators/magic/index.html",
             badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
             available: true
+        },
+        {
+            id: "magic-items",
+            audience: "gms",
+            category: { "pt-BR": "ITENS MÁGICOS", en: "MAGIC ITEMS" },
+            title: { "pt-BR": "Itens Mágicos", en: "Magic Items" },
+            description: {
+                "pt-BR": "91 itens mágicos do Livro de Regras com busca, filtros e geradores de pergaminhos, varinhas e itens mágicos.",
+                "en": "91 magic items from the Rulebook with search, filters, and scroll, wand, and magic item generators."
+            },
+            icon: "gem.svg",
+            href: "generators/magic/magic-items.html",
+            badge: { "pt-BR": "DISPONÍVEL", en: "AVAILABLE" },
+            available: true
         }
     ];
 
@@ -315,7 +329,7 @@
         const desc = document.getElementById("hero-desc");
         if (desc) desc.innerHTML = t.description;
 
-        const navHome = document.getElementById("nav-home");
+        const navHome = document.getElementById("nav-back-text");
         if (navHome) navHome.textContent = t.home;
 
         const navGenerators = document.getElementById("nav-generators");

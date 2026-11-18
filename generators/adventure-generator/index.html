@@ -13,7 +13,10 @@
 <div class="site-shell" id="top">
     <div id="site-header"><header class="site-header" role="banner"><div class="header-inner container-fluid">
         <a class="site-brand" href="../../index.html" aria-label="Shadowdark Tools - Home"><img src="../../assets/icons/lucide/book-open.svg" alt="" class="ui-icon" width="24" height="24"><span>Shadowdark Tools</span></a>
-        <nav class="site-navigation" aria-label="Main navigation"><a href="../../index.html" id="nav-home">Início</a><a href="../../index.html#geradores" id="nav-generators">Geradores</a><a href="#sobre" id="nav-about">Sobre</a></nav>
+        <nav class="site-navigation" aria-label="Main navigation"><a href="../../index.html" class="home-link" id="nav-back">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="header-nav-icon" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            <span id="nav-back-text">Início</span>
+                        </a><a href="../../index.html#geradores" id="nav-generators">Geradores</a><a href="#sobre" id="nav-about">Sobre</a></nav>
     </div></header></div>
     <main class="site-main"><section class="adventure-page"><div class="container-fluid">
         <header class="adventure-heading"><p class="eyebrow" id="eyebrow">MESTRE</p><h1 id="title">Gerador de Aventuras</h1><p id="intro">Combine três resultados para criar o objetivo, o obstáculo e o local da sua próxima aventura.</p></header>
@@ -25,7 +28,39 @@
         </div>
         <p class="adventure-source" id="source">Tabelas de aventuras adaptadas do Livro de Regras de Shadowdark, páginas 122–123.</p>
     </div></section></main>
-    <div id="site-footer"><footer class="site-footer" id="sobre" role="contentinfo"><div class="container-fluid"><p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Aventuras</p><p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p><p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p><div class="adventure-language-switch" role="group" aria-label="Idioma"><button data-lang="pt-BR" aria-pressed="true">PT</button><button data-lang="en" aria-pressed="false">EN</button></div></div></footer></div>
+    <div id="site-footer"><footer class="site-footer" id="sobre" role="contentinfo"><div class="container-fluid"><p class="footer-caption" id="footer-caption">Shadowdark Tools · Gerador de Aventuras</p><p class="footer-credit" id="footer-credit">Feito por <a href="https://github.com/Tadeu-Raphael" target="_blank" rel="noopener">Tadeu Raphael</a> · Código em <a href="https://github.com/Tadeu-Raphael/shadowdark-tools" target="_blank" rel="noopener">GitHub</a></p><p class="footer-subcredit" id="footer-subcredit">Shadowdark RPG é propriedade de <a href="https://thearcanelibrary.com/" target="_blank" rel="noopener">The Arcane Library</a>. Este é um projeto de fã não oficial.</p><div class="adventure-language-switch" role="group" aria-label="Idioma"><button class="flag-button" type="button" aria-pressed="true" aria-label="Português (Brasil)" data-lang="pt-BR" data-lang-switch="pt" title="Português (Brasil)">
+                        <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="Brasil">
+                            <rect width="60" height="42" fill="#009b3a"/>
+                            <polygon points="30,5 56,21 30,37 4,21" fill="#fedf00"/>
+                            <circle cx="30" cy="21" r="9" fill="#002776"/>
+                            <path d="M21.5 19.2 Q30 16.5 38.5 23" stroke="#fff" stroke-width="1.6" fill="none"/>
+                        </svg>
+                    </button>
+                    <button class="flag-button" type="button" aria-pressed="false" aria-label="English" data-lang="en" data-lang-switch="en" title="English">
+                        <svg viewBox="0 0 60 42" width="36" height="25" role="img" aria-label="UK / USA">
+                            <defs>
+                                <clipPath id="flag-left"><rect width="30" height="42"/></clipPath>
+                                <clipPath id="flag-right"><rect x="30" width="30" height="42"/></clipPath>
+                            </defs>
+                            <g clip-path="url(#flag-left)">
+                                <rect width="60" height="42" fill="#012169"/>
+                                <path d="M0 0L60 42M60 0L0 42" stroke="#fff" stroke-width="7"/>
+                                <path d="M0 0L60 42M60 0L0 42" stroke="#c8102e" stroke-width="3"/>
+                                <path d="M30 0V42M0 21H60" stroke="#fff" stroke-width="11"/>
+                                <path d="M30 0V42M0 21H60" stroke="#c8102e" stroke-width="6"/>
+                            </g>
+                            <g clip-path="url(#flag-right)">
+                                <rect x="30" width="30" height="42" fill="#fff"/>
+                                <g fill="#b22234">
+                                    <rect x="30" y="0" width="30" height="3.2"/><rect x="30" y="6.5" width="30" height="3.2"/>
+                                    <rect x="30" y="13" width="30" height="3.2"/><rect x="30" y="19.5" width="30" height="3.2"/>
+                                    <rect x="30" y="26" width="30" height="3.2"/><rect x="30" y="32.5" width="30" height="3.2"/>
+                                    <rect x="30" y="38.8" width="30" height="3.2"/>
+                                </g>
+                                <rect x="30" y="0" width="14" height="22.5" fill="#3c3b6e"/>
+                            </g>
+                        </svg>
+                    </button></div></div></footer></div>
 </div>
 <script src="../../js/ui-icons.js"></script><script src="adventure-data.js"></script><script src="../../js/export-actions.js"></script><script src="adventure.js"></script>
 </body></html>
